@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>ApplicationTest.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>LogicTest.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Phresco.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>EA6086841640F4C600C260C4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA99371E163FAEE40005DC86</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA993735163FAF100005DC86</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA993761163FB9400005DC86</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA99377D163FD12D0005DC86</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EAAA05F7161C0E2E00BD06EF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EACA355316450FAE0062B88E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EAEF47C91643FFB000278D99</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

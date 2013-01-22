@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NavigationBar</key>
+	<dict>
+		<key>rightBarButton_ipad</key>
+		<string>back_btn-72</string>
+		<key>leftBarButton_ipad</key>
+		<string>back_btn-72</string>
+		<key>title-ipad</key>
+		<string></string>
+		<key>backgroundImage_ipad</key>
+		<string>header_logo-72</string>
+		<key>rightBarButton_iphone</key>
+		<string>back_btn</string>
+		<key>leftBarButton_iphone</key>
+		<string>back_btn</string>
+		<key>title-iphone</key>
+		<string></string>
+		<key>backgroundImage_iphone</key>
+		<string>header_logo</string>
+	</dict>
+	<key>Login</key>
+	<dict>
+		<key>backgroundImageNames</key>
+		<string>home_screen_bg.png</string>
+		<key>loginURL</key>
+		<string>http://172.16.17.180:2020/eshop/rest/api/post/login/</string>
+		<key>captions</key>
+		<string>Login</string>
+		<key>font</key>
+		<string>Verdana</string>
+		<key>backgroundColor</key>
+		<string>lightGrayColor</string>
+	</dict>
+</dict>
+</plist>
