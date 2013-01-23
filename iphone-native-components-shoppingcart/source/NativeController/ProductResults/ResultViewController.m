@@ -113,7 +113,7 @@
 {
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
-        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80, 768, 845)];
+        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80, SCREENWIDTH, 860)];
         
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg-72.png"]];
         
@@ -121,7 +121,7 @@
         
         bgView =nil;
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 , 320, 60)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 , SCREENWIDTH, 90)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
         
@@ -134,7 +134,7 @@
         
         int x  = 8;
         
-        int y = 82;
+        int y = 83;
         
         int width = 250;
         
@@ -158,7 +158,7 @@
     }
     else {
         
-        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 320, 375)];
+        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, SCREENWIDTH, 375)];
         
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg.png"]];
         
@@ -166,7 +166,7 @@
         
         bgView =nil;
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , 320, 40)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , SCREENWIDTH, 40)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
         

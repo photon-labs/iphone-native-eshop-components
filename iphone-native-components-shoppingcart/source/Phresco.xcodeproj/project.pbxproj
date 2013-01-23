@@ -18,6 +18,22 @@
 		06DC394B1671B35B006E699C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06DC394A1671B35B006E699C /* AVFoundation.framework */; };
 		A48F4FFD16AFB137003B50A3 /* ThemeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = A48F4FFC16AFB137003B50A3 /* ThemeReader.m */; };
 		A48F500116AFB14B003B50A3 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A48F500016AFB14B003B50A3 /* NavigationView.m */; };
+		A48F500616AFBCA3003B50A3 /* HomeViewController-iPAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F500516AFBCA3003B50A3 /* HomeViewController-iPAd.xib */; };
+		A48F500816AFBD56003B50A3 /* BrowseViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F500716AFBD56003B50A3 /* BrowseViewController-iPad.xib */; };
+		A48F500A16AFC019003B50A3 /* ResultsViewController-iPAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F500916AFC019003B50A3 /* ResultsViewController-iPAd.xib */; };
+		A48F500C16AFC21A003B50A3 /* ProductDetailsViewController-iPAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F500B16AFC21A003B50A3 /* ProductDetailsViewController-iPAd.xib */; };
+		A48F500E16AFC407003B50A3 /* AddtoBagViewController-iPAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F500D16AFC407003B50A3 /* AddtoBagViewController-iPAd.xib */; };
+		A48F501216AFC60C003B50A3 /* ReviewCommentsViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F500F16AFC60C003B50A3 /* ReviewCommentsViewController-iPad.xib */; };
+		A48F501316AFC60C003B50A3 /* ReviewViewController-iPAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F501016AFC60C003B50A3 /* ReviewViewController-iPAd.xib */; };
+		A48F501416AFC60C003B50A3 /* SubmitReviewViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F501116AFC60C003B50A3 /* SubmitReviewViewController-iPad.xib */; };
+		A48F501616AFC879003B50A3 /* SpecialOffersViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F501516AFC879003B50A3 /* SpecialOffersViewController-iPad.xib */; };
+		A48F501C16AFCC7A003B50A3 /* CheckOutViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F501B16AFCC7A003B50A3 /* CheckOutViewController-iPad.xib */; };
+		A48F501E16AFCEB4003B50A3 /* CheckoutOverAllViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F501D16AFCEB4003B50A3 /* CheckoutOverAllViewController-iPad.xib */; };
+		A48F502016AFCFBD003B50A3 /* LoginViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F501F16AFCFBD003B50A3 /* LoginViewController-iPad.xib */; };
+		A48F502216AFD008003B50A3 /* RegistrationViewController-iPAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F502116AFD008003B50A3 /* RegistrationViewController-iPAd.xib */; };
+		A48F502416AFD050003B50A3 /* MoreViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F502316AFD050003B50A3 /* MoreViewController-iPad.xib */; };
+		A48F502616AFD08A003B50A3 /* OrderStatusViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F502516AFD08A003B50A3 /* OrderStatusViewController-iPad.xib */; };
+		A48F502816AFD0FE003B50A3 /* ViewCartController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F502716AFD0FE003B50A3 /* ViewCartController-iPad.xib */; };
 		A4901EB916AE7EE1001F816E /* Manifest.plist in Resources */ = {isa = PBXBuildFile; fileRef = A4901EB416AE7EE1001F816E /* Manifest.plist */; };
 		EA2FCEE516564584000F2C9C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA2FCEAD16564584000F2C9C /* InfoPlist.strings */; };
 		EA2FCEEA16564584000F2C9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2FCEDB16564584000F2C9C /* main.m */; };
@@ -298,6 +314,22 @@
 		A48F4FFC16AFB137003B50A3 /* ThemeReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeReader.m; sourceTree = "<group>"; };
 		A48F4FFF16AFB14B003B50A3 /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
 		A48F500016AFB14B003B50A3 /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
+		A48F500516AFBCA3003B50A3 /* HomeViewController-iPAd.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "HomeViewController-iPAd.xib"; sourceTree = "<group>"; };
+		A48F500716AFBD56003B50A3 /* BrowseViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "BrowseViewController-iPad.xib"; sourceTree = "<group>"; };
+		A48F500916AFC019003B50A3 /* ResultsViewController-iPAd.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ResultsViewController-iPAd.xib"; sourceTree = "<group>"; };
+		A48F500B16AFC21A003B50A3 /* ProductDetailsViewController-iPAd.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ProductDetailsViewController-iPAd.xib"; sourceTree = "<group>"; };
+		A48F500D16AFC407003B50A3 /* AddtoBagViewController-iPAd.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "AddtoBagViewController-iPAd.xib"; sourceTree = "<group>"; };
+		A48F500F16AFC60C003B50A3 /* ReviewCommentsViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ReviewCommentsViewController-iPad.xib"; sourceTree = "<group>"; };
+		A48F501016AFC60C003B50A3 /* ReviewViewController-iPAd.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ReviewViewController-iPAd.xib"; sourceTree = "<group>"; };
+		A48F501116AFC60C003B50A3 /* SubmitReviewViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SubmitReviewViewController-iPad.xib"; sourceTree = "<group>"; };
+		A48F501516AFC879003B50A3 /* SpecialOffersViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "SpecialOffersViewController-iPad.xib"; sourceTree = "<group>"; };
+		A48F501B16AFCC7A003B50A3 /* CheckOutViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CheckOutViewController-iPad.xib"; sourceTree = "<group>"; };
+		A48F501D16AFCEB4003B50A3 /* CheckoutOverAllViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "CheckoutOverAllViewController-iPad.xib"; sourceTree = "<group>"; };
+		A48F501F16AFCFBD003B50A3 /* LoginViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "LoginViewController-iPad.xib"; sourceTree = "<group>"; };
+		A48F502116AFD008003B50A3 /* RegistrationViewController-iPAd.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "RegistrationViewController-iPAd.xib"; sourceTree = "<group>"; };
+		A48F502316AFD050003B50A3 /* MoreViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MoreViewController-iPad.xib"; sourceTree = "<group>"; };
+		A48F502516AFD08A003B50A3 /* OrderStatusViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "OrderStatusViewController-iPad.xib"; sourceTree = "<group>"; };
+		A48F502716AFD0FE003B50A3 /* ViewCartController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ViewCartController-iPad.xib"; sourceTree = "<group>"; };
 		A4901EB416AE7EE1001F816E /* Manifest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Manifest.plist; sourceTree = "<group>"; };
 		EA2FCE6F16563CE3000F2C9C /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = base64/Base64.m; sourceTree = SOURCE_ROOT; };
 		EA2FCE7016563CE3000F2C9C /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = base64/Base64.h; sourceTree = SOURCE_ROOT; };
@@ -1095,11 +1127,12 @@
 		EA2FCECE16564584000F2C9C /* AddToBag */ = {
 			isa = PBXGroup;
 			children = (
-				EA2FCF2916564754000F2C9C /* AddToBagViewController.m */,
 				EA2FCF2A16564754000F2C9C /* AddToBagViewController.h */,
+				EA2FCF2916564754000F2C9C /* AddToBagViewController.m */,
 				EA2FCF2B16564754000F2C9C /* AddToBagCustomCell.h */,
 				EA2FCF2C16564754000F2C9C /* AddToBagCustomCell.m */,
 				EA2FCF2D16564754000F2C9C /* AddToBagViewController.xib */,
+				A48F500D16AFC407003B50A3 /* AddtoBagViewController-iPAd.xib */,
 			);
 			path = AddToBag;
 			sourceTree = "<group>";
@@ -1107,11 +1140,12 @@
 		EA2FCECF16564584000F2C9C /* Browse */ = {
 			isa = PBXGroup;
 			children = (
-				EA2FCF311656475E000F2C9C /* BrowseViewController.m */,
 				EA2FCF321656475E000F2C9C /* BrowseViewController.h */,
-				EA2FCF331656475E000F2C9C /* BrowseViewCustomCell.m */,
+				EA2FCF311656475E000F2C9C /* BrowseViewController.m */,
 				EA2FCF341656475E000F2C9C /* BrowseViewCustomCell.h */,
+				EA2FCF331656475E000F2C9C /* BrowseViewCustomCell.m */,
 				EA2FCF351656475E000F2C9C /* BrowseViewController.xib */,
+				A48F500716AFBD56003B50A3 /* BrowseViewController-iPad.xib */,
 			);
 			path = Browse;
 			sourceTree = "<group>";
@@ -1119,14 +1153,16 @@
 		EA2FCED016564584000F2C9C /* Checkout */ = {
 			isa = PBXGroup;
 			children = (
-				EA2FCF3916564766000F2C9C /* CheckoutOverAllViewController.m */,
-				EA2FCF3A16564766000F2C9C /* CheckoutOverAllViewController.h */,
-				EA2FCF3B16564766000F2C9C /* CheckOutViewController.m */,
-				EA2FCF3C16564766000F2C9C /* CheckoutOverAllViewController.xib */,
-				EA2FCF3D16564766000F2C9C /* DTCustomColoredAccessory.m */,
 				EA2FCF3E16564766000F2C9C /* CheckOutViewController.h */,
+				EA2FCF3B16564766000F2C9C /* CheckOutViewController.m */,
+				EA2FCF3A16564766000F2C9C /* CheckoutOverAllViewController.h */,
+				EA2FCF3916564766000F2C9C /* CheckoutOverAllViewController.m */,
 				EA2FCF3F16564766000F2C9C /* DTCustomColoredAccessory.h */,
+				EA2FCF3D16564766000F2C9C /* DTCustomColoredAccessory.m */,
 				EA2FCF4016564766000F2C9C /* CheckOutViewController.xib */,
+				EA2FCF3C16564766000F2C9C /* CheckoutOverAllViewController.xib */,
+				A48F501B16AFCC7A003B50A3 /* CheckOutViewController-iPad.xib */,
+				A48F501D16AFCEB4003B50A3 /* CheckoutOverAllViewController-iPad.xib */,
 			);
 			path = Checkout;
 			sourceTree = "<group>";
@@ -1134,9 +1170,10 @@
 		EA2FCED116564584000F2C9C /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				EA2FCF461656476E000F2C9C /* HomeViewController.m */,
 				EA2FCF471656476E000F2C9C /* HomeViewController.h */,
+				EA2FCF461656476E000F2C9C /* HomeViewController.m */,
 				EA2FCF481656476E000F2C9C /* HomeViewController.xib */,
+				A48F500516AFBCA3003B50A3 /* HomeViewController-iPAd.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1144,9 +1181,10 @@
 		EA2FCED216564584000F2C9C /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				EA2FCF4B16564775000F2C9C /* LoginViewController.m */,
 				EA2FCF4C16564775000F2C9C /* LoginViewController.h */,
+				EA2FCF4B16564775000F2C9C /* LoginViewController.m */,
 				EA2FCF4D16564775000F2C9C /* LoginViewController.xib */,
+				A48F501F16AFCFBD003B50A3 /* LoginViewController-iPad.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1154,9 +1192,10 @@
 		EA2FCED316564584000F2C9C /* MoreOption */ = {
 			isa = PBXGroup;
 			children = (
-				EA2FCF501656477D000F2C9C /* MoreViewController.m */,
 				EA2FCF511656477D000F2C9C /* MoreViewController.h */,
+				EA2FCF501656477D000F2C9C /* MoreViewController.m */,
 				EA2FCF521656477D000F2C9C /* MoreViewController.xib */,
+				A48F502316AFD050003B50A3 /* MoreViewController-iPad.xib */,
 			);
 			path = MoreOption;
 			sourceTree = "<group>";
@@ -1164,9 +1203,10 @@
 		EA2FCED416564584000F2C9C /* OrderStatus */ = {
 			isa = PBXGroup;
 			children = (
-				EA2FCF5516564784000F2C9C /* OrderStatusViewController.m */,
 				EA2FCF5616564784000F2C9C /* OrderStatusViewController.h */,
+				EA2FCF5516564784000F2C9C /* OrderStatusViewController.m */,
 				EA2FCF5716564784000F2C9C /* OrderStatusViewController.xib */,
+				A48F502516AFD08A003B50A3 /* OrderStatusViewController-iPad.xib */,
 			);
 			path = OrderStatus;
 			sourceTree = "<group>";
@@ -1177,6 +1217,7 @@
 				EA2FCF5A1656478B000F2C9C /* ProductDetailsViewController.h */,
 				EA2FCF5B1656478B000F2C9C /* ProductDetailsViewController.m */,
 				EA2FCF5C1656478B000F2C9C /* ProductDetailsViewController.xib */,
+				A48F500B16AFC21A003B50A3 /* ProductDetailsViewController-iPAd.xib */,
 			);
 			path = ProductDetails;
 			sourceTree = "<group>";
@@ -1184,11 +1225,12 @@
 		EA2FCED616564584000F2C9C /* ProductResults */ = {
 			isa = PBXGroup;
 			children = (
-				EA2FCF5F16564793000F2C9C /* ResultViewController.m */,
 				EA2FCF6016564793000F2C9C /* ResultViewController.h */,
-				EA2FCF6116564793000F2C9C /* ResultViewController.xib */,
-				EA2FCF6216564793000F2C9C /* ResultViewCustomCell.m */,
+				EA2FCF5F16564793000F2C9C /* ResultViewController.m */,
 				EA2FCF6316564793000F2C9C /* ResultViewCustomCell.h */,
+				EA2FCF6216564793000F2C9C /* ResultViewCustomCell.m */,
+				EA2FCF6116564793000F2C9C /* ResultViewController.xib */,
+				A48F500916AFC019003B50A3 /* ResultsViewController-iPAd.xib */,
 			);
 			path = ProductResults;
 			sourceTree = "<group>";
@@ -1199,6 +1241,7 @@
 				EA2FCF671656479B000F2C9C /* RegistrationViewController.h */,
 				EA2FCF681656479B000F2C9C /* RegistrationViewController.m */,
 				EA2FCF691656479B000F2C9C /* RegistrationViewController.xib */,
+				A48F502116AFD008003B50A3 /* RegistrationViewController-iPAd.xib */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -1206,17 +1249,20 @@
 		EA2FCED816564584000F2C9C /* ReviewView */ = {
 			isa = PBXGroup;
 			children = (
-				EA2FCF6C165647A2000F2C9C /* SubmitReviewViewController.m */,
+				EA2FCF6F165647A2000F2C9C /* ReviewViewController.h */,
 				EA2FCF6D165647A2000F2C9C /* ReviewViewController.m */,
 				EA2FCF6E165647A2000F2C9C /* SubmitReviewViewController.h */,
-				EA2FCF6F165647A2000F2C9C /* ReviewViewController.h */,
-				EA2FCF70165647A2000F2C9C /* ReviewCommentsViewController.m */,
+				EA2FCF6C165647A2000F2C9C /* SubmitReviewViewController.m */,
 				EA2FCF71165647A2000F2C9C /* ReviewCommentsViewController.h */,
-				EA2FCF72165647A2000F2C9C /* ReviewCustomCell.m */,
+				EA2FCF70165647A2000F2C9C /* ReviewCommentsViewController.m */,
 				EA2FCF73165647A2000F2C9C /* ReviewCustomCell.h */,
-				EA2FCF74165647A2000F2C9C /* SubmitReviewViewController.xib */,
-				EA2FCF75165647A2000F2C9C /* ReviewCommentsViewController.xib */,
+				EA2FCF72165647A2000F2C9C /* ReviewCustomCell.m */,
 				EA2FCF76165647A2000F2C9C /* ReviewViewController.xib */,
+				A48F501016AFC60C003B50A3 /* ReviewViewController-iPAd.xib */,
+				EA2FCF74165647A2000F2C9C /* SubmitReviewViewController.xib */,
+				A48F501116AFC60C003B50A3 /* SubmitReviewViewController-iPad.xib */,
+				EA2FCF75165647A2000F2C9C /* ReviewCommentsViewController.xib */,
+				A48F500F16AFC60C003B50A3 /* ReviewCommentsViewController-iPad.xib */,
 			);
 			path = ReviewView;
 			sourceTree = "<group>";
@@ -1224,11 +1270,12 @@
 		EA2FCED916564584000F2C9C /* SpecialOffer */ = {
 			isa = PBXGroup;
 			children = (
-				EA2FCF7E165647A9000F2C9C /* SpecialOfferCustomCell.m */,
 				EA2FCF7F165647A9000F2C9C /* SpecialOfferCustomCell.h */,
-				EA2FCF80165647A9000F2C9C /* SpecialOffersViewController.m */,
+				EA2FCF7E165647A9000F2C9C /* SpecialOfferCustomCell.m */,
 				EA2FCF81165647A9000F2C9C /* SpecialOffersViewController.h */,
+				EA2FCF80165647A9000F2C9C /* SpecialOffersViewController.m */,
 				EA2FCF82165647A9000F2C9C /* SpecialOffersViewController.xib */,
+				A48F501516AFC879003B50A3 /* SpecialOffersViewController-iPad.xib */,
 			);
 			path = SpecialOffer;
 			sourceTree = "<group>";
@@ -1236,9 +1283,10 @@
 		EA2FCEDA16564584000F2C9C /* ViewCart */ = {
 			isa = PBXGroup;
 			children = (
-				EA2FCF86165647B0000F2C9C /* ViewCartViewController.m */,
 				EA2FCF87165647B0000F2C9C /* ViewCartViewController.h */,
+				EA2FCF86165647B0000F2C9C /* ViewCartViewController.m */,
 				EA2FCF88165647B0000F2C9C /* ViewCartViewController.xib */,
+				A48F502716AFD0FE003B50A3 /* ViewCartController-iPad.xib */,
 			);
 			path = ViewCart;
 			sourceTree = "<group>";
@@ -1654,6 +1702,22 @@
 				EAA462A816566344000F43D6 /* viewmycart_btn.png in Resources */,
 				06DC39311671B058006E699C /* paynow.png in Resources */,
 				A4901EB916AE7EE1001F816E /* Manifest.plist in Resources */,
+				A48F500616AFBCA3003B50A3 /* HomeViewController-iPAd.xib in Resources */,
+				A48F500816AFBD56003B50A3 /* BrowseViewController-iPad.xib in Resources */,
+				A48F500A16AFC019003B50A3 /* ResultsViewController-iPAd.xib in Resources */,
+				A48F500C16AFC21A003B50A3 /* ProductDetailsViewController-iPAd.xib in Resources */,
+				A48F500E16AFC407003B50A3 /* AddtoBagViewController-iPAd.xib in Resources */,
+				A48F501216AFC60C003B50A3 /* ReviewCommentsViewController-iPad.xib in Resources */,
+				A48F501316AFC60C003B50A3 /* ReviewViewController-iPAd.xib in Resources */,
+				A48F501416AFC60C003B50A3 /* SubmitReviewViewController-iPad.xib in Resources */,
+				A48F501616AFC879003B50A3 /* SpecialOffersViewController-iPad.xib in Resources */,
+				A48F501C16AFCC7A003B50A3 /* CheckOutViewController-iPad.xib in Resources */,
+				A48F501E16AFCEB4003B50A3 /* CheckoutOverAllViewController-iPad.xib in Resources */,
+				A48F502016AFCFBD003B50A3 /* LoginViewController-iPad.xib in Resources */,
+				A48F502216AFD008003B50A3 /* RegistrationViewController-iPAd.xib in Resources */,
+				A48F502416AFD050003B50A3 /* MoreViewController-iPad.xib in Resources */,
+				A48F502616AFD08A003B50A3 /* OrderStatusViewController-iPad.xib in Resources */,
+				A48F502816AFD0FE003B50A3 /* ViewCartController-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -112,7 +112,7 @@
         
         [self.view addSubview:scrollView];
         
-        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 91, 768, 1200)];
+        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80, 768, 1200)];
         
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg-72.png"]];
         
@@ -120,7 +120,7 @@
         
         bgView = nil;
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 , SCREENWIDTH, 60)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 , SCREENWIDTH, 90)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
         

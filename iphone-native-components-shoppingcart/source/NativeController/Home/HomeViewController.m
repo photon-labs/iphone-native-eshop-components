@@ -127,7 +127,7 @@
 {
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 , 768, 120)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 81 , 768, 145)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
         
