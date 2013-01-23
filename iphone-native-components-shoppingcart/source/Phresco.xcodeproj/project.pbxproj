@@ -16,9 +16,9 @@
 		06DC39471671B33D006E699C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06DC39451671B33C006E699C /* CoreVideo.framework */; };
 		06DC39491671B347006E699C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06DC39481671B347006E699C /* AudioToolbox.framework */; };
 		06DC394B1671B35B006E699C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06DC394A1671B35B006E699C /* AVFoundation.framework */; };
+		A48F4FFD16AFB137003B50A3 /* ThemeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = A48F4FFC16AFB137003B50A3 /* ThemeReader.m */; };
+		A48F500116AFB14B003B50A3 /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A48F500016AFB14B003B50A3 /* NavigationView.m */; };
 		A4901EB916AE7EE1001F816E /* Manifest.plist in Resources */ = {isa = PBXBuildFile; fileRef = A4901EB416AE7EE1001F816E /* Manifest.plist */; };
-		A4901EBA16AE7EE1001F816E /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4901EB616AE7EE1001F816E /* NavigationView.m */; };
-		A4901EBB16AE7EE1001F816E /* ThemeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = A4901EB816AE7EE1001F816E /* ThemeReader.m */; };
 		EA2FCEE516564584000F2C9C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA2FCEAD16564584000F2C9C /* InfoPlist.strings */; };
 		EA2FCEEA16564584000F2C9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2FCEDB16564584000F2C9C /* main.m */; };
 		EA2FCEEB16564584000F2C9C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2FCEDC16564584000F2C9C /* ViewController.m */; };
@@ -294,11 +294,11 @@
 		06DC39451671B33C006E699C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		06DC39481671B347006E699C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		06DC394A1671B35B006E699C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A48F4FFB16AFB137003B50A3 /* ThemeReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeReader.h; sourceTree = "<group>"; };
+		A48F4FFC16AFB137003B50A3 /* ThemeReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeReader.m; sourceTree = "<group>"; };
+		A48F4FFF16AFB14B003B50A3 /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
+		A48F500016AFB14B003B50A3 /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
 		A4901EB416AE7EE1001F816E /* Manifest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Manifest.plist; sourceTree = "<group>"; };
-		A4901EB516AE7EE1001F816E /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
-		A4901EB616AE7EE1001F816E /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
-		A4901EB716AE7EE1001F816E /* ThemeReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeReader.h; sourceTree = "<group>"; };
-		A4901EB816AE7EE1001F816E /* ThemeReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeReader.m; sourceTree = "<group>"; };
 		EA2FCE6F16563CE3000F2C9C /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = base64/Base64.m; sourceTree = SOURCE_ROOT; };
 		EA2FCE7016563CE3000F2C9C /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = base64/Base64.h; sourceTree = SOURCE_ROOT; };
 		EA2FCE7116563CE3000F2C9C /* NSData-AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData-AES.h"; path = "base64/NSData-AES.h"; sourceTree = SOURCE_ROOT; };
@@ -661,6 +661,24 @@
 				0609330516819F2B00472ED5 /* libCardIO.a */,
 			);
 			path = CardIO;
+			sourceTree = "<group>";
+		};
+		A48F4FFA16AFB137003B50A3 /* ThemeReader */ = {
+			isa = PBXGroup;
+			children = (
+				A48F4FFB16AFB137003B50A3 /* ThemeReader.h */,
+				A48F4FFC16AFB137003B50A3 /* ThemeReader.m */,
+			);
+			path = ThemeReader;
+			sourceTree = "<group>";
+		};
+		A48F4FFE16AFB14B003B50A3 /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				A48F4FFF16AFB14B003B50A3 /* NavigationView.h */,
+				A48F500016AFB14B003B50A3 /* NavigationView.m */,
+			);
+			path = NavigationBar;
 			sourceTree = "<group>";
 		};
 		EA2FCEAC16564584000F2C9C /* en.lproj */ = {
@@ -1055,6 +1073,7 @@
 		EA2FCECD16564584000F2C9C /* NativeController */ = {
 			isa = PBXGroup;
 			children = (
+				A48F4FFE16AFB14B003B50A3 /* NavigationBar */,
 				EA2FCED116564584000F2C9C /* Home */,
 				EA2FCECF16564584000F2C9C /* Browse */,
 				EA2FCED616564584000F2C9C /* ProductResults */,
@@ -1268,11 +1287,6 @@
 		EAAA05ED161C0E2E00BD06EF = {
 			isa = PBXGroup;
 			children = (
-				A4901EB416AE7EE1001F816E /* Manifest.plist */,
-				A4901EB516AE7EE1001F816E /* NavigationView.h */,
-				A4901EB616AE7EE1001F816E /* NavigationView.m */,
-				A4901EB716AE7EE1001F816E /* ThemeReader.h */,
-				A4901EB816AE7EE1001F816E /* ThemeReader.m */,
 				06DC394A1671B35B006E699C /* AVFoundation.framework */,
 				06DC39481671B347006E699C /* AudioToolbox.framework */,
 				06DC39441671B33C006E699C /* CoreMedia.framework */,
@@ -1282,6 +1296,7 @@
 				06DC393E1671B317006E699C /* QuartzCore.framework */,
 				EAA4616516566065000F43D6 /* ViewController_iPhone.xib */,
 				EAA4616616566065000F43D6 /* ViewController_iPad.xib */,
+				A48F4FFA16AFB137003B50A3 /* ThemeReader */,
 				EA2FCECD16564584000F2C9C /* NativeController */,
 				EA2FCEAC16564584000F2C9C /* en.lproj */,
 				EA2FCEB316564584000F2C9C /* DataLayer */,
@@ -1300,6 +1315,7 @@
 				EA2FCEE216564584000F2C9C /* Constants.h */,
 				EA2FCEE416564584000F2C9C /* phresco-env-config.xml */,
 				EA99374F163FB0850005DC86 /* libxml2.2.dylib */,
+				A4901EB416AE7EE1001F816E /* Manifest.plist */,
 				EA993747163FAF2C0005DC86 /* SenTestingKit.framework */,
 				EAAA065F161C722000BD06EF /* base64 */,
 				EA993767163FB9400005DC86 /* LogicTest */,
@@ -1740,8 +1756,8 @@
 				EA2FCF84165647A9000F2C9C /* SpecialOffersViewController.m in Sources */,
 				EA2FCF89165647B0000F2C9C /* ViewCartViewController.m in Sources */,
 				EA2FCF8D165647EF000F2C9C /* ConfigurationReader.m in Sources */,
-				A4901EBA16AE7EE1001F816E /* NavigationView.m in Sources */,
-				A4901EBB16AE7EE1001F816E /* ThemeReader.m in Sources */,
+				A48F4FFD16AFB137003B50A3 /* ThemeReader.m in Sources */,
+				A48F500116AFB14B003B50A3 /* NavigationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
