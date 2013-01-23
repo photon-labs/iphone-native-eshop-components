@@ -20,6 +20,8 @@
 #import "SpecialOffersViewController.h"
 #import "Tabbar.h"
 #import "ConfigurationReader.h"
+#import "NavigationView.h"
+#import "Constants.h"
 @interface CheckoutOverAllViewController ()
 
 @end
@@ -52,7 +54,7 @@
 		self = [super initWithNibName:@"CheckoutOverAllViewController-iPad" bundle:nil];
 		
 	}
-	else 
+	else
     {
         self = [super initWithNibName:@"CheckoutOverAllViewController" bundle:nil];
         
@@ -106,8 +108,18 @@
     [self.view addSubview:(UIView*)tabbar];
     
     [tabbar setSelectedIndex:2 fromSender:nil];
+    NavigationView *navBar=nil;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        navBar = [[NavigationView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
+    }
+    else{
+        navBar = [[NavigationView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 80)];
+    }
+    navBar.navigationDelegate = self;
+    [navBar loadNavbar:YES:NO];
+    [self.view addSubview:navBar];
     
-    [self loadNavigationBar];
+    [self loadOtherViews];
     
     [self initializeTableView];
     
@@ -119,54 +131,32 @@
 }
 
 
--(void) loadNavigationBar
+-(void) loadOtherViews
 {
 	//add scroll view
 	
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
-        UIImageView *navBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 768, 90)];
-        
-        [navBarView setImage:[UIImage imageNamed:@"header_logo-72.png"]];
-        
-        [self.view addSubview:navBarView];
-        
-        //navBarView = nil;
-        
-        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 91, 768, 845)];
+        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80, SCREENWIDTH, 860)];
         
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg-72.png"]];
         
         [self.view addSubview:bgView];
         
-        //bgView = nil;
         
-        UIButton *backButton = [[UIButton alloc] init];
-        
-        [backButton setFrame:CGRectMake(5, 5, 123, 60)];
-        
-        [backButton setBackgroundImage:[UIImage imageNamed:@"back_btn-72.png"] forState:UIControlStateNormal];
-        
-        [backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:backButton];
-        
-        //backButton = nil;
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 91 , 768, 60)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0,80 , SCREENWIDTH, 60)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
         
         [self.view addSubview:searchBarView];
         
-        //searchBarView = nil;
         
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"],  [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_highlighted.png"], 
+        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"],  [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_highlighted.png"],
                                        nil];
         
         int x  = 8;
         
-        int y = 92;
+        int y = 82;
         
         int width = 250;
         
@@ -230,35 +220,14 @@
     }
     else {
         
-        UIImageView *navBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-        
-        [navBarView setImage:[UIImage imageNamed:@"header_logo.png"]];
-        
-        [self.view addSubview:navBarView];
-        
-        //navBarView =nil;
-        
-        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 41, 320, 375)];
+        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, SCREENWIDTH, 375)];
         
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg.png"]];
         
         [self.view addSubview:bgView];
         
-        //bgView =nil;
         
-        UIButton *backButton = [[UIButton alloc] init];
-        
-        [backButton setFrame:CGRectMake(5, 5, 60, 30)];
-        
-        [backButton setBackgroundImage:[UIImage imageNamed:@"back_btn.png"] forState:UIControlStateNormal];
-        
-        [backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:backButton];
-        
-        //backButton =nil;
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , 320, 40)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , SCREENWIDTH, 40)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
         
@@ -356,7 +325,7 @@
     
 	addToBagTable.dataSource = self;
 	addToBagTable.delegate = self;
-	addToBagTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0]; 
+	addToBagTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0];
 	addToBagTable.separatorColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"split_line.png"]];
 	[self.view addSubview:addToBagTable];
     
@@ -379,9 +348,9 @@
 
 #pragma mark Button Actions
 
-- (void) browseButtonSelected:(id)sender 
+- (void) browseButtonSelected:(id)sender
 {
-    NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_highlighted.png"], [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_normal.png"], 
+    NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_highlighted.png"], [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_normal.png"],
                                    nil];
     
     
@@ -430,7 +399,7 @@
     tempBrowseViewController =nil;
 }
 
-- (void) specialOfferButtonSelected:(id)sender 
+- (void) specialOfferButtonSelected:(id)sender
 {
     AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
     assetsData.specialProductsArray = [[NSMutableArray alloc]init];
@@ -652,7 +621,7 @@
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:  @"Order cannot be placed. Please try again"
 													   delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-		[alert show]; 
+		[alert show];
 		//alert =nil;
     }
 }
@@ -699,7 +668,7 @@
         if (!indexPath.row)
         {
             return 70;
-        } 
+        }
         else if ((indexPath.section ==0) && (indexPath.row == 1))
         {
             return 60;
@@ -716,7 +685,7 @@
         {
             return 200;
         }
-        else 
+        else
         {
             return 80;
         }
@@ -726,7 +695,7 @@
         if (!indexPath.row)
         {
             return 35;
-        } 
+        }
         else if ((indexPath.section ==0) && (indexPath.row == 1))
         {
             return 30;
@@ -743,7 +712,7 @@
         {
             return 100;
         }
-        else 
+        else
         {
             return 40;
         }
@@ -784,7 +753,7 @@
                 [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:24]];
                 cell.textLabel.text = @"Payment Methods"; // only top row showing
                 cell.textLabel.textColor = [UIColor whiteColor];
-            } else 
+            } else
             {
                 [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:24]];
                 cell.textLabel.text = @"Order Comments"; // only top row showing
@@ -868,28 +837,28 @@
                 cityLabel.textColor = [UIColor whiteColor];
                 [cell.contentView addSubview:cityLabel];
                 
-                                      UILabel *lblProvince =  [[UILabel alloc] initWithFrame:CGRectMake(5, 262, 629, 40)];
+                UILabel *lblProvince =  [[UILabel alloc] initWithFrame:CGRectMake(5, 262, 629, 40)];
                 lblProvince.tag = 12;
                 [lblProvince setFont:[UIFont fontWithName:@"Helvetica" size:24]];
                 lblProvince.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"product_viewlist_middle-72.png"]];
                 lblProvince.textColor = [UIColor whiteColor];
                 [cell.contentView addSubview:lblProvince];
                 
-                                         UILabel *countryLabel =  [[UILabel alloc] initWithFrame:CGRectMake(5, 304, 629, 40)];
+                UILabel *countryLabel =  [[UILabel alloc] initWithFrame:CGRectMake(5, 304, 629, 40)];
                 countryLabel.tag = 13;
                 [countryLabel setFont:[UIFont fontWithName:@"Helvetica" size:24]];
                 countryLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"product_viewlist_middle-72.png"]];
                 countryLabel.textColor = [UIColor whiteColor];
                 [cell.contentView addSubview:countryLabel];
                 
-                                          UILabel *lblZip = [[UILabel alloc] initWithFrame:CGRectMake(5, 346, 629, 40)];
+                UILabel *lblZip = [[UILabel alloc] initWithFrame:CGRectMake(5, 346, 629, 40)];
                 lblZip.tag = 14;
                 [lblZip setFont:[UIFont fontWithName:@"Helvetica" size:24]];
                 lblZip.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"product_viewlist_middle-72.png"]];
                 lblZip.textColor = [UIColor whiteColor];
                 [cell.contentView addSubview:lblZip];
                 
-                                   UILabel *lblNumber = [[UILabel alloc] initWithFrame:CGRectMake(5, 388, 629, 62)];
+                UILabel *lblNumber = [[UILabel alloc] initWithFrame:CGRectMake(5, 388, 629, 62)];
                 lblNumber.tag = 15;
                 [lblNumber setFont:[UIFont fontWithName:@"Helvetica" size:24]];
                 lblNumber.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"product_viewlist_bottom-72.png"]];
@@ -942,21 +911,21 @@
                 firstName.textColor = [UIColor whiteColor];
                 [cell.contentView addSubview:firstName];
                 
-                                      UILabel *lastName = [[UILabel alloc] initWithFrame:CGRectMake(5, 52, 629, 40)];
+                UILabel *lastName = [[UILabel alloc] initWithFrame:CGRectMake(5, 52, 629, 40)];
                 lastName.tag = 35;
                 [lastName setFont:[UIFont fontWithName:@"Helvetica" size:24]];
                 lastName.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"product_viewlist_middle-72.png"]];
                 lastName.textColor = [UIColor whiteColor];
                 [cell.contentView addSubview:lastName];
                 
-                                     UILabel *companyLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 94, 629, 40)];
+                UILabel *companyLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 94, 629, 40)];
                 companyLabel.tag = 36;
                 [companyLabel setFont:[UIFont fontWithName:@"Helvetica" size:24]];
                 companyLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"product_viewlist_middle-72.png"]];
                 companyLabel.textColor = [UIColor whiteColor];
                 [cell.contentView addSubview:companyLabel];
                 
-                                         UILabel *lblAddress = [[UILabel alloc] initWithFrame:CGRectMake(5, 136, 629, 40)];
+                UILabel *lblAddress = [[UILabel alloc] initWithFrame:CGRectMake(5, 136, 629, 40)];
                 lblAddress.tag = 37;
                 [lblAddress setFont:[UIFont fontWithName:@"Helvetica" size:24]];
                 lblAddress.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"product_viewlist_middle-72.png"]];
@@ -991,14 +960,14 @@
                 countryLabel.textColor = [UIColor whiteColor];
                 [cell.contentView addSubview:countryLabel];
                 
-                                         UILabel *lblZip = [[UILabel alloc] initWithFrame:CGRectMake(5, 346, 629, 40)];
+                UILabel *lblZip = [[UILabel alloc] initWithFrame:CGRectMake(5, 346, 629, 40)];
                 lblZip.tag = 42;
                 [lblZip setFont:[UIFont fontWithName:@"Helvetica" size:24]];
                 lblZip.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"product_viewlist_middle-72.png"]];
                 lblZip.textColor = [UIColor whiteColor];
                 [cell.contentView addSubview:lblZip];
                 
-                                   UILabel *lblNumber = [[UILabel alloc] initWithFrame:CGRectMake(5, 388, 629, 62)];
+                UILabel *lblNumber = [[UILabel alloc] initWithFrame:CGRectMake(5, 388, 629, 62)];
                 lblNumber.tag = 43;
                 [lblNumber setFont:[UIFont fontWithName:@"Helvetica" size:24]];
                 lblNumber.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"product_viewlist_bottom-72.png"]];
@@ -1058,7 +1027,7 @@
                 lblTotal.textColor = [UIColor whiteColor];
                 [cell.contentView addSubview:lblTotal];
                 
-               UILabel *lblOrderTotal=[[UILabel alloc] initWithFrame:CGRectMake(5, 94, 629, 40)];
+                UILabel *lblOrderTotal=[[UILabel alloc] initWithFrame:CGRectMake(5, 94, 629, 40)];
                 lblOrderTotal.tag = 64;
                 [lblOrderTotal setFont:[UIFont fontWithName:@"Helvetica" size:24]];
                 lblOrderTotal.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"product_viewlist_middle-72.png"]];
@@ -1086,7 +1055,7 @@
             }
             
         }
-        else 
+        else
         {
             if ((cell == nil) ||(cell != nil)) {
                 
@@ -1129,7 +1098,7 @@
                 [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:12]];
                 cell.textLabel.text = @"Payment Methods"; // only top row showing
                 cell.textLabel.textColor = [UIColor whiteColor];
-            } else 
+            } else
             {
                 [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:12]];
                 cell.textLabel.text = @"Order Comments"; // only top row showing
@@ -1431,7 +1400,7 @@
             }
             
         }
-        else 
+        else
         {
             
             if ((cell == nil) ||(cell != nil)) {
@@ -1485,7 +1454,7 @@
         
         for (int i=1; i<rows; i++)
         {
-            NSIndexPath *tmpIndexPath = [NSIndexPath indexPathForRow:i 
+            NSIndexPath *tmpIndexPath = [NSIndexPath indexPathForRow:i
                                                            inSection:section];
             [tmpArray addObject:tmpIndexPath];
         }
@@ -1494,7 +1463,7 @@
         
         if (currentlyExpanded)
         {
-            [tableView deleteRowsAtIndexPaths:tmpArray 
+            [tableView deleteRowsAtIndexPaths:tmpArray
                              withRowAnimation:UITableViewRowAnimationTop];
             
             cell.accessoryView = [DTCustomColoredAccessory accessoryWithColor:[UIColor grayColor] type:DTCustomColoredAccessoryTypeDown];
@@ -1502,7 +1471,7 @@
         }
         else
         {
-            [tableView insertRowsAtIndexPaths:tmpArray 
+            [tableView insertRowsAtIndexPaths:tmpArray
                              withRowAnimation:UITableViewRowAnimationTop];
             cell.accessoryView =  [DTCustomColoredAccessory accessoryWithColor:[UIColor grayColor] type:DTCustomColoredAccessoryTypeUp];
             
@@ -1510,6 +1479,9 @@
     }
     
     
+}
+-(void)backButtonAction{
+    [self.view removeFromSuperview];
 }
 
 
