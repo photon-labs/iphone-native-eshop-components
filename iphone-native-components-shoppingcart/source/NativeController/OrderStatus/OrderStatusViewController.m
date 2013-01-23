@@ -14,6 +14,8 @@
 #import "SharedObjects.h"
 #import "SpecialOffersViewController.h"
 #import "Tabbar.h"
+#import "NavigationView.h"
+#import "Constants.h"
 @interface OrderStatusViewController ()
 
 @end
@@ -28,7 +30,7 @@
 		self = [super initWithNibName:@"OrderStatusViewController-iPad" bundle:nil];
 		
 	}
-	else 
+	else
     {
         NSLog(@"iPhone....");
         self = [super initWithNibName:@"OrderStatusViewController" bundle:nil];
@@ -76,25 +78,27 @@
     [self.view addSubview:(UIView*)tabbar];
     
     [tabbar setSelectedIndex:2 fromSender:nil];
+    NavigationView *navBar=nil;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        navBar = [[NavigationView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
+    }
+    else{
+        navBar = [[NavigationView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 80)];
+    }
+    navBar.navigationDelegate = self;
+    [navBar loadNavbar:YES:NO];
+    [self.view addSubview:navBar];
     
-    [self loadNavigationBar];
+    [self loadOtherViews];
     
     [self initializeTextView];
     
 }
--(void) loadNavigationBar
+-(void) loadOtherViews
 {
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
-        UIImageView *navBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 768, 90)];
-        
-        [navBarView setImage:[UIImage imageNamed:@"header_logo-72.png"]];
-        
-        [self.view addSubview:navBarView];
-        
-        navBarView = nil;
-        
-        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 91, 768, 845)];
+        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80, SCREENWIDTH, 860)];
         
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg-72.png"]];
         
@@ -102,19 +106,7 @@
         
         bgView = nil;
         
-        UIButton *backButton = [[UIButton alloc] init];
-        
-        [backButton setFrame:CGRectMake(5, 5, 123, 60)];
-        
-        [backButton setBackgroundImage:[UIImage imageNamed:@"back_btn-72.png"] forState:UIControlStateNormal];
-        
-        [backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:backButton];
-        
-        backButton = nil;
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 91 , 768, 60)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 ,SCREENWIDTH, 60)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
         
@@ -126,7 +118,7 @@
         
         int x  = 8;
         
-        int y = 92;
+        int y = 82;
         
         int width = 250;
         
@@ -180,15 +172,7 @@
     }
     else {
         
-        UIImageView *navBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-        
-        [navBarView setImage:[UIImage imageNamed:@"header_logo.png"]];
-        
-        [self.view addSubview:navBarView];
-        
-        navBarView = nil;
-        
-        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 41, 320, 375)];
+        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, SCREENWIDTH, 375)];
         
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg.png"]];
         
@@ -196,19 +180,7 @@
         
         bgView = nil;
         
-        UIButton *backButton = [[UIButton alloc] init];
-        
-        [backButton setFrame:CGRectMake(5, 5, 60, 30)];
-        
-        [backButton setBackgroundImage:[UIImage imageNamed:@"back_btn.png"] forState:UIControlStateNormal];
-        
-        [backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:backButton];
-        
-        backButton = nil;
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , 320, 40)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , SCREENWIDTH, 40)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
         
@@ -280,14 +252,14 @@
 {
     [self.view removeFromSuperview];
 }
-- (void)initializeTextView 
+- (void)initializeTextView
 {
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
         orderStatusTextView =[[UITextView alloc]initWithFrame:CGRectMake(10, 300,740,400)];
         orderStatusTextView.delegate = self;
         orderStatusTextView.editable = NO;
-        orderStatusTextView.backgroundColor =[UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0]; 
+        orderStatusTextView.backgroundColor =[UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0];
         [orderStatusTextView setFont:[UIFont fontWithName:@"Times New Roman-Regular" size:26]];
         [orderStatusTextView.layer setBorderColor:[[UIColor grayColor]CGColor]];
         [orderStatusTextView.layer setBorderWidth:1.0];
@@ -302,7 +274,7 @@
         orderStatusTextView =[[UITextView alloc]initWithFrame:CGRectMake(5, 150,310,150)];
         orderStatusTextView.delegate = self;
         orderStatusTextView.editable = NO;
-        orderStatusTextView.backgroundColor =[UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0]; 
+        orderStatusTextView.backgroundColor =[UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0];
         [orderStatusTextView setFont:[UIFont fontWithName:@"Times New Roman-Regular" size:13]];
         [orderStatusTextView.layer setBorderColor:[[UIColor grayColor]CGColor]];
         [orderStatusTextView.layer setBorderWidth:1.0];
@@ -319,7 +291,7 @@
 
 #pragma mark Button Actions
 
-- (void) browseButtonSelected:(id)sender 
+- (void) browseButtonSelected:(id)sender
 {
     
     AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
@@ -349,7 +321,7 @@
     tempBrowseViewController = nil;
 }
 
-- (void) specialOfferButtonSelected:(id)sender 
+- (void) specialOfferButtonSelected:(id)sender
 {
     AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
     assetsData.specialProductsArray = [[NSMutableArray alloc]init];
@@ -385,6 +357,9 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
+}
+-(void)backButtonAction{
+    [self.view removeFromSuperview];
 }
 
 @end
