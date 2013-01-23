@@ -16,6 +16,8 @@
 #import "SpecialOffersViewController.h"
 #import "Tabbar.h"
 #import "CheckoutOverAllViewController.h"
+#import "NavigationView.h"
+#import "Constants.h"
 @interface ViewCartViewController ()
 
 @end
@@ -41,7 +43,7 @@
 		self = [super initWithNibName:@"ViewCartController-iPad" bundle:nil];
 		
 	}
-	else 
+	else
     {
         self = [super initWithNibName:@"ViewCartViewController" bundle:nil];
         
@@ -81,58 +83,47 @@
     [self.view addSubview:(UIView*)tabbar];
     
     [tabbar setSelectedIndex:2 fromSender:nil];
+    NavigationView *navBar=nil;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        navBar = [[NavigationView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
+    }
+    else{
+        navBar = [[NavigationView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 80)];
+    }
+    navBar.navigationDelegate = self;
+    [navBar loadNavbar:YES:NO];
+    [self.view addSubview:navBar];
     
-    [self loadNavigationBar];
+    [self loadOtherViews];
     
     [self initializeTableView];
     
     [self.view addSubview:viewCartTable];
 }
 
--(void) loadNavigationBar
+-(void) loadOtherViews
 {
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
-        UIImageView *navBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 768, 90)];
-        
-        [navBarView setImage:[UIImage imageNamed:@"header_logo-72.png"]];
-        
-        [self.view addSubview:navBarView];
-        
-       // navBarView = nil;
-        
-        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 91, 768, 845)];
+        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80, SCREENWIDTH, 860)];
         
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg-72.png"]];
         
         [self.view addSubview:bgView];
         
-       // bgView = nil;
-        
-        UIButton *backButton = [[UIButton alloc] init];
-        
-        [backButton setFrame:CGRectMake(5, 15, 123, 60)];
-        
-        [backButton setBackgroundImage:[UIImage imageNamed:@"back_btn-72.png"] forState:UIControlStateNormal];
-        
-        [backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:backButton];
-        
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 91 , 768, 60)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0,80 , SCREENWIDTH, 60)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
         
         [self.view addSubview:searchBarView];
         
         
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal-72.png"], [UIImage imageNamed:@"specialoffers_btn_normal-72.png"], [UIImage imageNamed:@"mycart_btn_highlighted-72.png"], 
+        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal-72.png"], [UIImage imageNamed:@"specialoffers_btn_normal-72.png"], [UIImage imageNamed:@"mycart_btn_highlighted-72.png"],
                                        nil];
         
         int x  = 8;
         
-        int y = 92;
+        int y = 82;
         
         int width = 250;
         
@@ -159,7 +150,7 @@
                 [button addTarget:self action:@selector(specialOfferButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
             }
             
-         //   [button release];
+            //   [button release];
             
         }
         
@@ -170,7 +161,7 @@
         [titleLabel setText:@"View My Cart"];
         [self.view addSubview:titleLabel];
         
-
+        
         int purchase=0;
         
         AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
@@ -180,7 +171,7 @@
             NSString *cartPrice=[[assetsData.arrayAddtoCart objectAtIndex:i]objectForKey:@"ListPrice"];
             NSString *cartCount=[[assetsData.arrayAddtoCart objectAtIndex:i]objectForKey:@"Count"];
             
- 
+            
             purchase = purchase + ([cartPrice intValue] * [cartCount intValue]);
             
             
@@ -213,39 +204,19 @@
     }
     else {
         
-        UIImageView *navBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-        
-        [navBarView setImage:[UIImage imageNamed:@"header_logo.png"]];
-        
-        [self.view addSubview:navBarView];
-        
-        
-        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 41, 320, 375)];
+        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, SCREENWIDTH, 375)];
         
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg.png"]];
         
         [self.view addSubview:bgView];
-        
-        
-        UIButton *backButton = [[UIButton alloc] init];
-        
-        [backButton setFrame:CGRectMake(5, 5, 60, 30)];
-        
-        [backButton setBackgroundImage:[UIImage imageNamed:@"back_btn.png"] forState:UIControlStateNormal];
-        
-        [backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:backButton];
-        
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , 320, 40)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , SCREENWIDTH, 40)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
         
         [self.view addSubview:searchBarView];
         
         
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_highlighted.png"], 
+        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_highlighted.png"],
                                        nil];
         
         int x  = 5;
@@ -287,7 +258,7 @@
         [titleLabel setText:@"View My Cart"];
         [self.view addSubview:titleLabel];
         
-
+        
         int purchase=0;
         
         AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
@@ -335,7 +306,7 @@
 
 #pragma mark Button Actions
 
-- (void) browseButtonSelected:(id)sender 
+- (void) browseButtonSelected:(id)sender
 {
     AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
     assetsData.productArray = [[NSMutableArray alloc]init];
@@ -362,7 +333,7 @@
     
 }
 
-- (void) specialOfferButtonSelected:(id)sender 
+- (void) specialOfferButtonSelected:(id)sender
 {
     
     ServiceHandler *serviceHandler = [[ServiceHandler alloc] init];
@@ -444,7 +415,7 @@
         viewCartTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 220, 768, iPadHeightTable) style:UITableViewStyleGrouped];
         viewCartTable.dataSource = self;
         viewCartTable.delegate = self;
-        viewCartTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0]; 
+        viewCartTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0];
         [self.view addSubview:viewCartTable];
     }
     else {
@@ -459,7 +430,7 @@
         viewCartTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 105, 320, heightTable) style:UITableViewStyleGrouped];
         viewCartTable.dataSource = self;
         viewCartTable.delegate = self;
-        viewCartTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0]; 
+        viewCartTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0];
         [self.view addSubview:viewCartTable];
     }
 	
@@ -490,7 +461,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 3;       
+    return 3;
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -543,12 +514,12 @@
         if(indexPath.row == 2) {
             
             NSString *strPrice=[[assetsData.arrayAddtoCart objectAtIndex:indexPath.section]objectForKey:@"ListPrice"];
-//            NSString *strCount=[[assetsData.arrayAddtoCart objectAtIndex:indexPath.section]objectForKey:@"Count"];
-//            int total = [strPrice intValue];
-//            int sum =  [strCount intValue];
-//            int subtotal;
-//            
-//            subtotal = (sum * total);
+            //            NSString *strCount=[[assetsData.arrayAddtoCart objectAtIndex:indexPath.section]objectForKey:@"Count"];
+            //            int total = [strPrice intValue];
+            //            int sum =  [strCount intValue];
+            //            int subtotal;
+            //
+            //            subtotal = (sum * total);
             
             Price.text = [NSString stringWithFormat:@" $%@",strPrice];
             [cell.contentView addSubview:Price];
@@ -624,6 +595,9 @@
 - (void)viewDidUnload {
     [super viewDidUnload];
     
+}
+-(void)backButtonAction{
+    [self.view removeFromSuperview];
 }
 
 @end
