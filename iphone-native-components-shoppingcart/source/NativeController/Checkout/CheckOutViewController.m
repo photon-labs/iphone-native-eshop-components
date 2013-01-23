@@ -16,6 +16,8 @@
 #import "ServiceHandler.h"
 #import "SpecialOffersViewController.h"
 #import "Tabbar.h"
+#import "NavigationView.h"
+#import "Constants.h"
 
 #define kSavedField 16;
 #define kFirstNameField  18;
@@ -52,7 +54,7 @@
 		self = [super initWithNibName:@"CheckOutViewController-iPad" bundle:nil];
 		
 	}
-	else 
+	else
     {
         self = [super initWithNibName:@"CheckOutViewController" bundle:nil];
         
@@ -90,8 +92,18 @@
     [self.view addSubview:(UIView*)tabbar];
     
     [tabbar setSelectedIndex:2 fromSender:nil];
+    NavigationView *navBar=nil;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        navBar = [[NavigationView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
+    }
+    else{
+        navBar = [[NavigationView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 80)];
+    }
+    navBar.navigationDelegate = self;
+    [navBar loadNavbar:YES:NO];
+    [self.view addSubview:navBar];
     
-    [self loadNavigationBar];
+    [self loadOtherViews];
     [self initializeTableView];
     
     if (!expandedSections)
@@ -215,7 +227,7 @@
     
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
-        actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
+        actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                   delegate:nil
                                          cancelButtonTitle:nil
                                     destructiveButtonTitle:nil
@@ -235,7 +247,7 @@
         [actionSheet addSubview:pickerView];
         
         UISegmentedControl *closeButton = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObject:@"Close"]];
-        closeButton.momentary = YES; 
+        closeButton.momentary = YES;
         closeButton.frame = CGRectMake(260, 7.0f, 50.0f, 30.0f);
         closeButton.segmentedControlStyle = UISegmentedControlStyleBar;
         closeButton.tintColor = [UIColor blackColor];
@@ -245,7 +257,7 @@
     }
     else {
         
-        actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
+        actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                   delegate:nil
                                          cancelButtonTitle:nil
                                     destructiveButtonTitle:nil
@@ -265,7 +277,7 @@
         [actionSheet addSubview:pickerView];
         
         UISegmentedControl *closeButton = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObject:@"Close"]];
-        closeButton.momentary = YES; 
+        closeButton.momentary = YES;
         closeButton.frame = CGRectMake(260, 7.0f, 50.0f, 30.0f);
         closeButton.segmentedControlStyle = UISegmentedControlStyleBar;
         closeButton.tintColor = [UIColor blackColor];
@@ -285,21 +297,13 @@
     
 }
 
--(void) loadNavigationBar
+-(void) loadOtherViews
 {
 	//add scroll view
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
         
-        UIImageView *navBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 768, 90)];
-        
-        [navBarView setImage:[UIImage imageNamed:@"header_logo-72.png"]];
-        
-        [self.view addSubview:navBarView];
-        
-        navBarView =nil;
-        
-        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 91, 768, 845)];
+        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80, SCREENWIDTH, 860)];
         
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg-72.png"]];
         
@@ -307,19 +311,7 @@
         
         bgView = nil;
         
-        UIButton *backButton = [[UIButton alloc] init];
-        
-        [backButton setFrame:CGRectMake(5, 15, 123, 60)];
-        
-        [backButton setBackgroundImage:[UIImage imageNamed:@"back_btn-72.png"] forState:UIControlStateNormal];
-        
-        [backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:backButton];
-        
-        backButton = nil;
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 92 , 768, 60)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0,81 , SCREENWIDTH, 60)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
         
@@ -327,12 +319,12 @@
         
         searchBarView = nil;
         
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal-72.png"], [UIImage imageNamed:@"specialoffers_btn_normal-72.png"], [UIImage imageNamed:@"mycart_btn_highlighted-72.png"], 
+        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal-72.png"], [UIImage imageNamed:@"specialoffers_btn_normal-72.png"], [UIImage imageNamed:@"mycart_btn_highlighted-72.png"],
                                        nil];
         
         int x  = 8;
         
-        int y = 92;
+        int y = 82;
         
         int width = 250;
         
@@ -359,7 +351,7 @@
             {
                 [button addTarget:self action:@selector(specialOfferButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
             }
-            button = nil;       
+            button = nil;
             
         }
         
@@ -384,7 +376,7 @@
         
         [self.view addSubview:reviewCart];
         
-        reviewCart.accessibilityLabel = @"revieworder btn";   
+        reviewCart.accessibilityLabel = @"revieworder btn";
         
         reviewCart = nil;
         
@@ -400,15 +392,7 @@
     }
     else {
         
-        UIImageView *navBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-        
-        [navBarView setImage:[UIImage imageNamed:@"header_logo.png"]];
-        
-        [self.view addSubview:navBarView];
-        
-        navBarView = nil;
-        
-        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 41, 320, 375)];
+        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, SCREENWIDTH, 375)];
         
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg.png"]];
         
@@ -416,19 +400,7 @@
         
         bgView =nil;
         
-        UIButton *backButton = [[UIButton alloc] init];
-        
-        [backButton setFrame:CGRectMake(5, 5, 60, 30)];
-        
-        [backButton setBackgroundImage:[UIImage imageNamed:@"back_btn.png"] forState:UIControlStateNormal];
-        
-        [backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:backButton];
-        
-        backButton = nil;
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , 320, 40)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , SCREENWIDTH, 40)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
         
@@ -436,7 +408,7 @@
         
         searchBarView = nil;
         
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_highlighted.png"], 
+        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_highlighted.png"],
                                        nil];
         
         int x  = 5;
@@ -468,7 +440,7 @@
             {
                 [button addTarget:self action:@selector(specialOfferButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
             }
-            button = nil;     
+            button = nil;
             
         }
         
@@ -520,7 +492,7 @@
     
 	addToBagTable.dataSource = self;
 	addToBagTable.delegate = self;
-	addToBagTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0]; 
+	addToBagTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0];
 	addToBagTable.separatorColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"split_line.png"]];
 	[self.view addSubview:addToBagTable];
     
@@ -532,7 +504,7 @@
     }
     for(int i = 0;i<[assetsData.productDetailArray count]; i++)
     {
-       // [productImageArray addObject:[[assetsData.productDetailArray objectAtIndex:i] productDetailImageUrl]];
+        // [productImageArray addObject:[[assetsData.productDetailArray objectAtIndex:i] productDetailImageUrl]];
     }
 }
 
@@ -551,7 +523,7 @@
 {
     
     //     if ((![txtFirst.text length]) || (![txtAdd1.text length]) || (![txtAdd2.text length]) || (![txtCity.text length]) || (![txtState.text length]) || (![txtCountry.text length]) || (![txtPost.text length]) || (![txtOrder.text length])){
-    //     
+    //
     //         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"Enter all Required Values" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     //         [alert show];
     //         [alert release];
@@ -580,7 +552,7 @@
 
 -(void) editButtonClicked:(id)sender
 {
-    viewController_ = [[UIView alloc] init];    
+    viewController_ = [[UIView alloc] init];
     viewController_.frame = CGRectMake(20, 150, 390, 120);
     
     txtLabel = [[UITextField alloc] init];
@@ -592,7 +564,7 @@
     txtLabel.adjustsFontSizeToFitWidth = YES;
     [txtLabel setDelegate:self];
     txtLabel.font = [UIFont fontWithName:@"Times New Roman-Regular" size:12];
-    UIImageView *myImageView = [[UIImageView alloc] initWithImage : 
+    UIImageView *myImageView = [[UIImageView alloc] initWithImage :
                                 [UIImage imageNamed :@"popup_bg.png"]];
     [viewController_ addSubview:myImageView];
     [viewController_ addSubview:txtLabel];
@@ -616,7 +588,7 @@
     [closeButton addTarget:self action:@selector(closeButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
     [viewController_ addSubview:closeButton];
     
-    okButton = nil;   
+    okButton = nil;
     closeButton = nil;
 }
 
@@ -675,7 +647,7 @@
 
 #pragma mark Button Actions
 
-- (void) browseButtonSelected:(id)sender 
+- (void) browseButtonSelected:(id)sender
 {
     AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
     assetsData.productArray = [[NSMutableArray alloc]init];
@@ -705,7 +677,7 @@
     tempBrowseViewController = nil;
 }
 
-- (void) specialOfferButtonSelected:(id)sender 
+- (void) specialOfferButtonSelected:(id)sender
 {
     AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
     assetsData.specialProductsArray = [[NSMutableArray alloc]init];
@@ -752,14 +724,14 @@
             txtSaved.text = textField.text;
             break;
         case 18:
-            txtFirst.text = textField.text; 
+            txtFirst.text = textField.text;
             break;
         case 19:
             txtLast.text = textField.text;
             
             break;
         case 20:
-            txtComp.text = textField.text; 
+            txtComp.text = textField.text;
             
             break;
         case 21:
@@ -767,7 +739,7 @@
             
             break;
         case 22:
-            txtAdd2.text = textField.text; 
+            txtAdd2.text = textField.text;
             
             break;
         case 23:
@@ -775,7 +747,7 @@
             
             break;
         case 24:
-            txtState.text = textField.text; 
+            txtState.text = textField.text;
             
             break;
         case 26:
@@ -783,7 +755,7 @@
             
             break;
         case 28:
-            txtPost.text = textField.text; 
+            txtPost.text = textField.text;
             
             break;
         case 29:
@@ -845,7 +817,7 @@
         
         [pickerView reloadAllComponents];
         
-        mlabel.text= [arraySaved objectAtIndex:[pickerView selectedRowInComponent:0]]; 
+        mlabel.text= [arraySaved objectAtIndex:[pickerView selectedRowInComponent:0]];
         
         [actionSheet showInView:[[UIApplication sharedApplication] keyWindow]];
         
@@ -857,7 +829,7 @@
         
         [pickerView reloadAllComponents];
         
-        mlabel.text= [arraySaved objectAtIndex:[pickerView selectedRowInComponent:0]]; 
+        mlabel.text= [arraySaved objectAtIndex:[pickerView selectedRowInComponent:0]];
         
         [actionSheet showInView:[[UIApplication sharedApplication] keyWindow]];
         
@@ -871,7 +843,7 @@
     
     [pickerView reloadAllComponents];
     
-    mlabel.text = [arrayCountry objectAtIndex:[pickerView selectedRowInComponent:0]]; 
+    mlabel.text = [arrayCountry objectAtIndex:[pickerView selectedRowInComponent:0]];
     
     [actionSheet showInView:[[UIApplication sharedApplication] keyWindow]];
     
@@ -986,7 +958,7 @@
     
     [pickerView reloadAllComponents];
     
-    mlabel.text= [arrayState objectAtIndex:[pickerView selectedRowInComponent:0]]; 
+    mlabel.text= [arrayState objectAtIndex:[pickerView selectedRowInComponent:0]];
     
     [actionSheet showInView:[[UIApplication sharedApplication] keyWindow]];
     
@@ -1006,7 +978,7 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{ 
+{
     if(mySelection == 1) {
         
         txtBillSaved.text = [arraySaved objectAtIndex:row];
@@ -1104,7 +1076,7 @@
         if (!indexPath.row)
         {
             return 100;
-        } 
+        }
         else if ((indexPath.section ==0) && (indexPath.row == 1))
         {
             return 220;
@@ -1121,7 +1093,7 @@
         {
             return 400;
         }
-        else 
+        else
         {
             return 420;
         }
@@ -1131,7 +1103,7 @@
         if (!indexPath.row)
         {
             return 50;
-        } 
+        }
         else if ((indexPath.section ==0) && (indexPath.row == 1))
         {
             return 110;
@@ -1148,7 +1120,7 @@
         {
             return 200;
         }
-        else 
+        else
         {
             return 210;
         }
@@ -1175,7 +1147,7 @@
                 [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:30]];
                 cell.textLabel.text = @"Customer Information"; // only top row showing
                 cell.textLabel.textColor = [UIColor whiteColor];
-                cell.accessibilityLabel = @"CustInfo"; 
+                cell.accessibilityLabel = @"CustInfo";
                 
             } else if (indexPath.section ==1)
             {
@@ -1195,7 +1167,7 @@
                 cell.textLabel.text = @"Payment Methods"; // only top row showing
                 cell.textLabel.textColor = [UIColor whiteColor];
                 cell.accessibilityLabel = @"PaytMethods";
-            } else 
+            } else
             {
                 [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:30]];
                 cell.textLabel.text = @"Order Comments"; // only top row showing
@@ -1989,7 +1961,7 @@
             }
             
         }
-        else 
+        else
         {
             
             if ((cell == nil) ||(cell != nil)) {
@@ -2039,7 +2011,7 @@
                 txtOrder.isAccessibilityElement = YES;
                 txtOrder.accessibilityLabel = @"OderTextView";
                 txtOrder.text = @"Phresco products are nice and cool...";
-                txtOrder.accessibilityValue = txtOrder.text; 
+                txtOrder.accessibilityValue = txtOrder.text;
             }
         }
         
@@ -2073,7 +2045,7 @@
                 cell.textLabel.text = @"Payment Methods"; // only top row showing
                 cell.textLabel.textColor = [UIColor whiteColor];
                 cell.accessibilityLabel = @"PaytMethods";
-            } else 
+            } else
             {
                 [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica" size:16]];
                 cell.textLabel.text = @"Order Comments"; // only top row showing
@@ -2799,7 +2771,7 @@
                 btnStatic.tag = 60;
                 [btnStatic setBackgroundImage:[UIImage imageNamed:@"radio_btn_unchecked.png"] forState:UIControlStateNormal];
                 [cell.contentView addSubview:btnStatic];
-                btnStatic = nil;                
+                btnStatic = nil;
                 UILabel *lblCash = [[UILabel alloc] initWithFrame:CGRectMake(90, 50, 180, 20)];
                 lblCash.tag = 61;
                 [lblCash setFont:[UIFont fontWithName:@"Helvetica" size:12]];
@@ -2869,7 +2841,7 @@
             }
             
         }
-        else 
+        else
         {
             
             if ((cell == nil) ||(cell != nil)) {
@@ -2957,7 +2929,7 @@
         
         for (int i=1; i<rows; i++)
         {
-            NSIndexPath *tmpIndexPath = [NSIndexPath indexPathForRow:i 
+            NSIndexPath *tmpIndexPath = [NSIndexPath indexPathForRow:i
                                                            inSection:section];
             [tmpArray addObject:tmpIndexPath];
         }
@@ -2966,7 +2938,7 @@
         
         if (currentlyExpanded)
         {
-            [tableView deleteRowsAtIndexPaths:tmpArray 
+            [tableView deleteRowsAtIndexPaths:tmpArray
                              withRowAnimation:UITableViewRowAnimationTop];
             
             cell.accessoryView = [DTCustomColoredAccessory accessoryWithColor:[UIColor grayColor] type:DTCustomColoredAccessoryTypeDown];
@@ -2974,7 +2946,7 @@
         }
         else
         {
-            [tableView insertRowsAtIndexPaths:tmpArray 
+            [tableView insertRowsAtIndexPaths:tmpArray
                              withRowAnimation:UITableViewRowAnimationTop];
             cell.accessoryView =  [DTCustomColoredAccessory accessoryWithColor:[UIColor grayColor] type:DTCustomColoredAccessoryTypeUp];
             
@@ -2987,5 +2959,7 @@
 {
 	return YES;
 }
-
+-(void)backButtonAction{
+    [self.view removeFromSuperview];
+}
 @end
