@@ -49,7 +49,7 @@
 		self = [super initWithNibName:@"AddtoBagViewController-iPAd" bundle:nil];
 		
 	}
-	else 
+	else
     {
         NSLog(@"iPhone....");
         self = [super initWithNibName:@"AddToBagViewController" bundle:nil];
@@ -106,7 +106,7 @@
     navBar.navigationDelegate = self;
     [navBar loadNavbar:YES:NO];
     [self.view addSubview:navBar];
-
+    
 	[self loadOtherViews];
     [self initializeTableView];
 }
@@ -117,15 +117,7 @@
     NSLog(@"Add to cart....");
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
-        UIImageView *navBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 768, 90)];
-        
-        [navBarView setImage:[UIImage imageNamed:@"header_logo-72.png"]];
-        
-        [self.view addSubview:navBarView];
-        
-        navBarView = nil;
-        
-        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 91, 768, 845)];
+        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80, SCREENWIDTH, 860)];
         
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg-72.png"]];
         
@@ -133,19 +125,7 @@
         
         bgView = nil;
         
-        UIButton *backButton = [[UIButton alloc] init];
-        
-        [backButton setFrame:CGRectMake(5, 15, 123, 60)];
-        
-        [backButton setBackgroundImage:[UIImage imageNamed:@"back_btn-72.png"] forState:UIControlStateNormal];
-        
-        [backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:backButton];
-        
-        backButton = nil;
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 91 , 768, 60)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 , SCREENWIDTH, 60)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
         
@@ -153,12 +133,12 @@
         
         searchBarView = nil;
         
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal-72.png"], [UIImage imageNamed:@"specialoffers_btn_normal-72.png"], [UIImage imageNamed:@"mycart_btn_highlighted-72.png"], 
+        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal-72.png"], [UIImage imageNamed:@"specialoffers_btn_normal-72.png"], [UIImage imageNamed:@"mycart_btn_highlighted-72.png"],
                                        nil];
         
         int x  = 8;
         
-        int y = 92;
+        int y = 82;
         
         int width = 250;
         
@@ -276,15 +256,7 @@
     }
     else {
         
-        UIImageView *navBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-        
-        [navBarView setImage:[UIImage imageNamed:@"header_logo.png"]];
-        
-        [self.view addSubview:navBarView];
-        
-        navBarView = nil;
-        
-        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 41, 320, 375)];
+        UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, SCREENWIDTH, 375)];
         
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg.png"]];
         
@@ -292,19 +264,7 @@
         
         bgView = nil;
         
-        UIButton *backButton = [[UIButton alloc] init];
-        
-        [backButton setFrame:CGRectMake(5, 5, 60, 30)];
-        
-        [backButton setBackgroundImage:[UIImage imageNamed:@"back_btn.png"] forState:UIControlStateNormal];
-        
-        [backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:backButton];
-        
-        backButton = nil;
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , 320, 40)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , SCREENWIDTH, 40)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
         
@@ -312,7 +272,7 @@
         
         searchBarView = nil;
         
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_highlighted.png"], 
+        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_highlighted.png"],
                                        nil];
         
         int x  = 5;
@@ -460,7 +420,7 @@
             lblNoCart.textAlignment = UITextAlignmentCenter;
             [self.view addSubview:lblNoCart];
         }
-    } 
+    }
     else {
         
         float heightTable = 0.0;
@@ -495,7 +455,7 @@
         
         addToBagTable.dataSource = self;
         addToBagTable.delegate = self;
-        addToBagTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0]; 
+        addToBagTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0];
         
         [self.view addSubview:addToBagTable];
         
@@ -508,7 +468,7 @@
         for(int i = 0;i<[assetsData.productDetailArray count]; i++)
         {
             NSLog(@"productImageArray :%@", productImageArray);
-           //[productImageArray addObject:[[assetsData.productDetailArray objectAtIndex:i] productDetailImageUrl]];
+            //[productImageArray addObject:[[assetsData.productDetailArray objectAtIndex:i] productDetailImageUrl]];
             
         }
     }
@@ -560,7 +520,7 @@
 
 #pragma mark Button Actions
 
-- (void) browseButtonSelected:(id)sender 
+- (void) browseButtonSelected:(id)sender
 {
     
     AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
@@ -586,14 +546,14 @@
     tempBrowseViewController = nil;
 }
 
-- (void) specialOfferButtonSelected:(id)sender 
+- (void) specialOfferButtonSelected:(id)sender
 {
     AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
     [assetsData.specialProductsArray removeAllObjects];
     [assetsData.productDetailArray removeAllObjects];
     [serviceHandler specialProductsService:self :@selector(finishedSpecialProductsService:)];
     
-   }
+}
 
 -(void) finishedSpecialProductsService:(id) data
 {
@@ -638,7 +598,7 @@
             
             [lblSubtotal setText:[NSString stringWithFormat:@"Subtotal:$ %d",purchase]];
             
-            if([lblSubtotal.text length] > 17) 
+            if([lblSubtotal.text length] > 17)
             {
                 if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
                     lblSubtotal.frame = CGRectMake(480, 710 , 300, 40);
@@ -762,7 +722,7 @@
     if ([assetsData.arrayAddtoCart count] == 0) {
         
         return 1;
-    } 
+    }
     else {
         
         return [assetsData.arrayAddtoCart count];
@@ -874,16 +834,16 @@
                 productCountLabel = nil;
                 
                 NSString *strPrice=[[assetsData.arrayAddtoCart objectAtIndex:indexPath.row]objectForKey:@"ListPrice"];
-//                int total = [strPrice intValue];
-//                
-//                int subtotal;
-//                
-//                subtotal = (theInteger * total);
+                //                int total = [strPrice intValue];
+                //
+                //                int subtotal;
+                //
+                //                subtotal = (theInteger * total);
                 
                 CGRect frame;
-                frame.size.width=100; 
+                frame.size.width=100;
                 frame.size.height=100;
-                frame.origin.x=20; 
+                frame.origin.x=20;
                 frame.origin.y=17;
                 
                 AsyncImageView *tasyncImage = [[AsyncImageView alloc]
@@ -925,7 +885,7 @@
                 
                 
             }
-            else 
+            else
             {
                 UIImageView *productImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 7, 30, 40)];
                 productImageView.tag=1;
@@ -966,13 +926,13 @@
                 //        [numberFormatter setFormat:@"$#, ##0.00"];
                 
                 [cell.contentView addSubview:quantityTextView];
-            quantityTextView = nil;
+                quantityTextView = nil;
                 
                 UIButton *btnRemove = [[UIButton alloc] initWithFrame:CGRectMake(248 , 45, 62, 20)];
                 btnRemove.tag=5;
                 [btnRemove setBackgroundImage:[UIImage imageNamed:@"remove_btn.png"] forState:UIControlStateNormal];
                 [cell.contentView addSubview:btnRemove];
-                    btnRemove = nil;
+                btnRemove = nil;
                 
                 UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 60 ,50, 30)];
                 [priceLabel setFont:[UIFont fontWithName:@"Helvetica" size:12]];
@@ -1004,16 +964,16 @@
                 productCountLabel = nil;
                 
                 NSString *strPrice=[[assetsData.arrayAddtoCart objectAtIndex:indexPath.row]objectForKey:@"ListPrice"];
-//                int total = [strPrice intValue];
-//                
-//                int subtotal;
-//                
-//                subtotal = (theInteger * total);
+                //                int total = [strPrice intValue];
+                //
+                //                int subtotal;
+                //
+                //                subtotal = (theInteger * total);
                 
                 CGRect frame;
-                frame.size.width=60; 
+                frame.size.width=60;
                 frame.size.height=60;
-                frame.origin.x=10; 
+                frame.origin.x=10;
                 frame.origin.y=7;
                 
                 AsyncImageView *tasyncImage = [[AsyncImageView alloc]
@@ -1058,7 +1018,7 @@
                     
                     UILabel *lblCount = (UILabel *)[cell viewWithTag:800];
                     lblCount.backgroundColor = [UIColor clearColor];
-                } 
+                }
             }
             
         }
@@ -1097,7 +1057,9 @@
     [super viewDidUnload];
     
 }
-
+-(void)backButtonAction{
+    [self.view removeFromSuperview];
+}
 
 
 @end
