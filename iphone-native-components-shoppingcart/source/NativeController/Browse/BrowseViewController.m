@@ -122,7 +122,7 @@
         
         [self.view addSubview:bgView];
                 
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 , SCREENWIDTH, 60)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 , SCREENWIDTH, 90)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
         
@@ -135,7 +135,7 @@
         
         int x  = 8;
         
-        int y = 82;
+        int y = 83;
         
         int width = 250;
         
@@ -227,7 +227,7 @@
 {
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 153 , 768, 90)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 140 , SCREENWIDTH, 100)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
         
