@@ -23,16 +23,20 @@
 	</dict>
 	<key>Login</key>
 	<dict>
-		<key>backgroundImageNames</key>
-		<string>home_screen_bg.png</string>
-		<key>loginURL</key>
-		<string>http://172.16.17.180:2020/eshop/rest/api/post/login/</string>
-		<key>captions</key>
-		<string>Login</string>
+		<key>password</key>
+		<string>Password</string>
+		<key>emailaddress</key>
+		<string>Email Address</string>
+		<key>backgroundImage</key>
+		<string>login_bg</string>
+		<key>header</key>
+		<string>login_header</string>
+		<key>loginImage</key>
+		<string>login_btn</string>
+		<key>cancelImage</key>
+		<string>cancel_btn</string>
 		<key>font</key>
-		<string>Verdana</string>
-		<key>backgroundColor</key>
-		<string>lightGrayColor</string>
+		<string>Helvetica-Bold</string>
 	</dict>
 </dict>
 </plist>
