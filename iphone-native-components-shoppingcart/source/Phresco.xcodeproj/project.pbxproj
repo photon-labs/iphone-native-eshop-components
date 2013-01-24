@@ -35,6 +35,7 @@
 		A48F502616AFD08A003B50A3 /* OrderStatusViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F502516AFD08A003B50A3 /* OrderStatusViewController-iPad.xib */; };
 		A48F502816AFD0FE003B50A3 /* ViewCartController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F502716AFD0FE003B50A3 /* ViewCartController-iPad.xib */; };
 		A4901EB916AE7EE1001F816E /* Manifest.plist in Resources */ = {isa = PBXBuildFile; fileRef = A4901EB416AE7EE1001F816E /* Manifest.plist */; };
+		A496E96616B14B8F002E624F /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = A496E96516B14B8F002E624F /* LoginView.m */; };
 		EA2FCEE516564584000F2C9C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA2FCEAD16564584000F2C9C /* InfoPlist.strings */; };
 		EA2FCEEA16564584000F2C9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2FCEDB16564584000F2C9C /* main.m */; };
 		EA2FCEEB16564584000F2C9C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2FCEDC16564584000F2C9C /* ViewController.m */; };
@@ -331,6 +332,8 @@
 		A48F502516AFD08A003B50A3 /* OrderStatusViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "OrderStatusViewController-iPad.xib"; sourceTree = "<group>"; };
 		A48F502716AFD0FE003B50A3 /* ViewCartController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ViewCartController-iPad.xib"; sourceTree = "<group>"; };
 		A4901EB416AE7EE1001F816E /* Manifest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Manifest.plist; sourceTree = "<group>"; };
+		A496E96416B14B8F002E624F /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
+		A496E96516B14B8F002E624F /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		EA2FCE6F16563CE3000F2C9C /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = base64/Base64.m; sourceTree = SOURCE_ROOT; };
 		EA2FCE7016563CE3000F2C9C /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = base64/Base64.h; sourceTree = SOURCE_ROOT; };
 		EA2FCE7116563CE3000F2C9C /* NSData-AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData-AES.h"; path = "base64/NSData-AES.h"; sourceTree = SOURCE_ROOT; };
@@ -712,6 +715,15 @@
 			);
 			path = NavigationBar;
 			sourceTree = "<group>";
+		};
+		A496E96316B14B8F002E624F /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				A496E96416B14B8F002E624F /* LoginView.h */,
+				A496E96516B14B8F002E624F /* LoginView.m */,
+			);
+			path = LoginView;
+			sourceTree = SOURCE_ROOT;
 		};
 		EA2FCEAC16564584000F2C9C /* en.lproj */ = {
 			isa = PBXGroup;
@@ -1105,6 +1117,7 @@
 		EA2FCECD16564584000F2C9C /* NativeController */ = {
 			isa = PBXGroup;
 			children = (
+				A496E96316B14B8F002E624F /* LoginView */,
 				A48F4FFE16AFB14B003B50A3 /* NavigationBar */,
 				EA2FCED116564584000F2C9C /* Home */,
 				EA2FCECF16564584000F2C9C /* Browse */,
@@ -1822,6 +1835,7 @@
 				EA2FCF8D165647EF000F2C9C /* ConfigurationReader.m in Sources */,
 				A48F4FFD16AFB137003B50A3 /* ThemeReader.m in Sources */,
 				A48F500116AFB14B003B50A3 /* NavigationView.m in Sources */,
+				A496E96616B14B8F002E624F /* LoginView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
