@@ -106,3 +106,16 @@
 #define SCREENWIDTH [UIScreen mainScreen].applicationFrame.size.width
 #define SCREENHEIGHT [UIScreen mainScreen].applicationFrame.size.height
 
+
+
+#define emailLabelTag 3453
+#define passwordLabelTag 9454
+
+#define cancelButtonTag 233
+
+#define emailTextFieldTag 123
+#define passwordTextFieldTag 198
+
+
+#define emailTag 345
+#define passwordTag 867
