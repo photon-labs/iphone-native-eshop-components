@@ -19,6 +19,7 @@
 #import "HomeViewController.h"
 #import "ConfigurationReader.h"
 #import "NavigationView.h"
+#import "LoginView.h"
 #import "Constants.h"
 @interface LoginViewController ()
 
@@ -102,10 +103,39 @@
     [self.view addSubview:navBar];
 
 	[self loadOtherViews];
-    
-    [self createLoginScreen];
-}
+   [self loadRegisterButton];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"login_bg" ofType:@"png"];
+    UIImage *bgImage = [UIImage imageWithContentsOfFile:filePath];
+    LoginView *loginView =nil;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        loginView= [[LoginView alloc] initWithFrame:CGRectMake(0, 100, SCREENWIDTH, bgImage.size.height + 160)];
+    }
+    else{
+        loginView= [[LoginView alloc] initWithFrame:CGRectMake(0, 40, bgImage.size.width, bgImage.size.height + 30)];
+    }
+    [loginView createLoginView];
+    loginView.loginDelegate=self;
+    [self.view addSubview:loginView];
 
+    
+}
+-(void) loadRegisterButton{
+    registerButton = [[UIButton alloc] init];
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    
+    
+    [registerButton setFrame:CGRectMake(260, 650, 240, 60)];
+    }
+    else{
+        [registerButton setFrame:CGRectMake(100, 370, 120, 30)];
+    }
+    [registerButton setBackgroundImage:[UIImage imageNamed:@"register_btn"] forState:UIControlStateNormal];
+    
+    [registerButton addTarget:self action:@selector(registerButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:registerButton];
+
+}
 -(void) loadOtherViews
 {
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -136,247 +166,6 @@
 	[self.view removeFromSuperview];
 }
 
--(void) createLoginScreen
-{
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        
-        UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 220, 768, 400)];
-        
-        [bgView setImage:[UIImage imageNamed:@"login_bg.png"]];
-        
-        [self.view addSubview:bgView];
-        
-        bgView = nil;
-        
-        UIImageView	*loginHeader = [[UIImageView alloc] initWithFrame:CGRectMake(230, 200, 300, 60)];
-        
-        [loginHeader setImage:[UIImage imageNamed:@"login_header.png"]];
-        
-        [self.view addSubview:loginHeader];
-        
-        loginHeader = nil;
-        
-        emailAddress = [[UITextField alloc] initWithFrame:CGRectMake(60, 300, 650, 60)];
-        
-        emailAddress.delegate = self;
-        
-        emailAddress.tag = kEmailAddress;
-        
-        emailAddress.borderStyle = UITextBorderStyleRoundedRect;
-        
-        [self.view addSubview:emailAddress];
-        
-        password = [[UITextField alloc] initWithFrame:CGRectMake(60, 455, 650, 60)];
-        
-        password.delegate = self;
-        
-        password.tag = kPassword;
-        
-        password.borderStyle = UITextBorderStyleRoundedRect;
-        
-        [password setSecureTextEntry:YES];
-        
-        [self.view addSubview:password];
-        
-        
-        int x = 60;
-        
-        int y = 250;
-        
-        int width = 250;
-        
-        int height = 50;
-        
-        NSMutableArray *labelName = [[NSMutableArray alloc] initWithObjects:@"Email Address", @"Password", nil];
-        
-        for(int i = 0; i<[labelName count]; i++)
-        {
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
-            
-            [label setText:[labelName objectAtIndex:i]];
-            
-            [label setFont:[UIFont fontWithName:@"Helvetica-Bold" size:24]];
-            
-            [label setBackgroundColor:[UIColor clearColor]];
-            
-            [label setTextColor:[UIColor whiteColor]];
-            
-            [self.view addSubview:label];
-            
-            y = y + 140;
-            
-            label = nil;
-        }
-        
-        labelName = nil;
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"login_btn.png"], [UIImage imageNamed:@"cancel_btn.png"],  nil];
-        
-        int buttonX = 420;
-        
-        int buttonY = 500;
-        
-        int buttonWidth = 240;
-        
-        int buttonHeight = 180;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(buttonX, buttonY, buttonWidth, buttonHeight)];
-            
-            [button setImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            if(i == 0) {
-                
-                [button addTarget:self action:@selector(loginButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            if(i == 1) {
-                
-                [button addTarget:self action:@selector(cancelButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            buttonX = buttonX + 160;
-            
-            button = nil;
-        }
-        
-        registerButton = [[UIButton alloc] init];
-        
-        [registerButton setFrame:CGRectMake(300, 700, 240, 60)];
-        
-        [registerButton setBackgroundImage:[UIImage imageNamed:@"register_btn"] forState:UIControlStateNormal];
-        
-        [registerButton addTarget:self action:@selector(registerButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:registerButton];
-    }
-    else {
-        UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 79, 320, 240)];
-        
-        [bgView setImage:[UIImage imageNamed:@"login_bg.png"]];
-        
-        [self.view addSubview:bgView];
-        
-        bgView = nil;
-        
-        
-        UIImageView	*loginHeader = [[UIImageView alloc] initWithFrame:CGRectMake(90, 70, 150, 30)];
-        
-        [loginHeader setImage:[UIImage imageNamed:@"login_header.png"]];
-        
-        [self.view addSubview:loginHeader];
-        
-        loginHeader = nil;
-        
-        strMsg = [[NSMutableString alloc] init];
-        successMsg = [[NSMutableString alloc] init];
-        userID = [[NSMutableString alloc] init];
-        userName = [[NSMutableString alloc] init];
-        
-        loginArray =[[NSMutableArray alloc] init];
-        
-        emailAddress = [[UITextField alloc] initWithFrame:CGRectMake(30, 150, 270, 30)];
-        
-        emailAddress.delegate = self;
-        
-        emailAddress.tag = kEmailAddress;
-        
-        emailAddress.borderStyle = UITextBorderStyleRoundedRect;
-        
-        [self.view addSubview:emailAddress];
-        
-        password = [[UITextField alloc] initWithFrame:CGRectMake(emailAddress.frame.origin.x, emailAddress.frame.origin.y + emailAddress.frame.size.height + 45, emailAddress.frame.size.width, emailAddress.frame.size.height)];
-        
-        
-        password.delegate = self;
-        
-        password.tag = kPassword;
-        
-        password.borderStyle = UITextBorderStyleRoundedRect;
-        
-        [password setSecureTextEntry:YES];
-        
-        [self.view addSubview:password];
-        
-        
-        int x = emailAddress.frame.origin.x;
-        
-        int y = emailAddress.frame.origin.y - 35;
-        
-        int width = 100;
-        
-        int height = 30;
-        
-        NSMutableArray *labelName = [[NSMutableArray alloc] initWithObjects:@"Email Address", @"Password", nil];
-        
-        for(int i = 0; i<[labelName count]; i++)
-        {
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(x, y, width, height)];
-            
-            [label setText:[labelName objectAtIndex:i]];
-            
-            [label setFont:[UIFont fontWithName:@"Helvetica-Bold" size:12]];
-            
-            [label setBackgroundColor:[UIColor clearColor]];
-            
-            [label setTextColor:[UIColor whiteColor]];
-            
-            [self.view addSubview:label];
-            
-            y = y + 80;
-            
-            label = nil;
-        }
-        
-        labelName = nil;
-        
-        int buttonY = password.frame.origin.y + 35;
-        
-        
-        loginButton = [[UIButton alloc] init];
-        
-        [loginButton setFrame:CGRectMake(170, buttonY, 60, 40)];
-        
-        [loginButton setImage:[UIImage imageNamed:@"login_btn.png"] forState:UIControlStateNormal];
-        
-        [loginButton addTarget:self action:@selector(loginButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:loginButton];
-        
-        loginButton.accessibilityLabel =@"log";
-        
-        
-        cancelButton = [[UIButton alloc] init];
-        
-        [cancelButton setFrame:CGRectMake(240, buttonY, 60, 40)];
-        
-        [cancelButton setImage:[UIImage imageNamed:@"cancel_btn.png"] forState:UIControlStateNormal];
-        
-        [cancelButton addTarget:self action:@selector(cancelButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:cancelButton];
-        
-        cancelButton.accessibilityLabel = @"logCancel";
-        
-        registerButton = [[UIButton alloc] init];
-        
-        [registerButton setFrame:CGRectMake(100, 350, 120, 30)];
-        
-        [registerButton setBackgroundImage:[UIImage imageNamed:@"register_btn.png"] forState:UIControlStateNormal];
-        
-        [registerButton addTarget:self action:@selector(registerButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-        registerButton.accessibilityLabel =@"logRegister";
-        
-        [self.view addSubview:registerButton];
-                
-    }
-    
-}
-
-
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     
@@ -386,13 +175,13 @@
 }
 
 
-- (void)serviceCall {
+- (void)serviceCall:(NSString*)email PASSWORD:(NSString*)passwd {
         
         ServiceHandler *serviceHandler = [[ServiceHandler alloc] init];
         
-        serviceHandler.loginId = (NSMutableString*)emailAddress.text;
+        serviceHandler.loginId = [NSMutableString stringWithString:email];
         
-        serviceHandler.pwd = (NSMutableString*)password.text;
+        serviceHandler.pwd = [NSMutableString stringWithString:passwd];
         
         NSMutableDictionary* loginDict= [[NSMutableDictionary alloc] init];
         
@@ -471,56 +260,68 @@
 
     }
         //Pop up screen
-        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            [activityIndicator stopAnimating];
-            UIView *viewController_ = [[UIView alloc] init];
-            viewController_.frame = CGRectMake(40, 300, 580, 260);
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        
+        [activityIndicator stopAnimating];
+        UIView *viewController_ = [[UIView alloc] init];
+        UIImageView *myImageView = [[UIImageView alloc] initWithImage :
+                                    [UIImage imageNamed :@"popup_bg.png"]];
+        viewController_.frame = CGRectMake((SCREENWIDTH-myImageView.frame.size.width)/2, (SCREENHEIGHT-myImageView.frame.size.height)/2, myImageView.frame.size.width,myImageView.frame.size.height);
+        
+        viewController_.isAccessibilityElement=NO; //Added for Automation testing
+        viewController_.accessibilityLabel = @"AlertView";
+        
+        UILabel *label = [[UILabel alloc] init];
+        label.text = successMsg;
+        label.frame = CGRectMake(viewController_.frame.size.width/2-45, viewController_.frame.size.height/2-45, 150, 20);
+        label.textColor =[UIColor whiteColor];
+        label.backgroundColor = [UIColor clearColor];
+        label.adjustsFontSizeToFitWidth = YES;
+        
+        label.accessibilityLabel =@"LoginResult";
+        
+        label.accessibilityValue = successMsg;
+        
+        label.font = [UIFont fontWithName:@"Times New Roman-Regular" size:24];
+        
+        [viewController_ addSubview:myImageView];
+        [viewController_ addSubview:label];
+        
+        if(unitTestCheck == NO) {
             
-            UILabel *label = [[UILabel alloc] init];
-            label.text = successMsg;
-            label.frame = CGRectMake(120, 60, 300, 40);
-            label.textColor =[UIColor whiteColor];
-            label.backgroundColor = [UIColor clearColor];
-            label.adjustsFontSizeToFitWidth = YES;
-            
-            label.accessibilityLabel =@"LoginResult";
-            
-            label.accessibilityValue = successMsg;
-            
-            label.font = [UIFont fontWithName:@"Times New Roman-Regular" size:24];
-            UIImageView *myImageView = [[UIImageView alloc] initWithImage :
-                                        [UIImage imageNamed :@"popup_bg.png"]];
-            [viewController_ addSubview:myImageView];
-            [viewController_ addSubview:label];
             [self.view addSubview:viewController_];
-            if(unitTestCheck == NO) {
-                [self.view addSubview:viewController_];
-            }
-            okButton = [[UIButton alloc] init];
-            
-            [okButton setFrame:CGRectMake(240, 160, 100, 60)];
-            
-            [okButton setBackgroundImage:[UIImage imageNamed:@"ok_btn.png"] forState:UIControlStateNormal];
-            
-            [okButton addTarget:self action:@selector(okButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            [viewController_ addSubview:okButton];
-            
-            okButton.accessibilityLabel = @"loginOkbutton";
-            
         }
+        okButton = [[UIButton alloc] init];
+        UIImage *okButtonImage=[UIImage imageNamed:@"ok_btn.png"];
+        [okButton setFrame:CGRectMake((viewController_.frame.size.width-okButtonImage.size.width)/2, (viewController_.frame.size.height-okButtonImage.size.height)/2,okButtonImage.size.width,okButtonImage.size.height)];
+        
+        [okButton setBackgroundImage:okButtonImage forState:UIControlStateNormal];
+        
+        [okButton addTarget:self action:@selector(okButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+        
+        okButton.accessibilityLabel = @"loginOkbutton";
+        
+        [viewController_ addSubview:okButton];
+        [backButton setUserInteractionEnabled:NO];
+        [registerButton setUserInteractionEnabled:NO];
+        [loginButton setUserInteractionEnabled:NO];
+        [cancelButton setUserInteractionEnabled:NO];
+        
+    }
         else {
             
             [activityIndicator stopAnimating];
             UIView *viewController_ = [[UIView alloc] init];
-            viewController_.frame = CGRectMake(20, 150, 390, 120);
+            UIImageView *myImageView = [[UIImageView alloc] initWithImage :
+                                        [UIImage imageNamed :@"popup_bg.png"]];
+            viewController_.frame = CGRectMake((SCREENWIDTH-myImageView.frame.size.width)/2, (SCREENHEIGHT-myImageView.frame.size.height)/2, myImageView.frame.size.width,myImageView.frame.size.height);
             
             viewController_.isAccessibilityElement=NO; //Added for Automation testing
             viewController_.accessibilityLabel = @"AlertView";
             
             UILabel *label = [[UILabel alloc] init];
             label.text = successMsg;
-            label.frame = CGRectMake(80, 30, 150, 20);
-            
+            label.frame = CGRectMake(viewController_.frame.size.width/2-45, viewController_.frame.size.height/2-45, 150, 20);
             label.textColor =[UIColor whiteColor];
             label.backgroundColor = [UIColor clearColor];
             label.adjustsFontSizeToFitWidth = YES;
@@ -530,8 +331,7 @@
             label.accessibilityValue = successMsg;
             
             label.font = [UIFont fontWithName:@"Times New Roman-Regular" size:12];
-            UIImageView *myImageView = [[UIImageView alloc] initWithImage :
-                                        [UIImage imageNamed :@"popup_bg.png"]];
+            
             [viewController_ addSubview:myImageView];
             [viewController_ addSubview:label];
             
@@ -540,8 +340,10 @@
                 [self.view addSubview:viewController_];
             }
             okButton = [[UIButton alloc] init];
+            UIImage *okButtonImage=[UIImage imageNamed:@"ok_btn.png"];
             
-            [okButton setFrame:CGRectMake(120, 80, 50, 30)];
+            [okButton setFrame:CGRectMake((viewController_.frame.size.width-okButtonImage.size.width)/2, (viewController_.frame.size.height-okButtonImage.size.height)/2, okButtonImage.size.width,okButtonImage.size.height)];
+            [okButton setBackgroundImage:okButtonImage forState:UIControlStateNormal];
             
             [okButton setBackgroundImage:[UIImage imageNamed:@"ok_btn.png"] forState:UIControlStateNormal];
             
@@ -563,30 +365,22 @@
 
 - (void)loginButtonSelected:(id)sender
 {
-    
-    NSLog(@"login button selected:");
-    if(unitTestCheck == NO) {
-        
-        NSLog(@"login button selected:if condition");
-        [self showAlerts];
-        
+    if(unitTestCheck == NO) {        
         
     }
     else {
-        NSLog(@"login button selected: else condition");
-        [self serviceCall];
+        //[self serviceCall];
     }
 }
 
--(void)showAlerts {
+-(void)loginButtonAction:(NSString*)email PASSWORD:(NSString *)passwd {
+    [self showAlerts:email PASSWORD:passwd];
+}
+
+-(void)showAlerts:(NSString*) email PASSWORD:(NSString*)passwd {
     
-    
-    NSString* str1 =emailAddress.text ;
-    
-    NSString* str2 =password.text ;
-    
-    
-    NSLog(@"email and pwd :%@ %@", emailAddress.text, password.text);
+    NSString* str1 = email;
+    NSString* str2 = passwd;
     
     if( ([str1 length] == 0) && ([str2 length] > 0) ){
         
@@ -613,12 +407,8 @@
     
     else {
         
-        [self serviceCall];
-        
-        
+        [self serviceCall:email PASSWORD:passwd];
     }
-    
-    
 }
 
 
@@ -651,7 +441,7 @@
     
 }
 
-- (void)cancelButtonSelected:(id)sender
+- (void)cancelButtonAction
 {
     [self.view removeFromSuperview];
     
