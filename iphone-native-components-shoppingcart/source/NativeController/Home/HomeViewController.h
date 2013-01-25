@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
+#import "DashBoardView.h"
 @class LoginViewController;
 @class RegistrationViewController;
 @class BrowseViewController;
@@ -16,7 +17,7 @@
 @class Tabbar;
 @class SubmitReviewViewController;
 
-@interface HomeViewController : UIViewController
+@interface HomeViewController : UIViewController <dashBoardDelegate>
 {
      Tabbar *tabbar;
     
@@ -39,8 +40,11 @@
     SpecialOffersViewController *specialOffersViewController;
     
     ResultViewController        *resultViewController;
+    
+    DashBoardView* dashBoard;
 
-
+    float navBarHieght;
+     float searchBarHieght;
 }
 @property (nonatomic, strong) UITextField	*searchTextField;
 
@@ -61,6 +65,8 @@
 
 @property (nonatomic, retain) SubmitReviewViewController *submitReviewViewController;
 
+@property (nonatomic, strong)DashBoardView* dashBoard;
+
 -(void) loadNavigationBar;
 
 -(void) addSearchBar;
@@ -69,7 +75,7 @@
 
 -(BOOL) checkIfOdd:(int) num;
 
--(void) buttonAction:(id) sender;
+-(void) callViewController:(id) sender;
 
 - (void)searchButtonSelected;
 

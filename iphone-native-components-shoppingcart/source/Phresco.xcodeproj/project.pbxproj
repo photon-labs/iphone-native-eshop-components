@@ -285,6 +285,7 @@
 		EAAA0621161C19DD00BD06EF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAA0620161C19DD00BD06EF /* SystemConfiguration.framework */; };
 		EAAA0626161C1F0200BD06EF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAA0624161C1EF400BD06EF /* Security.framework */; };
 		EAAA0627161C1F0B00BD06EF /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAAA0622161C1EE900BD06EF /* MessageUI.framework */; };
+		EAC4770716B28DFB00550057 /* DashBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = EAC4770616B28DFB00550057 /* DashBoardView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -636,6 +637,8 @@
 		EAAA0620161C19DD00BD06EF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		EAAA0622161C1EE900BD06EF /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		EAAA0624161C1EF400BD06EF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		EAC4770516B28DFB00550057 /* DashBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashBoardView.h; sourceTree = "<group>"; };
+		EAC4770616B28DFB00550057 /* DashBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashBoardView.m; sourceTree = "<group>"; };
 		EAEF47CB1643FFB000278D99 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -1117,6 +1120,7 @@
 		EA2FCECD16564584000F2C9C /* NativeController */ = {
 			isa = PBXGroup;
 			children = (
+				EAC4770416B28DFB00550057 /* DashBoard */,
 				A496E96316B14B8F002E624F /* LoginView */,
 				A48F4FFE16AFB14B003B50A3 /* NavigationBar */,
 				EA2FCED116564584000F2C9C /* Home */,
@@ -1422,6 +1426,15 @@
 			);
 			name = base64;
 			path = Phresco/base64;
+			sourceTree = "<group>";
+		};
+		EAC4770416B28DFB00550057 /* DashBoard */ = {
+			isa = PBXGroup;
+			children = (
+				EAC4770516B28DFB00550057 /* DashBoardView.h */,
+				EAC4770616B28DFB00550057 /* DashBoardView.m */,
+			);
+			path = DashBoard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1836,6 +1849,7 @@
 				A48F4FFD16AFB137003B50A3 /* ThemeReader.m in Sources */,
 				A48F500116AFB14B003B50A3 /* NavigationView.m in Sources */,
 				A496E96616B14B8F002E624F /* LoginView.m in Sources */,
+				EAC4770716B28DFB00550057 /* DashBoardView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

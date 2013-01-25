@@ -107,7 +107,6 @@
 #define SCREENHEIGHT [UIScreen mainScreen].applicationFrame.size.height
 
 
-
 #define emailLabelTag 3453
 #define passwordLabelTag 9454
 
@@ -119,3 +118,22 @@
 
 #define emailTag 345
 #define passwordTag 867
+
+
+///Dashboard macros
+#define kbgImage                @"backgroundImage"
+#define kfontSize               @"fontSize"
+#define kiPhoneButtonImages     @"iPhoneHomeButtonImages"
+#define kiPadButtonImages       @"iPadHomeButtonImages"
+#define kbuttonTitle            @"buttonTitle"
+#define kdashBoard              @"DashBoard"
+#define kbrowse                 @"browse"
+#define kspecial                @"special"
+#define klogin                  @"login"
+#define kregister               @"register"
+#define kipadHomeBgImage        @"homeBg"
+#define khomePageIcons          @"imagesArray"
+#define khomeButtonTitles        @"titleLabelArray"
+
+
+
