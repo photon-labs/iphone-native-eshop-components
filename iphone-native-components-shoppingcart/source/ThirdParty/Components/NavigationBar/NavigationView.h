@@ -22,4 +22,5 @@
 }
 @property (weak) id navigationDelegate;
 -(void)loadNavbar:(BOOL)isBackNeeded :(BOOL)isForwardNeeded;
+-(NSString*)getObjectForKey:(NSString*)navigationKey;
 @end
