@@ -107,33 +107,61 @@
 #define SCREENHEIGHT [UIScreen mainScreen].applicationFrame.size.height
 
 
-#define emailLabelTag 3453
-#define passwordLabelTag 9454
+#define emailLabelTag                       3453
+#define passwordLabelTag                    9454
 
-#define cancelButtonTag 233
+#define cancelButtonTag                     233
 
-#define emailTextFieldTag 123
-#define passwordTextFieldTag 198
+#define emailTextFieldTag                   123
+#define passwordTextFieldTag                198
 
 
-#define emailTag 345
-#define passwordTag 867
+#define emailTag                            345
+#define passwordTag                         867
 
 
 ///Dashboard macros
-#define kbgImage                @"backgroundImage"
-#define kfontSize               @"fontSize"
-#define kiPhoneButtonImages     @"iPhoneHomeButtonImages"
-#define kiPadButtonImages       @"iPadHomeButtonImages"
-#define kbuttonTitle            @"buttonTitle"
-#define kdashBoard              @"DashBoard"
-#define kbrowse                 @"browse"
-#define kspecial                @"special"
-#define klogin                  @"login"
-#define kregister               @"register"
-#define kipadHomeBgImage        @"homeBg"
-#define khomePageIcons          @"imagesArray"
-#define khomeButtonTitles        @"titleLabelArray"
+#define kbgImage                       @"backgroundImage"
+#define kfontSize                      @"fontSize"
+#define kiPhoneButtonImages            @"iPhoneHomeButtonImages"
+#define kiPadButtonImages              @"iPadHomeButtonImages"
+#define kbuttonTitle                   @"buttonTitle"
+#define kdashBoard                     @"DashBoard"
+#define kbrowse                        @"browse"
+#define kspecial                       @"special"
+#define klogin                         @"login"
+#define kregister                      @"register"
+#define kipadHomeBgImage               @"homeBg"
+#define khomePageIcons                 @"imagesArray"
+#define khomeButtonTitles              @"titleLabelArray"
 
 
 
+
+#define kDefaultPassdCaption           @"Password"
+#define kDefaultPasswordCaption        @"password"
+#define kDefaultEmailCaption           @"Email address"
+#define kDefaultEmailAddressCaption    @"emailaddress"
+#define kDefaultBgImage                @"login_bg"
+#define kDefaultBackgroundImage        @"backgroundImage"
+#define kDefaultHdImage                @"login_header"
+#define kDefaultHeaderImage            @"header"
+#define kDefaultLgImage                @"login_btn"
+#define kDefaultLoginImage             @"loginImage"
+#define kDefaultClImage                @"cancel_btn"
+#define kDefaultCancelImage            @"cancelImage"
+#define kDefaultFont                   @"Helvetica-Bold"
+#define kDefaultFontType               @"font"
+
+#define kDefaultRightBarButtonIpad     @""
+#define kDefaultRightButtonIpad        @"rightBarButton_ipad"
+#define kDefaultLeftBarButtonIpad      @"back_btn-72"
+#define kDefaultLeftButtonIpad         @"leftBarButton_ipad"
+#define kDefaultBgImageIpad            @"header_logo-72"
+#define kDefaultBackgroundImageIpad    @"backgroundImage_ipad"
+#define kDefaultRightBarButtonIphone   @""
+#define kDefaultRightButtonIphone      @"rightBarButton_iphone"
+#define kDefaultLeftBarButtonIphone    @"back_btn"
+#define kDefaultLeftButtonIphone       @"leftBarButton_iphone"
+#define kDefaultBgImageIphone          @"header_logo"
+#define kDefaultBackgroundImageIphone  @"backgroundImage_iphone"

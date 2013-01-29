@@ -8,6 +8,9 @@
 
 #import "NavigationView.h"
 #import "ThemeReader.h"
+#import "Constants.h"
+
+
 
 @implementation NavigationView
 @synthesize navigationDelegate;
@@ -17,13 +20,14 @@
     self = [super init];
     if (self) {
         navigationDelegate = nil;
-        dataDictionary = nil;
+        navigationDefaultsDict = nil;
     }
     return self;
 }
 
 -(void)loadNavbar:(BOOL)isBackNeeded :(BOOL)isForwardNeeded
-{    
+{
+ navigationDefaultsDict =[NSDictionary dictionaryWithObjectsAndKeys:@"",kDefaultRightButtonIpad,@"back_btn-72",kDefaultLeftButtonIpad,@"header_logo-72",kDefaultBackgroundImageIpad,@"",kDefaultRightButtonIphone,@"back_btn",kDefaultLeftButtonIphone,@"header_logo",kDefaultBackgroundImageIphone, nil];
         NSString *backgroundImage = nil;
         if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
         {
@@ -122,7 +126,6 @@
     if(navigationKey != nil &&[navigationKey length]>0){
         ThemeReader *themeReader =[[ThemeReader alloc]init];
         NSMutableDictionary *navigationDict = nil;
-        navigationDict = [[NSMutableDictionary alloc]init];
         navigationDict = [themeReader loadDataFromManifestPlist:@"NavigationBar"];
         if(nil != navigationDict && [navigationDict count] >0)  //Get data from manifest plist
         {
@@ -131,14 +134,9 @@
             {
                 return object;
             }
-            else
+            else  //feature
             {
-                
-            }
-        }
-        else  //feature 
-        {
-        navigationDict = [themeReader loadDataFromComponentPlist:navigationKey INCOMPONENT:@"NavigationBar"];
+                navigationDict = [themeReader loadDataFromComponentPlist:navigationKey INCOMPONENT:@"NavigationBar"];
                 if(nil != navigationDict && [navigationDict count] > 0)
                 {
                     NSString *object = [navigationDict objectForKey:navigationKey];
@@ -148,29 +146,33 @@
                     }
                     else
                     {
-                        // load from constant
+                        return [navigationDefaultsDict objectForKey:navigationKey];
                     }
+                }
+                
+            }
+        }
+        else 
+        {
+            NSMutableDictionary *navigationViewDict=[themeReader loadDataFromComponentPlist:navigationKey INCOMPONENT:@"NavigationBar"];
+            if(nil != navigationViewDict && [navigationViewDict count] > 0)
+            {
+                NSString *object = [navigationViewDict objectForKey:navigationKey];
+                if(nil != object && [object length] > 0)
+                {
+                    return object;
                 }
                 else
                 {
-                    // load from constant
-//                    NSArray* keys =[NSArray arrayWithObjects:@"title",@"back",@"done" nil];
-//                    NSArray* values = [NSArray arrayWithObjects:@"Title",@"Back",@"Done", nil];
-//                    
-//                    navigationDict = [[NSMutableDictionary alloc] initWithObjects:values forKeys:keys];
-//                    return navigationDict
+                    return [navigationDefaultsDict objectForKey:navigationKey];
                 }
             }
-        
-        
-//        title -> Title;
-//        back -> Back;
-//        done -> Done;
-       
+            
+            
+        }
+        return [navigationDefaultsDict objectForKey:navigationKey];
+
     }
     return nil;
 }
-    
-
-
 @end
