@@ -1,4 +1,4 @@
-//
+   //
 //  NavigationView.m
 //  NavigationBar
 //
@@ -17,24 +17,21 @@
     self = [super init];
     if (self) {
         navigationDelegate = nil;
+        dataDictionary = nil;
     }
     return self;
 }
 
 -(void)loadNavbar:(BOOL)isBackNeeded :(BOOL)isForwardNeeded
-{
-    ThemeReader *themeReader = [[ThemeReader alloc] init];
-    
-    NSMutableDictionary *dict = [themeReader loadDataFromPlist:@"NavigationBar"];
-    if(dict != nil && [dict count] > 0)
-    {
+{    
         NSString *backgroundImage = nil;
-        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
-            backgroundImage = [dict objectForKey:@"backgroundImage_iphone"];
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        {
+            backgroundImage = [self getObjectForKey:@"backgroundImage_iphone"];
         }
         else
         {
-            backgroundImage = [dict objectForKey:@"backgroundImage_ipad"];
+            backgroundImage = [self getObjectForKey:@"backgroundImage_ipad"];
         }
         if(nil != backgroundImage && [backgroundImage length] > 0)
         {
@@ -51,11 +48,11 @@
             NSString *leftBarButton = nil;
             if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
             {
-                leftBarButton = [dict objectForKey:@"leftBarButton_iphone"];
+                leftBarButton = [self getObjectForKey:@"leftBarButton_iphone"];
             }
             else
             {
-                leftBarButton = [dict objectForKey:@"leftBarButton_ipad"];
+                leftBarButton = [self getObjectForKey:@"leftBarButton_ipad"];
             }
             if(leftBarButton != nil && [leftBarButton length] > 0)
             {
@@ -76,17 +73,16 @@
                 [self addSubview:button];
             }
         }
-    
-        if(isForwardNeeded)
+    if(isForwardNeeded)
         {
             NSString *rightBarButton = nil;
             if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
             {
-            rightBarButton=[dict objectForKey:@"rightBarButton_iphone"];
+            rightBarButton=[self getObjectForKey:@"rightBarButton_iphone"];
             }
             else
             {
-                rightBarButton=[dict objectForKey:@"rightBarButton_ipad"];
+                rightBarButton=[self getObjectForKey:@"rightBarButton_ipad"];
             }
             if(rightBarButton !=nil && [rightBarButton length]>0)
             {
@@ -108,7 +104,8 @@
         }
     }
         
-}
+
+
 
 -(void) leftNavigationBarButtonPressed
 {
@@ -121,4 +118,59 @@
 {
     
 }
+-(NSString*)getObjectForKey:(NSString*)navigationKey{
+    if(navigationKey != nil &&[navigationKey length]>0){
+        ThemeReader *themeReader =[[ThemeReader alloc]init];
+        NSMutableDictionary *navigationDict = nil;
+        navigationDict = [[NSMutableDictionary alloc]init];
+        navigationDict = [themeReader loadDataFromManifestPlist:@"NavigationBar"];
+        if(nil != navigationDict && [navigationDict count] >0)  //Get data from manifest plist
+        {
+            NSString* object=[navigationDict objectForKey:navigationKey];
+            if(nil != object && [object length] > 0)
+            {
+                return object;
+            }
+            else
+            {
+                
+            }
+        }
+        else  //feature 
+        {
+        navigationDict = [themeReader loadDataFromComponentPlist:navigationKey INCOMPONENT:@"NavigationBar"];
+                if(nil != navigationDict && [navigationDict count] > 0)
+                {
+                    NSString *object = [navigationDict objectForKey:navigationKey];
+                    if(nil != object && [object length] > 0)
+                    {
+                        return object;
+                    }
+                    else
+                    {
+                        // load from constant
+                    }
+                }
+                else
+                {
+                    // load from constant
+//                    NSArray* keys =[NSArray arrayWithObjects:@"title",@"back",@"done" nil];
+//                    NSArray* values = [NSArray arrayWithObjects:@"Title",@"Back",@"Done", nil];
+//                    
+//                    navigationDict = [[NSMutableDictionary alloc] initWithObjects:values forKeys:keys];
+//                    return navigationDict
+                }
+            }
+        
+        
+//        title -> Title;
+//        back -> Back;
+//        done -> Done;
+       
+    }
+    return nil;
+}
+    
+
+
 @end

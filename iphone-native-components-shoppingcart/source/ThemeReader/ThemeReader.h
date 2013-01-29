@@ -13,6 +13,7 @@
     NSMutableDictionary* dataDictionary ;
 }
 
--(NSMutableDictionary*)loadDataFromPlist:(NSString*)key;
+-(NSMutableDictionary*)loadDataFromComponentPlist:(NSString*)key INCOMPONENT:(NSString*)component;
+-(NSMutableDictionary*)loadDataFromManifestPlist:(NSString*)key;
 
 @end

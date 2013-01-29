@@ -67,7 +67,7 @@
 
 - (void)xCoordinate:(float)x yCoordinate:(float)y  device:(NSString*)key bgImage:(NSString*)img {
     
-    NSMutableDictionary *dict = [themeReader loadDataFromPlist:kdashBoard];
+    NSMutableDictionary *dict = [themeReader loadDataFromManifestPlist:kdashBoard];
     NSDictionary *buttonImagesArray = [dict objectForKey:key];
     NSArray* imagesArray = [buttonImagesArray objectForKey:khomePageIcons]; //khomeButtonTitles
     NSArray* titlesArray = [dict objectForKey:khomeButtonTitles];

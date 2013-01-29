@@ -17,6 +17,7 @@
 @interface NavigationView : UIView
 {
     __weak id navigationDelegate;
+    NSMutableDictionary* dataDictionary ;
 }
 @property (weak) id navigationDelegate;
 -(void)loadNavbar:(BOOL)isBackNeeded :(BOOL)isForwardNeeded;
