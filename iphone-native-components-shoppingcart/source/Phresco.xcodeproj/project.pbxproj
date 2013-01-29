@@ -341,12 +341,6 @@
 		A48F502516AFD08A003B50A3 /* OrderStatusViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "OrderStatusViewController-iPad.xib"; sourceTree = "<group>"; };
 		A48F502716AFD0FE003B50A3 /* ViewCartController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ViewCartController-iPad.xib"; sourceTree = "<group>"; };
 		A4901EB416AE7EE1001F816E /* Manifest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Manifest.plist; sourceTree = "<group>"; };
-		EA2FCE6F16563CE3000F2C9C /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Base64.m; path = base64/Base64.m; sourceTree = SOURCE_ROOT; };
-		EA2FCE7016563CE3000F2C9C /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = base64/Base64.h; sourceTree = SOURCE_ROOT; };
-		EA2FCE7116563CE3000F2C9C /* NSData-AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData-AES.h"; path = "base64/NSData-AES.h"; sourceTree = SOURCE_ROOT; };
-		EA2FCE7216563CE3000F2C9C /* NSData-AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData-AES.m"; path = "base64/NSData-AES.m"; sourceTree = SOURCE_ROOT; };
-		EA2FCE7316563CE3000F2C9C /* rijndael.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rijndael.c; path = base64/rijndael.c; sourceTree = SOURCE_ROOT; };
-		EA2FCE7416563CE3000F2C9C /* rijndael.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = rijndael.h; path = base64/rijndael.h; sourceTree = SOURCE_ROOT; };
 		EA2FCEAE16564584000F2C9C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		EA2FCECA16564584000F2C9C /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		EA2FCECB16564584000F2C9C /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
@@ -1400,7 +1394,6 @@
 				EA99374F163FB0850005DC86 /* libxml2.2.dylib */,
 				A4901EB416AE7EE1001F816E /* Manifest.plist */,
 				EA993747163FAF2C0005DC86 /* SenTestingKit.framework */,
-				EAAA065F161C722000BD06EF /* base64 */,
 				EA993767163FB9400005DC86 /* LogicTest */,
 				EA60868A1640F4C600C260C4 /* ApplicationTest */,
 				EAAA05FB161C0E2E00BD06EF /* Frameworks */,
@@ -1430,20 +1423,6 @@
 				EAEF47CB1643FFB000278D99 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EAAA065F161C722000BD06EF /* base64 */ = {
-			isa = PBXGroup;
-			children = (
-				EA2FCE6F16563CE3000F2C9C /* Base64.m */,
-				EA2FCE7016563CE3000F2C9C /* Base64.h */,
-				EA2FCE7116563CE3000F2C9C /* NSData-AES.h */,
-				EA2FCE7216563CE3000F2C9C /* NSData-AES.m */,
-				EA2FCE7316563CE3000F2C9C /* rijndael.c */,
-				EA2FCE7416563CE3000F2C9C /* rijndael.h */,
-			);
-			name = base64;
-			path = Phresco/base64;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
