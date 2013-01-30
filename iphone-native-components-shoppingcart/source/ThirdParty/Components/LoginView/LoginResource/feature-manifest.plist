@@ -9,13 +9,13 @@
 		<key>emailaddress</key>
 		<string>Email Address</string>
 		<key>backgroundImage</key>
-		<string>login_bg</string>
+		<string>login_bg.png</string>
 		<key>header</key>
-		<string>login_header</string>
+		<string>login_header.png</string>
 		<key>loginImage</key>
-		<string>login_btn</string>
+		<string>login_btn.png</string>
 		<key>cancelImage</key>
-		<string>cancel_btn</string>
+		<string>cancel_btn.png</string>
 		<key>font</key>
 		<string>Helvetica-Bold</string>
 	</dict>
