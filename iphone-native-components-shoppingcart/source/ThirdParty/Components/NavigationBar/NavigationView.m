@@ -40,9 +40,7 @@
         if(nil != backgroundImage && [backgroundImage length] > 0)
         {
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.frame];
-            
-            NSString *filePath = [[NSBundle mainBundle] pathForResource:backgroundImage ofType:@"png"];
-            UIImage *bgImage = [UIImage imageWithContentsOfFile:filePath];
+            UIImage *bgImage = [UIImage imageNamed:backgroundImage];
             imageView.image = bgImage;
             [self addSubview:imageView];
         }
@@ -61,8 +59,7 @@
             if(leftBarButton != nil && [leftBarButton length] > 0)
             {
                 UIButton *button = [[UIButton alloc] init];
-                NSString *filePath = [[NSBundle mainBundle] pathForResource:leftBarButton ofType:@"png"];
-                UIImage *leftImage = [UIImage imageWithContentsOfFile:filePath];
+                UIImage *leftImage = [UIImage imageNamed:leftBarButton];
                 if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
                 {
                     
@@ -91,8 +88,7 @@
             if(rightBarButton !=nil && [rightBarButton length]>0)
             {
                 UIButton *button =[[UIButton alloc]init];
-                NSString *filePath =[[NSBundle mainBundle]pathForResource:rightBarButton ofType:@"png"];
-                UIImage *rightImage =[UIImage imageWithContentsOfFile:filePath];
+                UIImage *rightImage =[UIImage imageNamed:rightBarButton];
                 if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
                 {
                 button.frame =CGRectMake([UIScreen mainScreen].bounds.size.width - (rightImage.size.width +5),self.frame.origin.y + 5, rightImage.size.width, rightImage.size.height);
