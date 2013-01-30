@@ -28,26 +28,34 @@
     self = [super init];
     if(self) {
         delegate = nil;
+        dashBoardDefaultsArray= nil;
+        dashBoardViewDefaultsArray=nil;
+        dashBoardDefaultString =nil;
    }
     return self;
 }
 
 - (void)loadComponents {
- 
-    ThemeReader  *themeReader = [[ThemeReader alloc]init];
-   
+    
+    dashBoardViewDefaultsArray = [[NSArray alloc] initWithObjects:@"Browse",@"SpecialOffer",@"Login",@"Register", nil];
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         float xCoord = self.frame.origin.x + iPadXpos;
         float yCoord  = self.frame.origin.y + iPadYpos;
-        [self xCoordinate:xCoord yCoordinate:yCoord  device:kiPadButtonImages bgImage:kipadHomeBgImage];
         
-        }
+        dashBoardDefaultsArray =[[NSArray alloc] initWithObjects:@"browse_icon.png-72",@"specialoffer_icon.png-72",@"login_icon.png-72",@"register_icon.png-72", nil];
+        dashBoardDefaultString=[[NSString alloc]init];
+        dashBoardDefaultString =@"icons_bg.png";
+        [self xCoordinate:xCoord yCoordinate:yCoord  device:kiPadButtonImages bgImage:kipadHomeBgImage];
+    }
     else
     {
         float xCoord = self.frame.origin.x + iPhoneXpos;
         float yCoord  = self.frame.origin.y + iPhoneYpos;
+                dashBoardDefaultsArray =[[NSArray alloc] initWithObjects:@"browse_icon.png",@"specialoffer_icon.png",@"login_icon.png",@"register_icon.png", nil];
+        dashBoardDefaultString=[[NSString alloc]init];
+        dashBoardDefaultString =@"icons_bg-72.png";
+
         [self xCoordinate:xCoord yCoordinate:yCoord  device:kiPhoneButtonImages bgImage:kipadHomeBgImage];
-        
     }
 }
 
@@ -68,15 +76,16 @@
 - (void)xCoordinate:(float)x yCoordinate:(float)y  device:(NSString*)key bgImage:(NSString*)img {
     
     NSArray* imagesArray =  [self getArrayImageName:key];
+    NSArray *titleArray = [self getTitleLabels:@"titleLabel"];
     UIImage *image = nil;
     NSString* path = [imagesArray objectAtIndex:0];
     if(nil != path && [path length] >0)
     {
-        image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:path ofType:@"png"]];
+        image = [UIImage imageNamed:path];
     }
     else
     {
-        image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"login_icon" ofType:@"png"]];
+        image = [UIImage imageNamed:@"login_icon.png"];
 
     }
     float width = 0.0;
@@ -89,7 +98,7 @@
     bgView = [[UIImageView alloc] init]; //homepage icon background view
     self.bgView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     NSString* imagePath = [self getBackgroundImageForKey:key];
-    bgView.image =  [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:imagePath ofType:@"png"]];
+    bgView.image =  [UIImage imageNamed:imagePath];
     [bgView setUserInteractionEnabled:YES];
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         bgView.frame = self.frame;
@@ -102,16 +111,16 @@
     {
         UIButton *button = [[UIButton alloc]init];
         [button setFrame:CGRectMake(x, y, width, height)];
-        //button.titleLabel.text = [titlesArray objectAtIndex:i];
+        button.titleLabel.text = [titleArray objectAtIndex:i];
         NSString* path = [imagesArray objectAtIndex:i];
         UIImage *image = nil;
         if(nil != path && [path length] > 0)
         {
-            image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:path ofType:@"png"]];
+            image = [UIImage imageNamed:path];
         }
         else
         {
-            image = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"login_icon" ofType:@"png"]];
+            image = [UIImage imageNamed:@"login_icon.png"];
         }
         [button setBackgroundImage:image forState:UIControlStateNormal];
         [button addTarget:self action:@selector(homeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -144,62 +153,7 @@
     }
 }
 
--(NSString*)getObjectForKey:(NSString*)key{
-    if(key != nil &&[key length]>0){
-        ThemeReader *themeReader =[[ThemeReader alloc]init];
-        NSMutableDictionary *navigationDict = nil;
-        navigationDict = [themeReader loadDataFromManifestPlist:@"DashBoard"];
-        if(nil != navigationDict && [navigationDict count] >0)  //Get data from manifest plist
-        {
-            NSString* object=[navigationDict objectForKey:key];
-            if(nil != object && [object length] > 0)
-            {
-                return object;
-            }
-            else  //feature
-            {
-                navigationDict = [themeReader loadDataFromComponentPlist:key INCOMPONENT:@"DashBoard"];
-                if(nil != navigationDict && [navigationDict count] > 0)
-                {
-                    NSString *object = [navigationDict objectForKey:key];
-                    if(nil != object && [object length] > 0)
-                    {
-                        return object;
-                    }
-                    else
-                    {
-                        //return [navigationDefaultsDict objectForKey:navigationKey];
-                    }
-                }
-                
-            }
-        }
-        else
-        {
-            NSMutableDictionary *navigationViewDict=[themeReader loadDataFromComponentPlist:key INCOMPONENT:@"DashBoard"];
-            if(nil != navigationViewDict && [navigationViewDict count] > 0)
-            {
-                NSString *object = [navigationViewDict objectForKey:key];
-                if(nil != object && [object length] > 0)
-                {
-                    return object;
-                }
-                else
-                {
-                    //return [navigationDefaultsDict objectForKey:navigationKey];
-                }
-            }
-            
-            
-        }
-        //return [navigationDefaultsDict objectForKey:navigationKey];
-        
-    }
-    return nil;
-}
-
--(NSArray*) getArrayImageName:(NSString*) key
-{
+-(NSArray*) getArrayImageName:(NSString*) key{
     if(key != nil && [key length] > 0)
     {
         ThemeReader *themeReader = [[ThemeReader alloc] init];
@@ -230,12 +184,12 @@
                             }
                             else
                             {
-                                //load from defaults
+                                return dashBoardDefaultsArray;
                             }
                         }
                         else
                         {
-                            //load from defaults
+                            return dashBoardDefaultsArray;
                         }
                     }
                 }
@@ -256,7 +210,7 @@
                     }
                     else
                     {
-                        //load from defaults
+                        return dashBoardDefaultsArray;
                     }
                 }
             }
@@ -277,10 +231,11 @@
                 }
                 else
                 {
-                    //load from defaults
+                    return dashBoardDefaultsArray;
                 }
             }
         }
+        return dashBoardDefaultsArray;
     }
     return nil;
 }
@@ -311,7 +266,7 @@
                     }
                     else
                     {
-                        //load from constants
+                        return dashBoardDefaultString;
                     }
                 }
             }
@@ -328,16 +283,76 @@
                 }
                 else
                 {
-                    //load from constants
+                    return dashBoardDefaultString;
                 }
             }
             else
             {
-                //load from defaults
+                return dashBoardDefaultString;
             }
         }
+        return dashBoardDefaultString;
     }
     return nil;
 }
 
+-(NSArray*) getTitleLabels:(NSString*) key
+{
+    if(nil != key && [key length] >0)
+    {
+        ThemeReader *themeReader = [[ThemeReader alloc] init];
+        NSMutableDictionary *dashboardDict = nil;
+        dashboardDict = [themeReader loadDataFromManifestPlist:@"DashBoard"];
+        if(nil != dashboardDict && [dashboardDict count] > 0)
+        {
+            NSArray *array = [dashboardDict objectForKey:key];
+            if(nil != array && [array count] >0)
+            {
+                return array;
+            }
+            else
+            {
+                dashboardDict = [themeReader loadDataFromComponentPlist:key INCOMPONENT:@"DashBoard"];
+                if(nil != dashboardDict && [dashboardDict count] > 0)
+                {
+                    NSArray *array = [dashboardDict objectForKey:key];
+                    if(nil != array && [array count] >0)
+                    {
+                        return array;
+                    }
+                    else
+                    {
+                        return dashBoardViewDefaultsArray ;
+                    }
+                }
+                else
+                {
+                    return dashBoardViewDefaultsArray ;
+                }
+            }
+        }
+        else
+        {
+            dashboardDict = [themeReader loadDataFromComponentPlist:key INCOMPONENT:@"DashBoard"];
+            if(nil != dashboardDict && [dashboardDict count] > 0)
+            {
+                NSArray *array = [dashboardDict objectForKey:key];
+                if(nil != array && [array count] >0)
+                {
+                    return array;
+                }
+                else
+                {
+                    return dashBoardViewDefaultsArray ;
+                }
+            }
+            else
+            {
+                return dashBoardViewDefaultsArray ;
+            }
+        }
+        return dashBoardViewDefaultsArray ;
+    }
+    return nil;
+}
 @end
