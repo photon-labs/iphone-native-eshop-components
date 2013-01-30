@@ -31,17 +31,17 @@ loginDefaultsDict = [NSDictionary dictionaryWithObjectsAndKeys:@"Password",kDefa
     
     NSString *bgString = [self getObjectForKey:@"backgroundImage"];
     UIImageView *bgView = [[UIImageView alloc] initWithFrame:self.frame];
-    
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:bgString ofType:@"png"];
-    UIImage *bgImage = [UIImage imageWithContentsOfFile:filePath];
+//    
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:bgString ofType:@"png"];
+    UIImage *bgImage = [UIImage imageNamed:bgString];
     bgView.image = bgImage;
     [self addSubview:bgView];
     
     NSString *loginHeaderString = [self getObjectForKey:@"header"];
     if(nil != loginHeaderString && [loginHeaderString length] >0)
     {
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:loginHeaderString ofType:@"png"];
-        UIImage *loginHeaderImage = [UIImage imageWithContentsOfFile:filePath];
+//        NSString *filePath = [[NSBundle mainBundle] pathForResource:loginHeaderString ofType:@"png"];
+        UIImage *loginHeaderImage = [UIImage imageNamed:loginHeaderString];
         if(nil != loginHeaderImage)
         {
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake((SCREENWIDTH - loginHeaderImage.size.width)/2, self.frame.origin.y - loginHeaderImage.size.height/2 +10, loginHeaderImage.size.width, loginHeaderImage.size.height)];
@@ -137,8 +137,8 @@ loginDefaultsDict = [NSDictionary dictionaryWithObjectsAndKeys:@"Password",kDefa
     
     NSString *cancelButton =[self getObjectForKey:@"cancelImage"];
     if(cancelButton != nil && [cancelButton length]>0){
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:cancelButton ofType:@"png"];
-        UIImage *cancelImage = [UIImage imageWithContentsOfFile:filePath];
+        //NSString *filePath = [[NSBundle mainBundle] pathForResource:cancelButton ofType:@"png"];
+        UIImage *cancelImage = [UIImage imageNamed:cancelButton];
         UIButton *button = [[UIButton alloc]init];
         button.frame = CGRectMake(SCREENWIDTH - cancelImage.size.width - 20, passwordField.frame.origin.y + passwordField.frame.size.height + 20, cancelImage.size.width, cancelImage.size.height);
         button.tag = cancelButtonTag;
@@ -150,8 +150,8 @@ loginDefaultsDict = [NSDictionary dictionaryWithObjectsAndKeys:@"Password",kDefa
     NSString *loginButton =[self getObjectForKey:@"loginImage"];
     if(loginButton != nil && [loginButton length]>0){
         
-         NSString *filePath = [[NSBundle mainBundle] pathForResource:loginButton ofType:@"png"];
-        UIImage *loginImage = [UIImage imageWithContentsOfFile:filePath];
+        
+        UIImage *loginImage = [UIImage imageNamed:loginButton];
         UIButton *button = [[UIButton alloc]init];
         UIView *cancelButton = [self viewWithTag:cancelButtonTag];
         button.frame=CGRectMake(SCREENWIDTH - cancelButton.frame.size.width - loginImage.size.width - 40,passwordField.frame.origin.y + passwordField.frame.size.height + 20 ,loginImage.size.width,loginImage.size.height);
