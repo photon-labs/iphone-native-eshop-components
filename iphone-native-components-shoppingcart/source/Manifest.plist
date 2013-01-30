@@ -38,13 +38,6 @@
 	<dict>
 		<key>iPhoneHomeButtonImages</key>
 		<dict>
-			<key>imagesArray</key>
-			<array>
-				<string>browse_icon</string>
-				<string>specialoffer_icon</string>
-				<string>login_icon</string>
-				<string>register_icon</string>
-			</array>
 			<key>homeBg</key>
 			<string>icons_bg</string>
 		</dict>

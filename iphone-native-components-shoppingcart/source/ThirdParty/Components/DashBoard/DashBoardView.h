@@ -16,7 +16,6 @@
 @interface DashBoardView : UIView <dashBoardDelegate>
 {
     __weak id <dashBoardDelegate> delegate;
-    ThemeReader* themeReader;
     UIImageView* bgView;
 }
 @property (nonatomic, strong) UIImageView* bgView;
