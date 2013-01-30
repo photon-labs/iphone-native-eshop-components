@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NavigationBar</key>
+	<dict>
+		<key>rightBarButton_ipad</key>
+		<string>back_btn-72.png</string>
+		<key>leftBarButton_ipad</key>
+		<string>back_btn-72.png</string>
+		<key>backgroundImage_ipad</key>
+		<string>header_logo-72.png</string>
+		<key>rightBarButton_iphone</key>
+		<string>back_btn.png</string>
+		<key>leftBarButton_iphone</key>
+		<string>back_btn.png</string>
+		<key>backgroundImage_iphone</key>
+		<string>header_logo.png</string>
+	</dict>
+	<key>Login</key>
+	<dict>
+		<key>password</key>
+		<string>Password</string>
+		<key>emailaddress</key>
+		<string>Email Address</string>
+		<key>backgroundImage</key>
+		<string>login_bg.png</string>
+		<key>header</key>
+		<string>login_header.png</string>
+		<key>loginImage</key>
+		<string>login_btn.png</string>
+		<key>cancelImage</key>
+		<string>cancel_btn.png</string>
+		<key>font</key>
+		<string>Helvetica-Bold</string>
+	</dict>
+	<key>DashBoard</key>
+	<dict>
+		<key>iPhoneHomeButtonImages</key>
+		<dict>
+			<key>imagesArray</key>
+			<array>
+				<string>browse_icon.png</string>
+				<string>specialoffer_icon.png</string>
+				<string>login_icon.png</string>
+				<string>register_icon.png</string>
+			</array>
+			<key>homeBg</key>
+			<string>icons_bg.png</string>
+		</dict>
+		<key>iPadHomeButtonImages</key>
+		<dict>
+			<key>imagesArray</key>
+			<array>
+				<string>browse_icon-72.png</string>
+				<string>specialoffer_icon-72.png</string>
+				<string>login_icon-72.png</string>
+				<string>register_icon-72.png</string>
+			</array>
+			<key>homeBg</key>
+			<string>icons_bg-72.png</string>
+		</dict>
+		<key>titleLabel</key>
+		<array>
+			<string>Browse</string>
+			<string>SpecialOffer</string>
+			<string>Login</string>
+			<string>Register</string>
+		</array>
+		<key>fontSize</key>
+		<string>12</string>
+		<key>font</key>
+		<string>Verdana</string>
+	</dict>
+</dict>
+</plist>
