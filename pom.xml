@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.photon.phresco</groupId>
+    <artifactId>PHR_iphoneNativeEshopARC</artifactId>
+    <packaging>xcode</packaging>
+    <name>PHR_iphoneNativeEshopARC</name>
+    <version>1.0.0</version>
+    <build>
+        <sourceDirectory>source</sourceDirectory>
+        <directory>do_not_checkin/target</directory>
+        <plugins>
+            <plugin>
+                <groupId>com.photon.phresco.plugins.xcode</groupId>
+                <artifactId>xcode-maven-plugin</artifactId>
+                <version>1.2.4.1003</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <xcodeProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">./source/Phresco.xcodeproj</xcodeProject>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>ci</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>2.5</version>
+                        <executions>
+                            <execution>
+<id>default-clean</id>
+<phase>pre-clean</phase>
+<goals>
+    <goal>clean</goal>
+</goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <filesets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<fileset>
+    <directory>do_not_checkin/build</directory>
+    <includes>
+        <include>**/*</include>
+							  </includes>
+    <followSymlinks>false</followSymlinks>
+							</fileset>
+						  </filesets>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
