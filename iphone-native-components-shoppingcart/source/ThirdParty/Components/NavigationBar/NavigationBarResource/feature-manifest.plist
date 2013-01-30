@@ -5,17 +5,17 @@
 	<key>NavigationBar</key>
 	<dict>
 		<key>rightBarButton_ipad</key>
-		<string>back_btn-72</string>
+		<string>back_btn-72.png</string>
 		<key>leftBarButton_ipad</key>
-		<string>back_btn-72</string>
+		<string>back_btn-72.png</string>
 		<key>backgroundImage_ipad</key>
-		<string>header_logo-72</string>
+		<string>header_logo-72.png</string>
 		<key>rightBarButton_iphone</key>
-		<string>back_btn</string>
+		<string>back_btn.png</string>
 		<key>leftBarButton_iphone</key>
-		<string>back_btn</string>
+		<string>back_btn.png</string>
 		<key>backgroundImage_iphone</key>
-		<string>header_logo</string>
+		<string>header_logo.png</string>
 	</dict>
 </dict>
 </plist>
