@@ -17,6 +17,10 @@
 {
     __weak id <dashBoardDelegate> delegate;
     UIImageView* bgView;
+    NSArray *dashBoardDefaultsArray;
+    NSArray *dashBoardViewDefaultsArray;
+    
+    NSString *dashBoardDefaultString;
 }
 @property (nonatomic, strong) UIImageView* bgView;
 @property (weak) id <dashBoardDelegate> delegate;
