@@ -22,7 +22,22 @@
 #import "LoginViewController.h"
 #import "NavigationView.h"
 #import "Constants.h"
+#define iPhoneCategoriesCellHeight 50
+#define iPhoneResultCellHeight 120
+#define iPadCategoriesCellHeight 110
+#define iPadResultCellHeight 230
 
+#define iPhoneCategoryNameWidth 140
+#define iPhoneXpos  20
+#define iPhoneYpos  5
+#define iPhoneProductNameHeight 50
+#define iPhoneProductNameWidth 200
+
+#define iPadXpos 50
+#define iPadYpos 5
+#define iPadcategoryNameWidth 300
+#define iPadProductNameHeight 100
+#define iPadProductNameWidth 400
 
 @interface BrowseViewController ()
 
@@ -499,127 +514,89 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSString* identifier = @"id";
+    ProductResultViewCell *cell = (ProductResultViewCell*) [tableView dequeueReusableCellWithIdentifier:identifier];
+    if ((cell == nil) ||(cell != nil)) {
+        cell = [[ProductResultViewCell alloc]
+                initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
-        static NSString *CellIdentifier = @"ProductsCell";
-		
-        BrowseViewCustomCell *cell = (BrowseViewCustomCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        UIImage* imageName = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"computer_icon-72" ofType:@"png"]];
+        [[cell productName] setFrame:CGRectMake(imageName.size.width +iPhoneXpos, iPadYpos +iPhoneYpos,iPadcategoryNameWidth, imageName.size.height)];
         
-        if ((cell == nil) ||(cell != nil)){
-            cell = [[BrowseViewCustomCell alloc]
-                     initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier]
-                    ;
-            [cell setFrame:CGRectZero];
-        } 
+        float nameWidth = iPadXpos + imageName.size.width  + iPadcategoryNameWidth;
+        UIImage* countImageName = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"itemscount_bg-72" ofType:@"png"]];
         
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            
-            [[cell disImage] setImage:[UIImage imageNamed:@"nav_arrow-72.png"]];
-        }
-        else {
-            
-            [[cell disImage] setImage:[UIImage imageNamed:@"nav_arrow.png"]];
-        }
+        [[cell productCountLabel] setFrame:CGRectMake(iPadXpos + nameWidth,self.view.frame.origin.y,countImageName.size.width, countImageName.size.height)];
+        [[cell countImage] setFrame:CGRectMake(iPadXpos + nameWidth, iPadYpos,countImageName.size.width , countImageName.size.height)];
         
-        
-        AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-        
-        [[cell productLabel] setText:[[assetsData.catalogArray objectAtIndex:indexPath.row] productName]];
-        
-        [[cell productCountLabel] setText: [NSString stringWithFormat:@"%@",[[assetsData.catalogArray objectAtIndex:indexPath.row] productCount]]];
-        
-        [[cell countImage] setImage:[UIImage imageNamed:@"itemscount_bg-72.png"]];
-        
+        float countImageWidth = self.view.frame.size.width - iPadXpos ;
+        UIImage* disImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"nav_arrow-72" ofType:@"png"]];
+        [[cell disImage] setFrame:CGRectMake(countImageWidth , 2*iPadYpos, disImage.size.width, disImage.size.height)];
+        [[cell disImage] setImage:disImage];
         
         CGRect frame;
-        
-        frame.size.width=60; 
-        frame.size.height=60;
-        frame.origin.x=20; 
+        frame.size.width=imageName.size.width;
+        frame.size.height=imageName.size.height;
+        frame.origin.x=10;
         frame.origin.y=7;
         
         AsyncImageView *tasyncImage = [[AsyncImageView alloc]
                                        initWithFrame:frame] ;
-        
-        
         // TODO: Add Code for getting Coupons Image URL
         NSURL	*url = nil;
-        
         if([productImageArray count] > 0 && indexPath.row < [productImageArray count])
         {
             url = [NSURL URLWithString:[productImageArray objectAtIndex:indexPath.row]];
-            
             [tasyncImage loadImageFromURL:url];
-            
             [cell.contentView addSubview:tasyncImage];
-            
-        }
-//        [tasyncImage release];
-        
-        return cell;
-    }
-    else {
-        
-        static NSString *CellIdentifier = @"ProductsCell";
-		
-        BrowseViewCustomCell *cell = (BrowseViewCustomCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if ((cell == nil) ||(cell != nil)) {
-            cell = [[BrowseViewCustomCell alloc]
-                    initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            [cell setFrame:CGRectZero];
-        } 
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            
-            [[cell disImage] setImage:[UIImage imageNamed:@"nav_arrow-72.png"]];
-        }
-        else {
-            
-            [[cell disImage] setImage:[UIImage imageNamed:@"nav_arrow.png"]];
-        }
-        
-        
-        AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-        
-        [[cell productLabel] setText:[[assetsData.catalogArray objectAtIndex:indexPath.row] productName]];
-        
-        [[cell productCountLabel] setText: [NSString stringWithFormat:@"%@",[[assetsData.catalogArray objectAtIndex:indexPath.row] productCount]]];
-        
-        [[cell countImage] setImage:[UIImage imageNamed:@"itemscount_bg-72.png"]];
-        
-        
-        CGRect frame;
-        
-        frame.size.width=30; 
-        frame.size.height=40;
-        frame.origin.x=10; 
-        frame.origin.y=7;
-        
-        
-        
-        AsyncImageView *tasyncImage = [[AsyncImageView alloc]
-                                       initWithFrame:frame] ;
-        
-        
-        // TODO: Add Code for getting Coupons Image URL
-        NSURL	*url = nil;
-        
-        if([productImageArray count] > 0 && indexPath.row < [productImageArray count])
-        {
-            url = [NSURL URLWithString:[productImageArray objectAtIndex:indexPath.row]];
-            
-            [tasyncImage loadImageFromURL:url];
-            
-            [cell.contentView addSubview:tasyncImage];
-            
         }
         tasyncImage = nil;
         
-        return cell;
+        
     }
+    else {
+        
+        UIImage* imageName = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"computer_icon" ofType:@"png"]];
+        [[cell productName] setFrame:CGRectMake(imageName.size.width +iPhoneXpos+10, iPhoneYpos + iPhoneYpos,iPhoneCategoryNameWidth, imageName.size.height)];
+        
+        UIImage* countImageName = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"itemscount_bg-72" ofType:@"png"]];
+        float nameWidth = iPhoneXpos + imageName.size.width  + iPhoneCategoryNameWidth;
+        
+        [[cell productCountLabel] setFrame:CGRectMake(nameWidth + 2*iPhoneXpos  ,self.view.frame.origin.y,countImageName.size.width, countImageName.size.height)];
+        [[cell countImage] setFrame:CGRectMake(iPhoneXpos + nameWidth ,iPhoneYpos ,imageName.size.width + iPhoneXpos, imageName.size.height)];
+        
+        UIImage* disImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"nav_arrow" ofType:@"png"]];
+        float countImageWidth =  iPhoneXpos + nameWidth + 2*imageName.size.width ;
+        [[cell disImage] setFrame:CGRectMake(countImageWidth, 2*iPhoneYpos, disImage.size.width, disImage.size.height)];
+        [[cell disImage] setImage:disImage];
+        CGRect frame;
+        frame.size.width=imageName.size.width;
+        frame.size.height=imageName.size.height;
+        frame.origin.x=10;
+        frame.origin.y=7;
+        
+        AsyncImageView *tasyncImage = [[AsyncImageView alloc]
+                                       initWithFrame:frame] ;
+        // TODO: Add Code for getting Coupons Image URL
+        NSURL	*url = nil;
+        if([productImageArray count] > 0 && indexPath.row < [productImageArray count])
+        {
+            url = [NSURL URLWithString:[productImageArray objectAtIndex:indexPath.row]];
+            [tasyncImage loadImageFromURL:url];
+            [cell.contentView addSubview:tasyncImage];
+        }
+        tasyncImage = nil;
+    }
+    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
+    [[cell productName] setText:[[assetsData.catalogArray objectAtIndex:indexPath.row] productName]];
+    [[cell productCountLabel] setText:[NSString stringWithFormat:@"%@",[[assetsData.catalogArray objectAtIndex:indexPath.row] productCount]]];
+    [[cell countImage] setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"itemscount_bg-72"ofType:@"png"]]];
+    
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
