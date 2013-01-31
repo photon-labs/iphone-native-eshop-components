@@ -17,12 +17,6 @@
 		06DC39491671B347006E699C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06DC39481671B347006E699C /* AudioToolbox.framework */; };
 		06DC394B1671B35B006E699C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06DC394A1671B35B006E699C /* AVFoundation.framework */; };
 		A48F103A16B78E600094E6AC /* ThemeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = A48F103916B78E600094E6AC /* ThemeReader.m */; };
-		A48F103E16B7DBC30094E6AC /* DashBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = A48F103D16B7DBC30094E6AC /* DashBoardView.m */; };
-		A48F104516B7DBD70094E6AC /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = A48F104316B7DBD70094E6AC /* LoginView.m */; };
-		A48F104716B7DBF80094E6AC /* LoginResource in Resources */ = {isa = PBXBuildFile; fileRef = A48F104616B7DBF80094E6AC /* LoginResource */; };
-		A48F105016B7DC1B0094E6AC /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A48F104E16B7DC1B0094E6AC /* NavigationView.m */; };
-		A48F105216B7DC270094E6AC /* NavigationBarResource in Resources */ = {isa = PBXBuildFile; fileRef = A48F105116B7DC270094E6AC /* NavigationBarResource */; };
-		A48F105B16B810F20094E6AC /* DashBoardResource in Resources */ = {isa = PBXBuildFile; fileRef = A48F105A16B810F20094E6AC /* DashBoardResource */; };
 		A48F500616AFBCA3003B50A3 /* HomeViewController-iPAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F500516AFBCA3003B50A3 /* HomeViewController-iPAd.xib */; };
 		A48F500816AFBD56003B50A3 /* BrowseViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F500716AFBD56003B50A3 /* BrowseViewController-iPad.xib */; };
 		A48F500A16AFC019003B50A3 /* ResultsViewController-iPAd.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48F500916AFC019003B50A3 /* ResultsViewController-iPAd.xib */; };
@@ -317,15 +311,6 @@
 		06DC394A1671B35B006E699C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A48F103816B78E600094E6AC /* ThemeReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeReader.h; sourceTree = "<group>"; };
 		A48F103916B78E600094E6AC /* ThemeReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeReader.m; sourceTree = "<group>"; };
-		A48F103C16B7DBC30094E6AC /* DashBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashBoardView.h; sourceTree = "<group>"; };
-		A48F103D16B7DBC30094E6AC /* DashBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashBoardView.m; sourceTree = "<group>"; };
-		A48F104216B7DBD70094E6AC /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
-		A48F104316B7DBD70094E6AC /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
-		A48F104616B7DBF80094E6AC /* LoginResource */ = {isa = PBXFileReference; lastKnownFileType = folder; path = LoginResource; sourceTree = "<group>"; };
-		A48F104D16B7DC1B0094E6AC /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
-		A48F104E16B7DC1B0094E6AC /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
-		A48F105116B7DC270094E6AC /* NavigationBarResource */ = {isa = PBXFileReference; lastKnownFileType = folder; path = NavigationBarResource; sourceTree = "<group>"; };
-		A48F105A16B810F20094E6AC /* DashBoardResource */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DashBoardResource; sourceTree = "<group>"; };
 		A48F500516AFBCA3003B50A3 /* HomeViewController-iPAd.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "HomeViewController-iPAd.xib"; sourceTree = "<group>"; };
 		A48F500716AFBD56003B50A3 /* BrowseViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "BrowseViewController-iPad.xib"; sourceTree = "<group>"; };
 		A48F500916AFC019003B50A3 /* ResultsViewController-iPAd.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "ResultsViewController-iPAd.xib"; sourceTree = "<group>"; };
@@ -709,39 +694,6 @@
 			);
 			path = ThemeReader;
 			sourceTree = "<group>";
-		};
-		A48F103B16B7DBC30094E6AC /* DashBoard */ = {
-			isa = PBXGroup;
-			children = (
-				A48F105A16B810F20094E6AC /* DashBoardResource */,
-				A48F103C16B7DBC30094E6AC /* DashBoardView.h */,
-				A48F103D16B7DBC30094E6AC /* DashBoardView.m */,
-			);
-			name = DashBoard;
-			path = ThirdParty/Components/DashBoard;
-			sourceTree = SOURCE_ROOT;
-		};
-		A48F103F16B7DBD70094E6AC /* LoginView */ = {
-			isa = PBXGroup;
-			children = (
-				A48F104616B7DBF80094E6AC /* LoginResource */,
-				A48F104216B7DBD70094E6AC /* LoginView.h */,
-				A48F104316B7DBD70094E6AC /* LoginView.m */,
-			);
-			name = LoginView;
-			path = ThirdParty/Components/LoginView;
-			sourceTree = SOURCE_ROOT;
-		};
-		A48F104A16B7DC1B0094E6AC /* NavigationBar */ = {
-			isa = PBXGroup;
-			children = (
-				A48F105116B7DC270094E6AC /* NavigationBarResource */,
-				A48F104D16B7DC1B0094E6AC /* NavigationView.h */,
-				A48F104E16B7DC1B0094E6AC /* NavigationView.m */,
-			);
-			name = NavigationBar;
-			path = ThirdParty/Components/NavigationBar;
-			sourceTree = SOURCE_ROOT;
 		};
 		EA2FCEAC16564584000F2C9C /* en.lproj */ = {
 			isa = PBXGroup;
@@ -1135,7 +1087,6 @@
 		EA2FCECD16564584000F2C9C /* NativeController */ = {
 			isa = PBXGroup;
 			children = (
-				A48F104A16B7DC1B0094E6AC /* NavigationBar */,
 				EA2FCED116564584000F2C9C /* Home */,
 				EA2FCECF16564584000F2C9C /* Browse */,
 				EA2FCED616564584000F2C9C /* ProductResults */,
@@ -1200,7 +1151,6 @@
 		EA2FCED116564584000F2C9C /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				A48F103B16B7DBC30094E6AC /* DashBoard */,
 				EA2FCF471656476E000F2C9C /* HomeViewController.h */,
 				EA2FCF461656476E000F2C9C /* HomeViewController.m */,
 				EA2FCF481656476E000F2C9C /* HomeViewController.xib */,
@@ -1212,7 +1162,6 @@
 		EA2FCED216564584000F2C9C /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				A48F103F16B7DBD70094E6AC /* LoginView */,
 				EA2FCF4C16564775000F2C9C /* LoginViewController.h */,
 				EA2FCF4B16564775000F2C9C /* LoginViewController.m */,
 				EA2FCF4D16564775000F2C9C /* LoginViewController.xib */,
@@ -1735,9 +1684,6 @@
 				A48F502416AFD050003B50A3 /* MoreViewController-iPad.xib in Resources */,
 				A48F502616AFD08A003B50A3 /* OrderStatusViewController-iPad.xib in Resources */,
 				A48F502816AFD0FE003B50A3 /* ViewCartController-iPad.xib in Resources */,
-				A48F104716B7DBF80094E6AC /* LoginResource in Resources */,
-				A48F105216B7DC270094E6AC /* NavigationBarResource in Resources */,
-				A48F105B16B810F20094E6AC /* DashBoardResource in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1841,9 +1787,6 @@
 				EA2FCF89165647B0000F2C9C /* ViewCartViewController.m in Sources */,
 				EA2FCF8D165647EF000F2C9C /* ConfigurationReader.m in Sources */,
 				A48F103A16B78E600094E6AC /* ThemeReader.m in Sources */,
-				A48F103E16B7DBC30094E6AC /* DashBoardView.m in Sources */,
-				A48F104516B7DBD70094E6AC /* LoginView.m in Sources */,
-				A48F105016B7DC1B0094E6AC /* NavigationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
