@@ -20,6 +20,25 @@
 #import "LoginViewController.h"
 #import "NavigationView.h"
 #import "Constants.h"
+#define iPhoneCategoriesCellHeight 50
+#define iPhoneResultCellHeight 120
+#define iPadCategoriesCellHeight 110
+#define iPadResultCellHeight 230
+
+#define iPhoneCategoryNameWidth 140
+#define iPhoneXpos  20
+#define iPhoneYpos  5
+#define iPhoneProductNameHeight 50
+#define iPhoneProductNameWidth 200
+
+#define iPadXpos 50
+#define iPadYpos 5
+#define iPadcategoryNameWidth 300
+#define iPadProductNameHeight 70
+#define iPadProductNameWidth 500
+#define reviewButtonPadding 20
+
+#define labelPadding  20
 
 @interface ResultViewController ()
 
@@ -349,224 +368,179 @@
 {
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
-        return 230;
+        return 180;
     }
     else {
         
-        return 110;
+        return 120;
     }
 	
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString *CellIdentifier = @"ProductsCell";
+    ProductResultViewCell *cell = (ProductResultViewCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if ((cell == nil) ||(cell != nil)) {
+        cell = [[ProductResultViewCell alloc]
+                initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+        cell.textLabel.numberOfLines = 2;
+        
+        [[cell reviewsButton] addTarget:self
+                                 action:@selector(reviewButtonSelected:)
+                       forControlEvents:UIControlEventTouchUpInside];
+        cell.reviewsButton.accessibilityLabel=@"Review";
+        cell.reviewsButton.isAccessibilityElement=YES;
+        
+    }
+    [[cell reviewsButton] setTag:[indexPath row]];
+    
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    //cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
+    
     
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
-        static NSString *CellIdentifier = @"ProductsCell";
+        UIImage* imageName = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"sony_razor_tv" ofType:@"png"]];
+        [[cell productName] setFrame:CGRectMake((imageName.size.width +iPadXpos), 0,iPadProductNameWidth, iPadProductNameHeight)];
+        [[cell priceLabel] setFrame:CGRectMake(imageName.size.width + iPadXpos,iPadProductNameHeight ,iPadProductNameHeight, iPadProductNameHeight)];
         
-        ResultViewCustomCell *cell = (ResultViewCustomCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        UIImage* reviewImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"review_btn" ofType:@"png"]];
+        [[cell reviewsButton] setFrame:CGRectMake( (iPadXpos + iPadProductNameWidth + labelPadding),iPadProductNameHeight+ labelPadding ,reviewImage.size.width + 10, reviewImage.size.height+ labelPadding)];
+        [[cell productPrice] setFrame:CGRectMake(iPadXpos + imageName.size.width + cell.priceLabel.frame.size.width, iPadProductNameHeight, iPadProductNameHeight, iPadProductNameHeight)];
         
-        if ((cell == nil) ||(cell != nil)) {
-            cell = [[ResultViewCustomCell alloc]
-                     initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier]
-                    ;
-            cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-            cell.textLabel.numberOfLines = 2;
-            
-            [[cell reviewsButton] addTarget:self
-                                     action:@selector(reviewButtonSelected:)
-                           forControlEvents:UIControlEventTouchUpInside];
-            cell.reviewsButton.accessibilityLabel=@"Review";
-            cell.reviewsButton.isAccessibilityElement=YES;
-            
-        }
-        [[cell reviewsButton] setTag:[indexPath row]];
-        
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        //cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
-        
-        [[cell disImage] setImage:[UIImage imageNamed:@"nav_arrow-72.png"]];
-        
-        
+        UIImage* disImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"nav_arrow-72" ofType:@"png"]];
+        [[cell disImage] setFrame:CGRectMake(self.view.frame.size.width - disImage.size.width , iPadProductNameHeight, disImage.size.width, disImage.size.height)];
+        [[cell disImage] setImage:disImage];
         CGRect frame;
         
-        frame.size.width=90; 
-        frame.size.height=90;
-        frame.origin.x=20; 
-        frame.origin.y=15;
-        
+        frame.size.width=imageName.size.width;
+        frame.size.height=imageName.size.width;
+        frame.origin.x=10;
+        frame.origin.y=iPadYpos;
         
         AsyncImageView *tasyncImage = [[AsyncImageView alloc]
                                        initWithFrame:frame] ;
-        
-        
         // TODO: Add Code for getting Coupons Image URL
         NSURL	*url = nil;
         
         if([productImageArray count] > 0 && indexPath.row < [productImageArray count])
         {
             url = [NSURL URLWithString:[productImageArray objectAtIndex:indexPath.row]];
-            
             [tasyncImage loadImageFromURL:url];
-            
             [cell.contentView addSubview:tasyncImage];
-            tasyncImage =nil;            
+            tasyncImage =nil;
         }
-        
-        
         AssetsDataEntity *assestsData = [SharedObjects sharedInstance].assetsDataEntity;
-        
-        [[cell productName] setText:[[assestsData.productArray objectAtIndex:indexPath.row] productDetailName]];
-        
-        
-        [[cell productPrice] setText: [NSString stringWithFormat:@"%@",[[assestsData.productArray objectAtIndex:indexPath.row] productDetailsPrice]]];
-        // [[cell reviewsButton] addTarget:self action:@selector(reviewButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
         NSString* string = [NSString stringWithFormat:@"%@",[[assestsData.productArray objectAtIndex:indexPath.row] productRatingView]];
-        //NSInteger rateValue = [string intValue];
-        
         index = indexPath.row;
         
-        float x = 145;
-        
-        float  y =  172;
-        
-        float  width = 25;
-        
-        float height = 25;
+        UIImage* whiteStarImage  = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"white_star" ofType:@"png"]];
+        float x = imageName.size.width + iPadXpos;
+        float  y =  imageName.size.height + cell.priceLabel.frame.size.height;
+        float  width = whiteStarImage.size.width;
+        float height = whiteStarImage.size.height;
         
         NSMutableArray *imageFramesWhiteArray = [[NSMutableArray alloc]init];
         for(int i = 0; i<5;i++)
         {
             UIImageView *ratingsView = [[UIImageView alloc]init];
             ratingsView.frame = CGRectMake(x,y,width,height);
-            [ratingsView setImage:[UIImage imageNamed:@"white_star.png"]];
+            [ratingsView setImage:whiteStarImage];
             x = x + 25;
             [ratingsView setTag:i];
             [cell.contentView  addSubview:ratingsView];
             [imageFramesWhiteArray addObject:ratingsView];
         }
         
-        float xBlue = 145;
+        float xBlue = imageName.size.width +iPadXpos;
         NSMutableArray *imageFramesArray = [[NSMutableArray alloc]init];
         for(int i = 0; i<[string intValue];i++)
         {
             UIImageView *ratingsView = [[UIImageView alloc]init];
             ratingsView.frame = CGRectMake(xBlue,y,width,height);
-            [ratingsView setImage:[UIImage imageNamed:@"blue_star.png"]];
+            [ratingsView setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"blue_star" ofType:@"png"]]];
             xBlue = xBlue + 25;
             [ratingsView setTag:i];
             [cell.contentView  addSubview:ratingsView];
             [imageFramesArray addObject:ratingsView];
         }
         
-        
-        return cell;
     }
     else {
         
-        static NSString *CellIdentifier = @"ProductsCell";
-        
-        ResultViewCustomCell *cell = (ResultViewCustomCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if ((cell == nil) ||(cell != nil)) {
-            cell = [[ResultViewCustomCell alloc]
-                     initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier]
-                    ;
-            cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-            cell.textLabel.numberOfLines = 2;
-            
-            [[cell reviewsButton] addTarget:self
-                                     action:@selector(reviewButtonSelected:)
-                           forControlEvents:UIControlEventTouchUpInside];
-            cell.reviewsButton.accessibilityLabel=@"Review";
-            cell.reviewsButton.isAccessibilityElement=YES;
-            
-        }
-        [[cell reviewsButton] setTag:[indexPath row]];
-        
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        [[cell disImage] setImage:[UIImage imageNamed:@"nav_arrow.png"]];
+        UIImage* imageName = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"sony_razor_tv" ofType:@"png"]];
+        [[cell productName] setFrame:CGRectMake(imageName.size.width +iPhoneXpos,0,iPhoneProductNameWidth, imageName.size.height)];
+        [[cell priceLabel] setFrame:CGRectMake(imageName.size.width + iPhoneXpos,iPhoneProductNameHeight ,iPhoneProductNameHeight, iPhoneProductNameHeight)];
+        UIImage* reviewImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"review_btn" ofType:@"png"]];
+        [[cell reviewsButton] setFrame:CGRectMake(iPhoneProductNameWidth + labelPadding,iPhoneProductNameHeight+ 2*iPhoneYpos+30,reviewImage.size.width, reviewImage.size.height)];
+        [[cell productPrice] setFrame:CGRectMake(imageName.size.width + iPhoneXpos + 2*labelPadding, iPhoneProductNameHeight, iPhoneProductNameHeight, iPhoneProductNameHeight)];
+        UIImage* disImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"nav_arrow.png" ofType:@""]];
+        [[cell disImage] setFrame:CGRectMake(self.view.frame.size.width - disImage.size.width , iPhoneProductNameHeight, disImage.size.width, disImage.size.height)];//
+        [[cell disImage] setImage:disImage];
         
         
         CGRect frame;
-        
-        frame.size.width=60; 
-        frame.size.height=60;
-        frame.origin.x=10; 
-        frame.origin.y=7;
-        
+        frame.size.width=imageName.size.width;
+        frame.size.height=imageName.size.height;
+        frame.origin.x=10;
+        frame.origin.y= iPhoneYpos;
         
         AsyncImageView *tasyncImage = [[AsyncImageView alloc]
                                        initWithFrame:frame] ;
-        
-        
         // TODO: Add Code for getting Coupons Image URL
         NSURL	*url = nil;
         
         if([productImageArray count] > 0 && indexPath.row < [productImageArray count])
         {
             url = [NSURL URLWithString:[productImageArray objectAtIndex:indexPath.row]];
-            
             [tasyncImage loadImageFromURL:url];
-            
             [cell.contentView addSubview:tasyncImage];
             tasyncImage =nil;
-            
         }
+        UIImage* starImage  = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"white_star" ofType:@"png"]];
+        float x = imageName.size.width + iPhoneXpos;
+        float y =  imageName.size.height + iPhoneXpos;
+        float  width = starImage.size.width ;
+        float  height = starImage.size.height ;
         
         AssetsDataEntity *assestsData = [SharedObjects sharedInstance].assetsDataEntity;
-        
-        [[cell productName] setText:[[assestsData.productArray objectAtIndex:indexPath.row] productDetailName]];
-        
-        
-        [[cell productPrice] setText: [NSString stringWithFormat:@"%@",[[assestsData.productArray objectAtIndex:indexPath.row] productDetailsPrice]]];
-        
         NSString* string = [NSString stringWithFormat:@"%@",[[assestsData.productArray objectAtIndex:indexPath.row] productRatingView]];
-        
-        index = indexPath.row;
-        
-        
-        float x = 85;
-        
-        float  y =  65;
-        
-        float  width = 15;
-        
-        float height = 15;
-        
         
         NSMutableArray *imageFramesWhiteArray = [[NSMutableArray alloc]init];
         for(int i = 0; i<5;i++)
         {
             UIImageView *ratingsView = [[UIImageView alloc]init];
             ratingsView.frame = CGRectMake(x,y,width,height);
-            [ratingsView setImage:[UIImage imageNamed:@"white_star.png"]];
+            [ratingsView setImage:starImage];
             x = x + 15;
             [ratingsView setTag:i];
             [cell.contentView  addSubview:ratingsView];
             [imageFramesWhiteArray addObject:ratingsView];
         }
         
-        float xBlue = 85;
+        float xBlue =imageName.size.width + iPhoneXpos;
         NSMutableArray *imageFramesArray = [[NSMutableArray alloc]init];
         for(int i = 0; i<[string intValue];i++)
         {
             UIImageView *ratingsView = [[UIImageView alloc]init];
             ratingsView.frame = CGRectMake(xBlue,y,width,height);
-            [ratingsView setImage:[UIImage imageNamed:@"blue_star.png"]];
+            [ratingsView setImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"blue_star" ofType:@"png"]]];
             xBlue = xBlue + 15;
             [ratingsView setTag:i];
             [cell.contentView  addSubview:ratingsView];
             [imageFramesArray addObject:ratingsView];
         }
-        
-        return cell;
     }
+    AssetsDataEntity *assestsData = [SharedObjects sharedInstance].assetsDataEntity;
+    [[cell productName] setText:[[assestsData.productArray objectAtIndex:indexPath.row] productDetailName]];
+    [[cell priceLabel] setText:@"Price :"];
+    [[cell productPrice] setText: [NSString stringWithFormat:@"$ %@",[[assestsData.productArray objectAtIndex:indexPath.row] productDetailsPrice]]];
+    
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
