@@ -18,8 +18,9 @@
 #import "SpecialOffersViewController.h"
 #import "Tabbar.h"
 #import "LoginViewController.h"
-#import "NavigationView.h"
-#import "Constants.h"
+
+
+
 #define iPhoneCategoriesCellHeight 50
 #define iPhoneResultCellHeight 120
 #define iPadCategoriesCellHeight 110
@@ -359,8 +360,6 @@
         
         return [assestsDataOne.productArray count];
     }
-    
-    
 }
 
 

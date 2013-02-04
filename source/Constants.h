@@ -135,6 +135,24 @@
 #define khomePageIcons                 @"imagesArray"
 #define khomeButtonTitles              @"titleLabelArray"
 
+//ProductResult Page
+#define kbgColor                @"backgroundColor"
+#define ktextFont               @"font"
+#define kbgImage                @"backgroundImage"
+#define ktableViewType          @"tableViewType"
+#define kproductName            @"productName"
+#define kproductID              @"productID"
+#define kproductRatingView      @"productRating"
+#define kproductResults         @"productResults"
+#define kfontSize               @"fontSize"
+#define kredColor               @"red"
+#define kgreenColor             @"green"
+#define kblueColor              @"blue"
+#define kalpha                  @"alpha"
+#define kcategory               @"product"
+#define kIphoneFontSize         @"iPhoneFontSize"
+#define kIpadFontSize           @"iPadFontSize"
+
 
 
 
