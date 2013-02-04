@@ -19,6 +19,8 @@
 #import "BrowseViewController.h"
 #import "ProductDetailsViewController.h"
 #import "Tabbar.h"
+#import "NavigationView.h"
+#import "ProductResultViewCell.h"
 
 
 #define iPhoneCategoriesCellHeight 50
