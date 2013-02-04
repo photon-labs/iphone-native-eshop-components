@@ -18,6 +18,9 @@
 #import "SpecialOffersViewController.h"
 #import "Tabbar.h"
 #import "LoginViewController.h"
+#import "NavigationView.h"
+#import "ProductResultViewCell.h"
+#import "Constants.h"
 
 
 
