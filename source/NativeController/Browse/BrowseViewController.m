@@ -20,6 +20,9 @@
 #import "specialOffersViewController.h"
 #import "Tabbar.h"
 #import "LoginViewController.h"
+#import "Constants.h"
+#import "NavigationView.h"
+#import "ProductResultViewCell.h"
 
 
 #define iPhoneCategoriesCellHeight 50
