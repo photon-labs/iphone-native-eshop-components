@@ -18,6 +18,7 @@
 #import "UIImage-NSCoding.h"
 #import "DebugOutput.h"
 #import "ConfigurationReader.h"
+#import "ThemeReader.h"
 
 #define MIN_ASSETS_COUNT 4
 #define ASSETS_PER_FEATURE 2
@@ -702,9 +703,13 @@ static int extraAssetsCounter = 0;
     index = [self indexOfAssetWithName:name];
     
 	//set bkg img    
-    UIImage *image = [[[self.assets objectAtIndex:index] imagesDict] objectForKey:kdefaultTab];
-	
-    [button setBackgroundImage:image forState:UIControlStateNormal];
+    //UIImage *image = [[[self.assets objectAtIndex:index] imagesDict] objectForKey:kdefaultTab];
+    NSString *imageName = [self getObjectForKey:name];
+    UIImage *image = [UIImage imageNamed:imageName];
+    if(nil != image)
+    {
+        [button setBackgroundImage:image forState:UIControlStateNormal];
+    }
 	
 	//set title name eg. "Home"to button name
 	button.titleLabel.text = name;
@@ -733,6 +738,57 @@ static int extraAssetsCounter = 0;
 	
 	
 	return button;	
+}
+
+-(NSString*) getObjectForKey:(NSString*)key
+{
+    if(nil != key && [key length] >0)
+    {
+        ThemeReader *themeReader = [[ThemeReader alloc] init];
+        NSMutableDictionary *dict = [themeReader loadDataFromManifestPlist:@"Tabbar"];
+        if(dict != nil)
+        {
+            NSString *object = [dict objectForKey:key];
+            if(nil != object && [object length] >0)
+            {
+                return object;
+            }
+            else
+            {
+                dict = [themeReader loadDataFromComponentPlist:key INCOMPONENT:@"Tabbar"];
+                if(nil != dict)
+                {
+                    NSString *object = [dict objectForKey:key];
+                    if(nil != object && [object length] >0)
+                    {
+                        return object;
+                    }
+                }
+                else
+                {
+                    //load from constants
+                }
+            }
+        }
+        else
+        {
+            dict = [themeReader loadDataFromComponentPlist:key INCOMPONENT:@"Tabbar"];
+            if(nil != dict)
+            {
+                NSString *object = [dict objectForKey:key];
+                if(nil != object && [object length] >0)
+                {
+                    return object;
+                }
+            }
+            else
+            {
+                //load from constants
+            }
+        }
+        //load from constants
+    }
+    return nil;
 }
 
 
