@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		0609330616819F2B00472ED5 /* libCardIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0609330516819F2B00472ED5 /* libCardIO.a */; };
+		06A1412816C4D0AE005942E2 /* browse.png in Resources */ = {isa = PBXBuildFile; fileRef = 06A1411E16C4D0AE005942E2 /* browse.png */; };
+		06A1412916C4D0AE005942E2 /* browse_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 06A1411F16C4D0AE005942E2 /* browse_selected.png */; };
+		06A1412A16C4D0AE005942E2 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 06A1412016C4D0AE005942E2 /* home.png */; };
+		06A1412B16C4D0AE005942E2 /* home_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 06A1412116C4D0AE005942E2 /* home_selected.png */; };
+		06A1412C16C4D0AE005942E2 /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 06A1412216C4D0AE005942E2 /* more.png */; };
+		06A1412D16C4D0AE005942E2 /* more_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 06A1412316C4D0AE005942E2 /* more_selected.png */; };
+		06A1412E16C4D0AE005942E2 /* mycart.png in Resources */ = {isa = PBXBuildFile; fileRef = 06A1412416C4D0AE005942E2 /* mycart.png */; };
+		06A1412F16C4D0AE005942E2 /* mycart_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 06A1412516C4D0AE005942E2 /* mycart_selected.png */; };
+		06A1413016C4D0AE005942E2 /* offer.png in Resources */ = {isa = PBXBuildFile; fileRef = 06A1412616C4D0AE005942E2 /* offer.png */; };
+		06A1413116C4D0AE005942E2 /* offer_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 06A1412716C4D0AE005942E2 /* offer_selected.png */; };
 		06DC39311671B058006E699C /* paynow.png in Resources */ = {isa = PBXBuildFile; fileRef = 06DC39301671B058006E699C /* paynow.png */; };
 		06DC393F1671B317006E699C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06DC393E1671B317006E699C /* QuartzCore.framework */; };
 		06DC39411671B321006E699C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06DC39401671B321006E699C /* OpenGLES.framework */; };
@@ -45,7 +55,6 @@
 		EA2FCEF916564658000F2C9C /* NavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2FCEF416564658000F2C9C /* NavigationBar.m */; };
 		EA2FCEFA16564658000F2C9C /* WebContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA2FCEF516564658000F2C9C /* WebContainer.xib */; };
 		EA2FCF0916564663000F2C9C /* WebUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2FCEFB16564663000F2C9C /* WebUtils.m */; };
-		EA2FCF0A16564663000F2C9C /* Tabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2FCEFD16564663000F2C9C /* Tabbar.m */; };
 		EA2FCF0B16564663000F2C9C /* DictionaryUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2FCEFE16564663000F2C9C /* DictionaryUtils.m */; };
 		EA2FCF0C16564663000F2C9C /* UIWebView_PageTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2FCEFF16564663000F2C9C /* UIWebView_PageTransition.m */; };
 		EA2FCF0D16564663000F2C9C /* UIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2FCF0016564663000F2C9C /* UIUtils.m */; };
@@ -301,6 +310,16 @@
 		0609330316819F2B00472ED5 /* CardIOPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOPaymentViewController.h; sourceTree = "<group>"; };
 		0609330416819F2B00472ED5 /* CardIOPaymentViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardIOPaymentViewControllerDelegate.h; sourceTree = "<group>"; };
 		0609330516819F2B00472ED5 /* libCardIO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCardIO.a; sourceTree = "<group>"; };
+		06A1411E16C4D0AE005942E2 /* browse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browse.png; sourceTree = "<group>"; };
+		06A1411F16C4D0AE005942E2 /* browse_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browse_selected.png; sourceTree = "<group>"; };
+		06A1412016C4D0AE005942E2 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		06A1412116C4D0AE005942E2 /* home_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_selected.png; sourceTree = "<group>"; };
+		06A1412216C4D0AE005942E2 /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
+		06A1412316C4D0AE005942E2 /* more_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more_selected.png; sourceTree = "<group>"; };
+		06A1412416C4D0AE005942E2 /* mycart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mycart.png; sourceTree = "<group>"; };
+		06A1412516C4D0AE005942E2 /* mycart_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mycart_selected.png; sourceTree = "<group>"; };
+		06A1412616C4D0AE005942E2 /* offer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offer.png; sourceTree = "<group>"; };
+		06A1412716C4D0AE005942E2 /* offer_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offer_selected.png; sourceTree = "<group>"; };
 		06DC39301671B058006E699C /* paynow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paynow.png; sourceTree = "<group>"; };
 		06DC393E1671B317006E699C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		06DC39401671B321006E699C /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -349,8 +368,6 @@
 		EA2FCEF516564658000F2C9C /* WebContainer.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebContainer.xib; sourceTree = "<group>"; };
 		EA2FCEF616564658000F2C9C /* Webview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Webview.h; sourceTree = "<group>"; };
 		EA2FCEFB16564663000F2C9C /* WebUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebUtils.m; sourceTree = "<group>"; };
-		EA2FCEFC16564663000F2C9C /* Tabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tabbar.h; sourceTree = "<group>"; };
-		EA2FCEFD16564663000F2C9C /* Tabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tabbar.m; sourceTree = "<group>"; };
 		EA2FCEFE16564663000F2C9C /* DictionaryUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionaryUtils.m; sourceTree = "<group>"; };
 		EA2FCEFF16564663000F2C9C /* UIWebView_PageTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIWebView_PageTransition.m; sourceTree = "<group>"; };
 		EA2FCF0016564663000F2C9C /* UIUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIUtils.m; sourceTree = "<group>"; };
@@ -686,6 +703,23 @@
 			path = CardIO;
 			sourceTree = "<group>";
 		};
+		06A1411D16C4D0AE005942E2 /* tabbar-iphone */ = {
+			isa = PBXGroup;
+			children = (
+				06A1411E16C4D0AE005942E2 /* browse.png */,
+				06A1411F16C4D0AE005942E2 /* browse_selected.png */,
+				06A1412016C4D0AE005942E2 /* home.png */,
+				06A1412116C4D0AE005942E2 /* home_selected.png */,
+				06A1412216C4D0AE005942E2 /* more.png */,
+				06A1412316C4D0AE005942E2 /* more_selected.png */,
+				06A1412416C4D0AE005942E2 /* mycart.png */,
+				06A1412516C4D0AE005942E2 /* mycart_selected.png */,
+				06A1412616C4D0AE005942E2 /* offer.png */,
+				06A1412716C4D0AE005942E2 /* offer_selected.png */,
+			);
+			path = "tabbar-iphone";
+			sourceTree = "<group>";
+		};
 		A48F103716B78E600094E6AC /* ThemeReader */ = {
 			isa = PBXGroup;
 			children = (
@@ -719,6 +753,7 @@
 		EA2FCEB416564584000F2C9C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				06A1411D16C4D0AE005942E2 /* tabbar-iphone */,
 				EA2FCF1C16564679000F2C9C /* Default.png */,
 				EA2FCF1D16564679000F2C9C /* Icon.png */,
 				EA2FCEB516564584000F2C9C /* browse */,
@@ -1025,8 +1060,6 @@
 			isa = PBXGroup;
 			children = (
 				EA2FCEFB16564663000F2C9C /* WebUtils.m */,
-				EA2FCEFC16564663000F2C9C /* Tabbar.h */,
-				EA2FCEFD16564663000F2C9C /* Tabbar.m */,
 				EA2FCEFE16564663000F2C9C /* DictionaryUtils.m */,
 				EA2FCEFF16564663000F2C9C /* UIWebView_PageTransition.m */,
 				EA2FCF0016564663000F2C9C /* UIUtils.m */,
@@ -1684,6 +1717,16 @@
 				A48F502416AFD050003B50A3 /* MoreViewController-iPad.xib in Resources */,
 				A48F502616AFD08A003B50A3 /* OrderStatusViewController-iPad.xib in Resources */,
 				A48F502816AFD0FE003B50A3 /* ViewCartController-iPad.xib in Resources */,
+				06A1412816C4D0AE005942E2 /* browse.png in Resources */,
+				06A1412916C4D0AE005942E2 /* browse_selected.png in Resources */,
+				06A1412A16C4D0AE005942E2 /* home.png in Resources */,
+				06A1412B16C4D0AE005942E2 /* home_selected.png in Resources */,
+				06A1412C16C4D0AE005942E2 /* more.png in Resources */,
+				06A1412D16C4D0AE005942E2 /* more_selected.png in Resources */,
+				06A1412E16C4D0AE005942E2 /* mycart.png in Resources */,
+				06A1412F16C4D0AE005942E2 /* mycart_selected.png in Resources */,
+				06A1413016C4D0AE005942E2 /* offer.png in Resources */,
+				06A1413116C4D0AE005942E2 /* offer_selected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1750,7 +1793,6 @@
 				EA2FCEF816564658000F2C9C /* WebContainer.m in Sources */,
 				EA2FCEF916564658000F2C9C /* NavigationBar.m in Sources */,
 				EA2FCF0916564663000F2C9C /* WebUtils.m in Sources */,
-				EA2FCF0A16564663000F2C9C /* Tabbar.m in Sources */,
 				EA2FCF0B16564663000F2C9C /* DictionaryUtils.m in Sources */,
 				EA2FCF0C16564663000F2C9C /* UIWebView_PageTransition.m in Sources */,
 				EA2FCF0D16564663000F2C9C /* UIUtils.m in Sources */,
@@ -1991,6 +2033,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_OBJC_RETAIN_COUNT = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mukund Balasubramanian (JJ5TQ44E7M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mukund Balasubramanian (JJ5TQ44E7M)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Phresco-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -2001,6 +2045,8 @@
 					"\"$(SRCROOT)/NativeController/CardIO\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8C33B250-7495-4E44-926A-932D9A2C7659";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8C33B250-7495-4E44-926A-932D9A2C7659";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "i386 armv6 armv7";
 				WRAPPER_EXTENSION = app;
@@ -2011,6 +2057,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_OBJC_RETAIN_COUNT = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mukund Balasubramanian (JJ5TQ44E7M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mukund Balasubramanian (JJ5TQ44E7M)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Phresco-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -2021,6 +2069,8 @@
 					"\"$(SRCROOT)/NativeController/CardIO\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8C33B250-7495-4E44-926A-932D9A2C7659";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8C33B250-7495-4E44-926A-932D9A2C7659";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "i386 armv6 armv7";
 				WRAPPER_EXTENSION = app;
