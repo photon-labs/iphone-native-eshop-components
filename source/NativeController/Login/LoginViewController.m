@@ -21,6 +21,8 @@
 #import "NavigationView.h"
 #import "LoginView.h"
 #import "Constants.h"
+
+
 @interface LoginViewController ()
 
 @end
@@ -101,9 +103,9 @@
     navBar.navigationDelegate = self;
     [navBar loadNavbar:YES:NO];
     [self.view addSubview:navBar];
-
+    
 	[self loadOtherViews];
-   [self loadRegisterButton];
+    [self loadRegisterButton];
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"login_bg" ofType:@"png"];
     UIImage *bgImage = [UIImage imageWithContentsOfFile:filePath];
     LoginView *loginView =nil;
@@ -113,18 +115,19 @@
     else{
         loginView= [[LoginView alloc] initWithFrame:CGRectMake(0, 40, bgImage.size.width, bgImage.size.height + 30)];
     }
+    loginView.tag = loginViewTag;
     [loginView createLoginView];
     loginView.loginDelegate=self;
     [self.view addSubview:loginView];
-
+    
     
 }
 -(void) loadRegisterButton{
     registerButton = [[UIButton alloc] init];
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    
-    
-    [registerButton setFrame:CGRectMake(260, 650, 240, 60)];
+        
+        
+        [registerButton setFrame:CGRectMake(260, 650, 240, 60)];
     }
     else{
         [registerButton setFrame:CGRectMake(100, 370, 120, 30)];
@@ -134,7 +137,7 @@
     [registerButton addTarget:self action:@selector(registerButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:registerButton];
-
+    
 }
 -(void) loadOtherViews
 {
@@ -176,90 +179,90 @@
 
 
 - (void)serviceCall:(NSString*)email PASSWORD:(NSString*)passwd {
-        
-        ServiceHandler *serviceHandler = [[ServiceHandler alloc] init];
-        
-        serviceHandler.loginId = [NSMutableString stringWithString:email];
-        
-        serviceHandler.pwd = [NSMutableString stringWithString:passwd];
-        
-        NSMutableDictionary* loginDict= [[NSMutableDictionary alloc] init];
-        
-        [loginDict setObject:serviceHandler.loginId  forKey:kloginEmail];
-        
-        [loginDict setObject:serviceHandler.pwd  forKey:kpassword];
-        
-        serviceHandler.loginId =[loginDict objectForKey:kloginEmail];
-        
-        serviceHandler.pwd =[loginDict objectForKey:kpassword];
-        
-        NSDictionary* dict = [NSDictionary dictionaryWithObject:loginDict forKey:klogin];
-              
-        ConfigurationReader *configReader = [[ConfigurationReader alloc]init];
-        [configReader parseXMLFileAtURL:@"phresco-env-config" environment:@"myWebservice"];
-        
-             NSString *protocol = [[configReader.stories objectAtIndex: 0] objectForKey:kwebserviceprotocol];
-        protocol = [protocol stringByTrimmingCharactersInSet:
-                    [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        
-        NSString *host = [[configReader.stories objectAtIndex: 0] objectForKey:kwebservicehost];
-        host = [host stringByTrimmingCharactersInSet:
+    
+    ServiceHandler *serviceHandler = [[ServiceHandler alloc] init];
+    
+    serviceHandler.loginId = [NSMutableString stringWithString:email];
+    
+    serviceHandler.pwd = [NSMutableString stringWithString:passwd];
+    
+    NSMutableDictionary* loginDict= [[NSMutableDictionary alloc] init];
+    
+    [loginDict setObject:serviceHandler.loginId  forKey:kloginEmail];
+    
+    [loginDict setObject:serviceHandler.pwd  forKey:kpassword];
+    
+    serviceHandler.loginId =[loginDict objectForKey:kloginEmail];
+    
+    serviceHandler.pwd =[loginDict objectForKey:kpassword];
+    
+    NSDictionary* dict = [NSDictionary dictionaryWithObject:loginDict forKey:klogin];
+    
+    ConfigurationReader *configReader = [[ConfigurationReader alloc]init];
+    [configReader parseXMLFileAtURL:@"phresco-env-config" environment:@"myWebservice"];
+    
+    NSString *protocol = [[configReader.stories objectAtIndex: 0] objectForKey:kwebserviceprotocol];
+    protocol = [protocol stringByTrimmingCharactersInSet:
                 [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        
-        NSString *port = [[configReader.stories objectAtIndex: 0] objectForKey:kwebserviceport];
-        port = [port stringByTrimmingCharactersInSet:
-                [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        
-        NSString *context = [[configReader.stories objectAtIndex: 0] objectForKey:kwebservicecontext];
-        context = [context stringByTrimmingCharactersInSet:
-                   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        
-        NSString *urlString = [NSString stringWithFormat:@"%@://%@:%@/%@/%@/%@/%@", protocol,host, port, context, kRestApi,kpost,klogin];
-        
-        NSLog(@"urlString %@",urlString);
-        NSData* postData = [NSJSONSerialization dataWithJSONObject:dict
-                                                           options:NSJSONWritingPrettyPrinted error:nil];
+    
+    NSString *host = [[configReader.stories objectAtIndex: 0] objectForKey:kwebservicehost];
+    host = [host stringByTrimmingCharactersInSet:
+            [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    NSString *port = [[configReader.stories objectAtIndex: 0] objectForKey:kwebserviceport];
+    port = [port stringByTrimmingCharactersInSet:
+            [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    NSString *context = [[configReader.stories objectAtIndex: 0] objectForKey:kwebservicecontext];
+    context = [context stringByTrimmingCharactersInSet:
+               [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@://%@:%@/%@/%@/%@/%@", protocol,host, port, context, kRestApi,kpost,klogin];
+    
+    NSLog(@"urlString %@",urlString);
+    NSData* postData = [NSJSONSerialization dataWithJSONObject:dict
+                                                       options:NSJSONWritingPrettyPrinted error:nil];
     NSLog(@"post data");
-        NSMutableURLRequest *request  = [[NSMutableURLRequest alloc] init];
-        [request setURL:[NSURL URLWithString:urlString]];
-        [request setHTTPMethod:@"POST"];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
-        [request setHTTPBody:postData];
-        
-        NSURLResponse *urlResponse;
-        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:nil];
-        
-        NSDictionary *response = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:nil];
-        strMsg = [response objectForKey:@"message"];
-        
-        successMsg = [response objectForKey:@"successMessage"];
-        
-        userID = [response objectForKey:@"userId"];
-        
-        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        
-        // saving an NSString
-        [prefs setObject:userID forKey:@"userId"];
-        
-        userName = [response objectForKey:@"userName"];
-        
-        [prefs setObject:userName forKey:@"userName"];
-        
-        index= [userID intValue];
-        
-        NSLog(@"Else condition");
-        if(index == 0 )
-        {
-            isLogin = NO;
-        }
+    NSMutableURLRequest *request  = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"accept"];
+    [request setHTTPBody:postData];
+    
+    NSURLResponse *urlResponse;
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:nil];
+    
+    NSDictionary *response = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:nil];
+    strMsg = [response objectForKey:@"message"];
+    
+    successMsg = [response objectForKey:@"successMessage"];
+    
+    userID = [response objectForKey:@"userId"];
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    // saving an NSString
+    [prefs setObject:userID forKey:@"userId"];
+    
+    userName = [response objectForKey:@"userName"];
+    
+    [prefs setObject:userName forKey:@"userName"];
+    
+    index= [userID intValue];
+    
+    NSLog(@"Else condition");
+    if(index == 0 )
+    {
+        isLogin = NO;
+    }
     else
-     {
+    {
         isLogin =  YES;
         homeViewController.array_ = loginArray;
-
+        
     }
-        //Pop up screen
+    //Pop up screen
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
         [activityIndicator stopAnimating];
@@ -308,64 +311,64 @@
         [cancelButton setUserInteractionEnabled:NO];
         
     }
-        else {
+    else {
+        
+        [activityIndicator stopAnimating];
+        UIView *viewController_ = [[UIView alloc] init];
+        UIImageView *myImageView = [[UIImageView alloc] initWithImage :
+                                    [UIImage imageNamed :@"popup_bg.png"]];
+        viewController_.frame = CGRectMake((SCREENWIDTH-myImageView.frame.size.width)/2, (SCREENHEIGHT-myImageView.frame.size.height)/2, myImageView.frame.size.width,myImageView.frame.size.height);
+        
+        viewController_.isAccessibilityElement=NO; //Added for Automation testing
+        viewController_.accessibilityLabel = @"AlertView";
+        
+        UILabel *label = [[UILabel alloc] init];
+        label.text = successMsg;
+        label.frame = CGRectMake(viewController_.frame.size.width/2-45, viewController_.frame.size.height/2-45, 150, 20);
+        label.textColor =[UIColor whiteColor];
+        label.backgroundColor = [UIColor clearColor];
+        label.adjustsFontSizeToFitWidth = YES;
+        
+        label.accessibilityLabel =@"LoginResult";
+        
+        label.accessibilityValue = successMsg;
+        
+        label.font = [UIFont fontWithName:@"Times New Roman-Regular" size:12];
+        
+        [viewController_ addSubview:myImageView];
+        [viewController_ addSubview:label];
+        
+        if(unitTestCheck == NO) {
             
-            [activityIndicator stopAnimating];
-            UIView *viewController_ = [[UIView alloc] init];
-            UIImageView *myImageView = [[UIImageView alloc] initWithImage :
-                                        [UIImage imageNamed :@"popup_bg.png"]];
-            viewController_.frame = CGRectMake((SCREENWIDTH-myImageView.frame.size.width)/2, (SCREENHEIGHT-myImageView.frame.size.height)/2, myImageView.frame.size.width,myImageView.frame.size.height);
-            
-            viewController_.isAccessibilityElement=NO; //Added for Automation testing
-            viewController_.accessibilityLabel = @"AlertView";
-            
-            UILabel *label = [[UILabel alloc] init];
-            label.text = successMsg;
-            label.frame = CGRectMake(viewController_.frame.size.width/2-45, viewController_.frame.size.height/2-45, 150, 20);
-            label.textColor =[UIColor whiteColor];
-            label.backgroundColor = [UIColor clearColor];
-            label.adjustsFontSizeToFitWidth = YES;
-            
-            label.accessibilityLabel =@"LoginResult";
-            
-            label.accessibilityValue = successMsg;
-            
-            label.font = [UIFont fontWithName:@"Times New Roman-Regular" size:12];
-            
-            [viewController_ addSubview:myImageView];
-            [viewController_ addSubview:label];
-            
-            if(unitTestCheck == NO) {
-                
-                [self.view addSubview:viewController_];
-            }
-            okButton = [[UIButton alloc] init];
-            UIImage *okButtonImage=[UIImage imageNamed:@"ok_btn.png"];
-            
-            [okButton setFrame:CGRectMake((viewController_.frame.size.width-okButtonImage.size.width)/2, (viewController_.frame.size.height-okButtonImage.size.height)/2, okButtonImage.size.width,okButtonImage.size.height)];
-            [okButton setBackgroundImage:okButtonImage forState:UIControlStateNormal];
-            
-            [okButton setBackgroundImage:[UIImage imageNamed:@"ok_btn.png"] forState:UIControlStateNormal];
-            
-            [okButton addTarget:self action:@selector(okButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            
-            okButton.accessibilityLabel = @"loginOkbutton";
-            
-            [viewController_ addSubview:okButton];
-            [backButton setUserInteractionEnabled:NO];
-            [registerButton setUserInteractionEnabled:NO];
-            [loginButton setUserInteractionEnabled:NO];
-            [cancelButton setUserInteractionEnabled:NO];
-            
+            [self.view addSubview:viewController_];
         }
-       
+        okButton = [[UIButton alloc] init];
+        UIImage *okButtonImage=[UIImage imageNamed:@"ok_btn.png"];
+        
+        [okButton setFrame:CGRectMake((viewController_.frame.size.width-okButtonImage.size.width)/2, (viewController_.frame.size.height-okButtonImage.size.height)/2, okButtonImage.size.width,okButtonImage.size.height)];
+        [okButton setBackgroundImage:okButtonImage forState:UIControlStateNormal];
+        
+        [okButton setBackgroundImage:[UIImage imageNamed:@"ok_btn.png"] forState:UIControlStateNormal];
+        
+        [okButton addTarget:self action:@selector(okButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
+        
+        okButton.accessibilityLabel = @"loginOkbutton";
+        
+        [viewController_ addSubview:okButton];
+        [backButton setUserInteractionEnabled:NO];
+        [registerButton setUserInteractionEnabled:NO];
+        [loginButton setUserInteractionEnabled:NO];
+        [cancelButton setUserInteractionEnabled:NO];
+        
     }
+    
+}
 
 ///Unit test validation
 
 - (void)loginButtonSelected:(id)sender
 {
-    if(unitTestCheck == NO) {        
+    if(unitTestCheck == NO) {
         
     }
     else {
@@ -407,6 +410,12 @@
     
     else {
         
+        UIView *loginView = [self.view viewWithTag:loginViewTag];
+        if(nil != loginView)
+        {
+            [loginView setUserInteractionEnabled:NO];
+        }
+        
         [self serviceCall:email PASSWORD:passwd];
     }
 }
@@ -439,25 +448,29 @@
     [loginButton setUserInteractionEnabled:YES];
     [cancelButton setUserInteractionEnabled:YES];
     
+    UIView *loginView = [self.view viewWithTag:loginViewTag];
+    if(nil != loginView)
+    {
+        [loginView setUserInteractionEnabled:YES];
+    }
 }
 
 - (void)cancelButtonAction
 {
     [self.view removeFromSuperview];
-    
 }
 
 - (void)registerButtonSelected:(id)sender
 {
     
-   RegistrationViewController	*tempBrowseViewController = [[RegistrationViewController alloc] initWithNibName:@"RegistrationViewController" bundle:nil];
-   
-   self.registrationViewController = tempBrowseViewController;
-   
-   [self.view addSubview:registrationViewController.view];
-   
-   tempBrowseViewController = nil;
- 
+    RegistrationViewController	*tempBrowseViewController = [[RegistrationViewController alloc] initWithNibName:@"RegistrationViewController" bundle:nil];
+    
+    self.registrationViewController = tempBrowseViewController;
+    
+    [self.view addSubview:registrationViewController.view];
+    
+    tempBrowseViewController = nil;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -467,7 +480,7 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
-   
+    
 }
 -(void)backButtonAction{
     [self.view removeFromSuperview];
