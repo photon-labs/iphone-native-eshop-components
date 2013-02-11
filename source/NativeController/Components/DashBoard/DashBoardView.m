@@ -48,7 +48,7 @@
         
         dashBoardDefaultsArray =[[NSArray alloc] initWithObjects:@"browse_icon.png-72",@"specialoffer_icon.png-72",@"login_icon.png-72",@"register_icon.png-72", nil];
         dashBoardDefaultString=[[NSString alloc]init];
-        dashBoardDefaultString =@"icons_bg.png";
+        dashBoardDefaultString =@"icons_bg-72.png";
         [self xCoordinate:xCoord yCoordinate:yCoord  device:kiPadButtonImages bgImage:kipadHomeBgImage];
     }
     else
@@ -57,7 +57,7 @@
         float yCoord  = self.frame.origin.y + iPhoneYpos;
         dashBoardDefaultsArray =[[NSArray alloc] initWithObjects:@"browse_icon.png",@"specialoffer_icon.png",@"login_icon.png",@"register_icon.png", nil];
         dashBoardDefaultString=[[NSString alloc]init];
-        dashBoardDefaultString =@"icons_bg-72.png";
+        dashBoardDefaultString =@"icons_bg.png";
         
         [self xCoordinate:xCoord yCoordinate:yCoord  device:kiPhoneButtonImages bgImage:kipadHomeBgImage];
     }
