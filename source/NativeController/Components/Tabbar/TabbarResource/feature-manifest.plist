@@ -5,7 +5,7 @@
 	<key>Tabbar</key>
 	<dict>
 		<key>Home</key>
-		<string></string>
+		<string>home.png</string>
 		<key>Browse</key>
 		<string>browse.png</string>
 		<key>MyCart</key>
