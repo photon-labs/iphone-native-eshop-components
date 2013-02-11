@@ -27,12 +27,12 @@
 
 -(void) createLoginView
 {
-loginDefaultsDict = [NSDictionary dictionaryWithObjectsAndKeys:@"Password",kDefaultPasswordCaption , @"Email Address",kDefaultEmailAddressCaption ,@"login_bg",kDefaultBackgroundImage,@"login_header",kDefaultHeaderImage,@"login_btn",kDefaultLoginImage,@"cancel_btn",kDefaultCancelImage,@"Helvetica-Bold",kDefaultFontType, nil];
+    loginDefaultsDict = [NSDictionary dictionaryWithObjectsAndKeys:@"Password",kDefaultPasswordCaption , @"Email Address",kDefaultEmailAddressCaption ,@"login_bg",kDefaultBackgroundImage,@"login_header",kDefaultHeaderImage,@"login_btn",kDefaultLoginImage,@"cancel_btn",kDefaultCancelImage,@"Helvetica-Bold",kDefaultFontType, nil];
     
     NSString *bgString = [self getObjectForKey:@"backgroundImage"];
     UIImageView *bgView = [[UIImageView alloc] initWithFrame:self.frame];
-//    
-//    NSString *filePath = [[NSBundle mainBundle] pathForResource:bgString ofType:@"png"];
+    //
+    //    NSString *filePath = [[NSBundle mainBundle] pathForResource:bgString ofType:@"png"];
     UIImage *bgImage = [UIImage imageNamed:bgString];
     bgView.image = bgImage;
     [self addSubview:bgView];
@@ -40,7 +40,7 @@ loginDefaultsDict = [NSDictionary dictionaryWithObjectsAndKeys:@"Password",kDefa
     NSString *loginHeaderString = [self getObjectForKey:@"header"];
     if(nil != loginHeaderString && [loginHeaderString length] >0)
     {
-//        NSString *filePath = [[NSBundle mainBundle] pathForResource:loginHeaderString ofType:@"png"];
+        //        NSString *filePath = [[NSBundle mainBundle] pathForResource:loginHeaderString ofType:@"png"];
         UIImage *loginHeaderImage = [UIImage imageNamed:loginHeaderString];
         if(nil != loginHeaderImage)
         {
@@ -56,31 +56,31 @@ loginDefaultsDict = [NSDictionary dictionaryWithObjectsAndKeys:@"Password",kDefa
         NSString* font = [self getObjectForKey:@"font"];
         if(nil != font && [font length]>0){
             UILabel *emailAddView=nil;
-         if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {   
-             emailAddView = [[UILabel alloc]initWithFrame:CGRectMake(self.frame.origin.x+25,self.frame.origin.y+45,250,50 )];
-             emailAddView.font=[UIFont fontWithName:font size:24];
-         }
-         else{
-             emailAddView = [[UILabel alloc]initWithFrame:CGRectMake(self.frame.origin.x+25,self.frame.origin.y+45,120,15 )];
-             emailAddView.font=[UIFont fontWithName:font size:12];
-         }
-        emailAddView.text=emailAddressString;
-        emailAddView.tag = emailLabelTag;
-        emailAddView.backgroundColor=[UIColor clearColor];
-        emailAddView.textColor=[UIColor whiteColor];
-        [self addSubview:emailAddView];
+            if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                emailAddView = [[UILabel alloc]initWithFrame:CGRectMake(self.frame.origin.x+25,self.frame.origin.y+45,250,50 )];
+                emailAddView.font=[UIFont fontWithName:font size:24];
+            }
+            else{
+                emailAddView = [[UILabel alloc]initWithFrame:CGRectMake(self.frame.origin.x+25,self.frame.origin.y+45,120,15 )];
+                emailAddView.font=[UIFont fontWithName:font size:12];
+            }
+            emailAddView.text=emailAddressString;
+            emailAddView.tag = emailLabelTag;
+            emailAddView.backgroundColor=[UIColor clearColor];
+            emailAddView.textColor=[UIColor whiteColor];
+            [self addSubview:emailAddView];
         }
     }
     //Email Text Field
     UIView *email = [self viewWithTag:emailLabelTag];
-//    UITextField *emailField=nil;
+    //    UITextField *emailField=nil;
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-
-    emailField=[[UITextField alloc]initWithFrame:CGRectMake(email.frame.origin.x,self.frame.origin.y+90,650,50)];
+        
+        emailField=[[UITextField alloc]initWithFrame:CGRectMake(email.frame.origin.x,self.frame.origin.y+90,650,50)];
     }
     else{
         emailField=[[UITextField alloc]initWithFrame:CGRectMake(email.frame.origin.x,self.frame.origin.y+70,270,30)];
-
+        
     }
     emailField.delegate = self;
     emailField.text=@"";
@@ -91,7 +91,7 @@ loginDefaultsDict = [NSDictionary dictionaryWithObjectsAndKeys:@"Password",kDefa
     emailField.borderStyle = UITextBorderStyleRoundedRect;
     [self addSubview:emailField];
     
-   //PassWord Label
+    //PassWord Label
     NSString *passwordString = [self getObjectForKey:@"password"];
     if(nil !=passwordString && [passwordString length]>0)
     {
@@ -99,19 +99,19 @@ loginDefaultsDict = [NSDictionary dictionaryWithObjectsAndKeys:@"Password",kDefa
         if(nil != font && [font length]>0){
             UILabel *passwordView=nil;
             if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-               passwordView = [[UILabel alloc]initWithFrame:CGRectMake(self.frame.origin.x+25,(self.frame.origin.y+emailField.frame.size.height+80),250,50 )];
-                 passwordView.font=[UIFont fontWithName:font size:24];
+                passwordView = [[UILabel alloc]initWithFrame:CGRectMake(self.frame.origin.x+25,(self.frame.origin.y+emailField.frame.size.height+80),250,50 )];
+                passwordView.font=[UIFont fontWithName:font size:24];
             }
             else{
                 passwordView = [[UILabel alloc]initWithFrame:CGRectMake(self.frame.origin.x+25,(self.frame.origin.y+emailField.frame.size.height+80),120,15 )];
-                 passwordView.font=[UIFont fontWithName:font size:12];
+                passwordView.font=[UIFont fontWithName:font size:12];
             }
-    
-    passwordView.text= passwordString;
-    passwordView.tag = passwordLabelTag;
-    passwordView.backgroundColor=[UIColor clearColor];
-    passwordView.textColor=[UIColor whiteColor];
-    [self addSubview:passwordView];
+            
+            passwordView.text= passwordString;
+            passwordView.tag = passwordLabelTag;
+            passwordView.backgroundColor=[UIColor clearColor];
+            passwordView.textColor=[UIColor whiteColor];
+            [self addSubview:passwordView];
         }
     }
     
@@ -119,10 +119,10 @@ loginDefaultsDict = [NSDictionary dictionaryWithObjectsAndKeys:@"Password",kDefa
     UIView *password = [self viewWithTag:passwordLabelTag];
     
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    passwordField=[[UITextField alloc]initWithFrame:CGRectMake(password.frame.origin.x,self.frame.origin.y+190,650,50)];
+        passwordField=[[UITextField alloc]initWithFrame:CGRectMake(password.frame.origin.x,self.frame.origin.y+190,650,50)];
     }else{
         passwordField=[[UITextField alloc]initWithFrame:CGRectMake(password.frame.origin.x,self.frame.origin.y+140,270,30)];
- 
+        
     }
     passwordField.delegate = self;
     passwordField.borderStyle = UITextBorderStyleNone;
@@ -146,7 +146,7 @@ loginDefaultsDict = [NSDictionary dictionaryWithObjectsAndKeys:@"Password",kDefa
         [button setBackgroundImage:cancelImage forState:UIControlStateNormal];
         [self addSubview:button];
     }
-
+    
     NSString *loginButton =[self getObjectForKey:@"loginImage"];
     if(loginButton != nil && [loginButton length]>0){
         
@@ -217,7 +217,7 @@ loginDefaultsDict = [NSDictionary dictionaryWithObjectsAndKeys:@"Password",kDefa
     else {
         return YES;
     }
-
+    
 }
 - (BOOL)textFieldShouldClear:(UITextField *)textField{
     return YES;
@@ -232,6 +232,7 @@ loginDefaultsDict = [NSDictionary dictionaryWithObjectsAndKeys:@"Password",kDefa
     if(nil != loginDelegate && [loginDelegate respondsToSelector:@selector(loginButtonAction:PASSWORD:)])
     {
         [loginDelegate loginButtonAction:emailAddress PASSWORD:password];
+        
     }
 }
 
@@ -257,45 +258,45 @@ loginDefaultsDict = [NSDictionary dictionaryWithObjectsAndKeys:@"Password",kDefa
             }
             else  //Get Data  from feature-Manifest  for key
             {
-            loginDict = [themeReader loadDataFromComponentPlist:loginKey INCOMPONENT:@"Login"];
-             if(nil != loginDict && [loginDict count] > 0)
-             {
-                NSString *object = [loginDict objectForKey:loginKey];
+                loginDict = [themeReader loadDataFromComponentPlist:loginKey INCOMPONENT:@"Login"];
+                if(nil != loginDict && [loginDict count] > 0)
+                {
+                    NSString *object = [loginDict objectForKey:loginKey];
+                    if(nil != object && [object length] > 0)
+                    {
+                        return object;
+                    }
+                    else
+                    {
+                        NSString *object = [loginDefaultsDict objectForKey:loginKey];
+                        return object;
+                    }
+                }
+                
+                
+            }
+        }
+        
+        else  //Get Data  from feature-Manifest
+        {
+            NSMutableDictionary *loginViewDict=[themeReader loadDataFromComponentPlist:loginKey INCOMPONENT:@"Login"];
+            if(nil != loginViewDict && [loginViewDict count] > 0)
+            {
+                NSString *object = [loginViewDict objectForKey:loginKey];
                 if(nil != object && [object length] > 0)
                 {
                     return object;
                 }
-                 else
-                 {
-                     NSString *object = [loginDefaultsDict objectForKey:loginKey];
-                     return object;
-                 }
-             }
-             
+                else{
+                    return [loginDefaultsDict objectForKey:loginKey];
+                }
+                
                 
             }
-      }
-   
-      else  //Get Data  from feature-Manifest 
-      {
-          NSMutableDictionary *loginViewDict=[themeReader loadDataFromComponentPlist:loginKey INCOMPONENT:@"Login"];
-          if(nil != loginViewDict && [loginViewDict count] > 0)
-          {
-              NSString *object = [loginViewDict objectForKey:loginKey];
-              if(nil != object && [object length] > 0)
-              {
-                  return object;
-              }
-              else{
-                  return [loginDefaultsDict objectForKey:loginKey];
-              }
-             
-              
-          }
-          
-      }
+            
+        }
         return [loginDefaultsDict objectForKey:loginKey];
-     }
+    }
     return nil;
- }
+}
 @end
