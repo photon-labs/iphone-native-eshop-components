@@ -118,7 +118,7 @@
 
 #define emailTag                            345
 #define passwordTag                         867
-
+#define loginViewTag                        23234
 
 ///Dashboard macros
 #define kbgImage                       @"backgroundImage"
