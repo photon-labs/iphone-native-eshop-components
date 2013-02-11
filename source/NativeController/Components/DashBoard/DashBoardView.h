@@ -19,7 +19,8 @@
     UIImageView* bgView;
     NSArray *dashBoardDefaultsArray;
     NSArray *dashBoardViewDefaultsArray;
-    
+    NSString *defaultPadding;
+    NSString *defaultPaddingvalue;
     NSString *dashBoardDefaultString;
 }
 @property (nonatomic, strong) UIImageView* bgView;
