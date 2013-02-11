@@ -99,7 +99,7 @@
 		<key>font</key>
 		<string>Verdana</string>
 	</dict>
-	<key>productResults</key>
+	<key>ProductResults</key>
 	<dict>
 		<key>backgroundColor</key>
 		<dict>
