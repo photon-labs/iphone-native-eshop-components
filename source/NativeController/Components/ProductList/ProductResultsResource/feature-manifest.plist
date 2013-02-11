@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ProductResults</key>
+	<dict>
+		<key>backgroundColor</key>
+		<dict>
+			<key>red</key>
+			<string>29.0</string>
+			<key>green</key>
+			<string>106.0</string>
+			<key>blue</key>
+			<string>150.0</string>
+			<key>alpha</key>
+			<string>1.0</string>
+		</dict>
+		<key>font</key>
+		<string>Helvetica</string>
+		<key>iPhoneFontSize</key>
+		<string>13</string>
+		<key>iPadFontSize</key>
+		<string>18</string>
+	</dict>
+</dict>
+</plist>
