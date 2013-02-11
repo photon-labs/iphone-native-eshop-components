@@ -16,7 +16,7 @@
 
 #define iPadXpos 100
 #define iPadYpos 80
-#define iPhoneXpos 45
+#define iPhoneXpos 60
 #define iPhoneYpos 20
 #define iPhoneImageWidth 120
 #define iPhoneImageheight 120
