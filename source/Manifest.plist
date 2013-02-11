@@ -59,6 +59,10 @@
 	</dict>
 	<key>DashBoard</key>
 	<dict>
+		<key>padding_ipad</key>
+		<string>80</string>
+		<key>padding_iphone</key>
+		<string>20</string>
 		<key>iPhoneHomeButtonImages</key>
 		<dict>
 			<key>imagesArray</key>
