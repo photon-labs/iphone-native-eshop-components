@@ -16,8 +16,8 @@
 
 #define iPadXpos 100
 #define iPadYpos 80
-#define iPhoneXpos 60
-#define iPhoneYpos 40
+#define iPhoneXpos 45
+#define iPhoneYpos 20
 #define iPhoneImageWidth 120
 #define iPhoneImageheight 120
 #define iPadImageWidth 300
@@ -31,11 +31,15 @@
         dashBoardDefaultsArray= nil;
         dashBoardViewDefaultsArray=nil;
         dashBoardDefaultString =nil;
-   }
+        defaultPadding=nil;
+        defaultPaddingvalue=nil;
+    }
     return self;
 }
 
 - (void)loadComponents {
+    defaultPadding= @"80";
+    defaultPaddingvalue= @"40";
     
     dashBoardViewDefaultsArray = [[NSArray alloc] initWithObjects:@"Browse",@"SpecialOffer",@"Login",@"Register", nil];
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -51,10 +55,10 @@
     {
         float xCoord = self.frame.origin.x + iPhoneXpos;
         float yCoord  = self.frame.origin.y + iPhoneYpos;
-                dashBoardDefaultsArray =[[NSArray alloc] initWithObjects:@"browse_icon.png",@"specialoffer_icon.png",@"login_icon.png",@"register_icon.png", nil];
+        dashBoardDefaultsArray =[[NSArray alloc] initWithObjects:@"browse_icon.png",@"specialoffer_icon.png",@"login_icon.png",@"register_icon.png", nil];
         dashBoardDefaultString=[[NSString alloc]init];
         dashBoardDefaultString =@"icons_bg-72.png";
-
+        
         [self xCoordinate:xCoord yCoordinate:yCoord  device:kiPhoneButtonImages bgImage:kipadHomeBgImage];
     }
 }
@@ -76,7 +80,7 @@
 - (void)xCoordinate:(float)x yCoordinate:(float)y  device:(NSString*)key bgImage:(NSString*)img {
     
     NSArray* imagesArray =  [self getArrayImageName:key];
-    NSArray *titleArray = [self getTitleLabels:@"titleLabel"];
+    
     UIImage *image = nil;
     NSString* path = [imagesArray objectAtIndex:0];
     if(nil != path && [path length] >0)
@@ -85,8 +89,14 @@
     }
     else
     {
-        image = [UIImage imageNamed:@"login_icon.png"];
-
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            image = [UIImage imageNamed:@"login_icon-72.png"];
+        }
+        else
+        {
+            image = [UIImage imageNamed:@"login_icon.png"];
+        }
     }
     float width = 0.0;
     float height = 0.0;
@@ -100,18 +110,71 @@
     NSString* imagePath = [self getBackgroundImageForKey:key];
     bgView.image =  [UIImage imageNamed:imagePath];
     [bgView setUserInteractionEnabled:YES];
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        bgView.frame = self.frame;
-    }
-    else {
-        bgView.frame = self.frame;
-    }
+    bgView.frame = self.frame;
     [self addSubview:bgView];
+    NSString *paddingValue=[[NSString alloc] init];
+    float paddingFloatvalue=0.0;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        NSString *padding = [self getPadding:@"padding_ipad"];
+        paddingValue = padding;
+        
+        
+    }
+    else
+    {
+        NSString *padding = [self getPadding:@"padding_iphone"];
+        paddingValue = padding;
+    }
+    
+    paddingFloatvalue = [paddingValue floatValue];
     for(int i = 0; i< [imagesArray count]; i++)
     {
         UIButton *button = [[UIButton alloc]init];
         [button setFrame:CGRectMake(x, y, width, height)];
-        button.titleLabel.text = [titleArray objectAtIndex:i];
+        NSLog(@"bgvi:%f",bgView.image.size.width);
+        if((x+button.frame.size.width)<=bgView.image.size.width)
+        {
+            if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            {
+                x=x+button.frame.size.width+paddingFloatvalue;
+            }
+            else
+            {
+                x=x+button.frame.size.width+paddingFloatvalue;
+            }
+            
+        }
+        else
+        {
+            if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            {
+                x=self.frame.origin.x+iPadXpos;
+                y=y+button.frame.size.height+paddingFloatvalue;
+            }
+            else
+            {
+                x=self.frame.origin.x+iPhoneXpos;
+                y=y+button.frame.size.height+paddingFloatvalue;
+            }
+            if((x+button.frame.size.width)<=bgView.image.size.width)
+            {
+                [button setFrame:CGRectMake(x, y, width, height)];
+                if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+                {
+                    x=x+button.frame.size.width+paddingFloatvalue;
+                }
+                else
+                {
+                    x=x+button.frame.size.width+paddingFloatvalue;
+                }
+            }
+        }
+        NSArray *titleArray = [self getTitleLabels:@"titleLabel"];
+        if(i<[titleArray count])
+        {
+            button.titleLabel.text = [titleArray objectAtIndex:i];
+        }
         NSString* path = [imagesArray objectAtIndex:i];
         UIImage *image = nil;
         if(nil != path && [path length] > 0)
@@ -120,36 +183,25 @@
         }
         else
         {
-            image = [UIImage imageNamed:@"login_icon.png"];
+            if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            {
+                image = [UIImage imageNamed:@"login_icon-72.png"];
+            }
+            else
+            {
+                image = [UIImage imageNamed:@"login_icon.png"];
+            }
+            
         }
         [button setBackgroundImage:image forState:UIControlStateNormal];
         [button addTarget:self action:@selector(homeButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [bgView  addSubview:button];
-        
-        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            x = x + iPadImageWidth;
-            if([self gotoNextRow:i])
-            {
-                y = y + iPadImageheight;
-                x = iPadXpos;
-            }
-        }
-        else {
-        
-               x = x + iPhoneImageWidth;
-            if([self gotoNextRow:i])
-            {
-                y = y + iPhoneImageheight;
-                x = iPhoneXpos;
-            }
-        }
     }
 }
-
 - (void)homeButtonAction:(id)sender {
     UIButton *button = (UIButton*) sender;
     if((delegate != nil) && [delegate respondsToSelector:@selector(callViewController:)]) {
-     [delegate callViewController:button];
+        [delegate callViewController:button];
     }
 }
 
@@ -289,6 +341,7 @@
             else
             {
                 return dashBoardDefaultString;
+                
             }
         }
         return dashBoardDefaultString;
@@ -354,5 +407,109 @@
         return dashBoardViewDefaultsArray ;
     }
     return nil;
+}
+-(NSString*)getPadding:(NSString*)key{
+    if(nil != key && [key length] >0)
+    {
+        ThemeReader *themeReader = [[ThemeReader alloc] init];
+        NSMutableDictionary *dashboardDict = nil;
+        dashboardDict = [themeReader loadDataFromManifestPlist:@"DashBoard"];
+        if(nil != dashboardDict && [dashboardDict count] > 0)
+        {
+            
+            NSString* padding=[dashboardDict objectForKey:key];
+            if(padding !=nil && [padding length]>0)
+            {
+                return padding;
+            }
+            else
+            {
+                dashboardDict=[themeReader loadDataFromComponentPlist:key INCOMPONENT:@"DashBoard"];
+                if(nil !=dashboardDict && [dashboardDict count]>0)
+                {
+                    NSString* padding=[dashboardDict objectForKey:key];
+                    if(padding !=nil && [padding length]>0)
+                    {
+                        return padding;
+                    }
+                    else
+                    {
+                        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+                        {
+                            return defaultPadding;
+                        }
+                        else
+                        {
+                            return defaultPaddingvalue;
+                        }
+                        
+                    }
+                }
+                else
+                {
+                    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+                    {
+                        return defaultPadding;
+                    }
+                    else
+                    {
+                        return defaultPaddingvalue;
+                        
+                    }
+                    
+                }
+                
+            }
+        }
+        else
+        {
+            dashboardDict=[themeReader loadDataFromComponentPlist:key INCOMPONENT:@"DashBoard"];
+            if(nil !=dashboardDict && [dashboardDict count]>0)
+            {
+                NSString* padding=[dashboardDict objectForKey:key];
+                if(padding !=nil && [padding length]>0)
+                {
+                    return padding;
+                }
+                else
+                {
+                    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+                    {
+                        return defaultPadding;
+                    }
+                    else
+                    {
+                        return defaultPaddingvalue;
+                    }
+                    
+                }
+            }
+            else
+            {
+                if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+                {
+                    return defaultPadding;
+                }
+                else
+                {
+                    return defaultPaddingvalue;
+                }
+                
+            }
+            
+        }
+        
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            return defaultPadding;
+        }
+        else
+        {
+            return defaultPaddingvalue;
+        }
+        
+    }
+    return nil;
+    
 }
 @end
