@@ -14,13 +14,13 @@
 		<string>offer.png</string>
 		<key>More</key>
 		<string>more.png</string>
-		<key>Home-highlighted</key>
+		<key>Home-Highlighted</key>
 		<string>home_selected.png</string>
-		<key>Browse-highlighted</key>
+		<key>Browse-Highlighted</key>
 		<string>browse_selected.png</string>
-		<key>MyCart-highlighted</key>
+		<key>MyCart-Highlighted</key>
 		<string>mycart_selected.png</string>
-		<key>Offers-highlighted</key>
+		<key>Offers-Highlighted</key>
 		<string>offer_selected.png</string>
 		<key>More-Highlighted</key>
 		<string>more_selected.png</string>
