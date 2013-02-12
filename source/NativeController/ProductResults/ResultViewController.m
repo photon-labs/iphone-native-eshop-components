@@ -480,8 +480,8 @@
         UIImage* reviewImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"review_btn" ofType:@"png"]];
         [[cell reviewsButton] setFrame:CGRectMake(iPhoneProductNameWidth + labelPadding,iPhoneProductNameHeight+ 2*iPhoneYpos+30,reviewImage.size.width, reviewImage.size.height)];
         [[cell productPrice] setFrame:CGRectMake(imageName.size.width + iPhoneXpos + 2*labelPadding, iPhoneProductNameHeight, iPhoneProductNameHeight, iPhoneProductNameHeight)];
-        UIImage* disImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"nav_arrow.png" ofType:@""]];
-        [[cell disImage] setFrame:CGRectMake(self.view.frame.size.width - disImage.size.width , iPhoneProductNameHeight, disImage.size.width, disImage.size.height)];//
+        UIImage* disImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"nav_arrow" ofType:@"png"]];
+        [[cell disImage] setFrame:CGRectMake(self.view.frame.size.width - disImage.size.width , iPhoneProductNameHeight, disImage.size.width, disImage.size.height)];
         [[cell disImage] setImage:disImage];
         
         

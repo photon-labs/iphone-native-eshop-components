@@ -75,7 +75,7 @@
 		self = [super initWithNibName:@"SpecialOffersViewController-iPad" bundle:nil];
 		
 	}
-	else 
+	else
     {
         self = [super initWithNibName:@"SpecialOffersViewController" bundle:nil];
         
@@ -126,7 +126,7 @@
     navBar.navigationDelegate = self;
     [navBar loadNavbar:YES:NO];
     [self.view addSubview:navBar];
-
+    
     [self loadOtherViews];
 	
 	[self initializeProductResults];
@@ -155,7 +155,7 @@
         
         searchBarView = nil;
         
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_highlighted.png"], [UIImage imageNamed:@"mycart_btn_normal.png"], 
+        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_highlighted.png"], [UIImage imageNamed:@"mycart_btn_normal.png"],
                                        nil];
         
         int x  = 8;
@@ -207,7 +207,7 @@
         
         searchBarView = nil;
         
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_highlighted.png"], [UIImage imageNamed:@"mycart_btn_normal.png"], 
+        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_highlighted.png"], [UIImage imageNamed:@"mycart_btn_normal.png"],
                                        nil];
         
         int x  = 5;
@@ -238,7 +238,7 @@
             }
             
             button = nil;
-        
+            
         }
     }
 	
@@ -264,7 +264,7 @@
 	
 	specialProductTable.dataSource = self;
 	specialProductTable.delegate = self;
-	specialProductTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0]; 
+	specialProductTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0];
     
     AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
     
@@ -358,7 +358,7 @@
         [[cell productPrice] setFrame:CGRectMake(iPadXpos + imageName.size.width + cell.priceLabel.frame.size.width, iPadProductNameHeight, iPadProductNameHeight, iPadProductNameHeight)];
         
         UIImage* disImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"nav_arrow-72" ofType:@"png"]];
-        [[cell disImage] setFrame:CGRectMake(self.view.frame.size.width - disImage.size.width , iPadProductNameHeight, disImage.size.width, disImage.size.height)];
+        [[cell disImage] setFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - disImage.size.width), iPadProductNameHeight, disImage.size.width, disImage.size.height)];
         [[cell disImage] setImage:disImage];
         CGRect frame;
         
@@ -423,10 +423,9 @@
         UIImage* reviewImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"review_btn" ofType:@"png"]];
         [[cell reviewsButton] setFrame:CGRectMake(iPhoneProductNameWidth + labelPadding,iPhoneProductNameHeight+ 2*iPhoneYpos+30,reviewImage.size.width, reviewImage.size.height)];
         [[cell productPrice] setFrame:CGRectMake(imageName.size.width + iPhoneXpos + 2*labelPadding, iPhoneProductNameHeight, iPhoneProductNameHeight, iPhoneProductNameHeight)];
-        UIImage* disImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"nav_arrow.png" ofType:@""]];
-        [[cell disImage] setFrame:CGRectMake(self.view.frame.size.width - disImage.size.width , iPhoneProductNameHeight, disImage.size.width, disImage.size.height)];//
+        UIImage* disImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"nav_arrow" ofType:@"png"]];
+        [[cell disImage] setFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - disImage.size.width) , iPhoneProductNameHeight, disImage.size.width, disImage.size.height)];
         [[cell disImage] setImage:disImage];
-        
         
         CGRect frame;
         frame.size.width=imageName.size.width;
@@ -562,7 +561,7 @@
         tempReviewViewController = nil;
         
     }
-    else 
+    else
     {
         ReviewViewController	*tempReviewViewController = [[ReviewViewController alloc] initWithNibName:@"ReviewViewController" bundle:nil];
         
@@ -577,7 +576,7 @@
 }
 
 #pragma mark navigation button Actions
-- (void) browseButtonSelected:(id)sender 
+- (void) browseButtonSelected:(id)sender
 {
     AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
     assetsData.productArray = [[NSMutableArray alloc]init];
@@ -624,7 +623,7 @@
 
 
 
--(void)viewWillAppear:(BOOL)animated 
+-(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
     [specialProductTable reloadData];
