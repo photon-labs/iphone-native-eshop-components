@@ -49,7 +49,7 @@
 	
 	float contentWidth = 0;
 	
-  //  NSArray *keys = [NSArray arrayWithObjects:@"Home", @"Browse", @"MyCart", @"Offers", @"More", nil];
+    //  NSArray *keys = [NSArray arrayWithObjects:@"Home", @"Browse", @"MyCart", @"Offers", @"More", nil];
 	for (int i = 0; i < buttonsCount; i++) {
 		
 		AssetsDataEntity *assetsDataEntity = [[SharedObjects sharedInstance] assetsDataEntity];
@@ -84,13 +84,13 @@
 			x_pos = (allotedWidth - 32) / 2 - 13;
 		}
 		
-		if(contentWidth == 0) {			
+		if(contentWidth == 0) {
 			
 			//rect = CGRectMake(x_pos + 5, (tabbar.frame.size.height - tabImage.size.height) / 2 + 5, tabImage.size.width, tabImage.size.height);
 			rect = CGRectMake(x_pos , (self.frame.size.height - 45) / 2, 62, 40);
 			
 		}
-		else {			
+		else {
 			
 			//rect = CGRectMake(contentWidth + 25, (self.frame.size.height - tabImage.size.height) / 2 + 5, tabImage.size.width, tabImage.size.height);
 			rect = CGRectMake(contentWidth + 2, (self.frame.size.height - 45) / 2, 62, 40);
@@ -156,8 +156,8 @@
                 
                 [[self superview] addSubview:[[self.viewControllers objectAtIndex:i] view]];
             }
-        }                
-    }    
+        }
+    }
 }
 
 - (void)setSelectedIndex:(int)index fromSender:sender {
@@ -177,14 +177,14 @@
             
             [[self superview] bringSubviewToFront:self];
             
-            AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;	
+            AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
             
             if (![assetsData isFeatureNative:[assetsData.featureLayout objectAtIndex:index]]) {
                 if (nil == [[[self.viewControllers objectAtIndex:index] iWebview] request]) {
                     
                     [self reloadFeatureTab:index];
                 }
-            }    
+            }
         }
         
         
@@ -199,9 +199,11 @@
 	
     if (nil != button) {
         
-        AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;	
+        AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
         
-        UIImage *image = [[[assetsData.assets objectAtIndex:index] imagesDict] objectForKey:khighlightedTab];
+        //UIImage *image = [[[assetsData.assets objectAtIndex:index] imagesDict] objectForKey:khighlightedTab];
+        NSString *imageName = [self getobjectForIndex:index];
+        UIImage *image = [UIImage imageNamed:imageName];
         
         if (nil != image) {
             
@@ -210,8 +212,8 @@
             if (lastSelectedIndex != selectedIndex) {
                 
                 [self unHighlightLastSelectedTab];
-            }            
-        }        
+            }
+        }
     }
     else {
         [self highlightTabAtIndex:index];
@@ -222,16 +224,18 @@
 	
     if (index >= 0 && index < [[self subviews]count]) {
         
+        NSString *imageName = [self getobjectForIndex:index];
         UIButton *lastSelectedTab = (UIButton*)[self viewWithTag:(kTabbarTagOffset + index)];
         
-        AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;	
+        AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
         
-        UIImage *image = [[[assetsData.assets objectAtIndex:index] imagesDict] objectForKey:khighlightedTab];
+        //UIImage *image = [[[assetsData.assets objectAtIndex:index] imagesDict] objectForKey:khighlightedTab];
+        UIImage *image = [UIImage imageNamed:imageName];
         
         if (nil != image) {
             [lastSelectedTab setBackgroundImage:image forState:UIControlStateNormal];
         }
-    }    
+    }
 }
 
 - (void)unHighlightLastSelectedTab {
@@ -240,25 +244,27 @@
         
         UIButton *lastSelectedTab = (UIButton*)[self viewWithTag:(kTabbarTagOffset + lastSelectedIndex)];
         
-        AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;	
+        AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
+        NSString *imageName = [self getobjectForIndex:lastSelectedIndex];
         
-        UIImage *image = [[[assetsData.assets objectAtIndex:lastSelectedIndex] imagesDict] objectForKey:kdefaultTab];
+        //UIImage *image = [[[assetsData.assets objectAtIndex:lastSelectedIndex] imagesDict] objectForKey:kdefaultTab];
+        UIImage *image = [UIImage imageNamed:imageName];
         
         if (nil != image) {
             [lastSelectedTab setBackgroundImage:image forState:UIControlStateNormal];
-        } 
-    }       
+        }
+    }
 }
 
 - (void)reloadFeatureTab:(int)index {
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;	
+    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
     
     FeaturedAsset *featuredAsset = (FeaturedAsset*)[assetsData.assets objectAtIndex:index];
     
     if ([[self.viewControllers objectAtIndex:index] respondsToSelector:@selector(loadWebViewWithRequest:)]) {
         
         [[self.viewControllers objectAtIndex:index] loadWebViewWithRequest:featuredAsset.featureUrl];
-    }    
+    }
 }
 
 - (id)selectedController {
@@ -269,7 +275,7 @@
 /**************************************************************************************************************
  getImageForButton
  
- desc:  returns button image based on the title given. The titles indexes  are referenced from 
+ desc:  returns button image based on the title given. The titles indexes  are referenced from
  in  moreButtonIndexArray & tabButtonIndexArray.
  with this index, the images are referenced from imageDictionary.
  
@@ -288,7 +294,7 @@
 	UIImage *btnImage = nil;
 	
 	
-	return btnImage;	
+	return btnImage;
 }
 
 // Only override drawRect: if you perform custom drawing.
@@ -298,5 +304,61 @@
 	[super drawRect:rect];
 }
 
+-(NSString*) getobjectForIndex:(int)index
+{
+    ThemeReader *themeReader = [[ThemeReader alloc] init];
+    NSArray *sortedKeys = [NSArray arrayWithObjects:@"Home-Highlighted", @"Browse-Highlighted", @"MyCart-Highlighted", @"Offers-Highlighted", @"More-Highlighted", nil];
+    NSMutableDictionary *dict = [themeReader loadDataFromManifestPlist:@"Tabbar"];
+    NSString  *object = nil;
+    NSMutableArray *sortedValues = [[NSMutableArray alloc] init];
+    if(nil != dict)
+    {
+        for(id key in sortedKeys)
+        {
+            object = [dict objectForKey:key];
+            if(nil != object && [object length]>0)
+            {
+                [sortedValues addObject:object];
+            }
+            else
+            {
+                NSMutableDictionary *manifestDict = [themeReader loadDataFromComponentPlist:nil INCOMPONENT:@"Tabbar"];
+                if(nil != manifestDict)
+                {
+                    object = [manifestDict objectForKey:key];
+                    if(nil != object)
+                    {
+                        [sortedValues addObject:object];
+                    }
+                }
+                else
+                {
+                    //load from constants
+                }
+            }
+        }
+        NSLog(@"Sorted values %@", sortedValues);
+    }
+    else
+    {
+        dict = [themeReader loadDataFromComponentPlist:nil INCOMPONENT:@"Tabbar"];
+        if(nil != dict)
+        {
+            for(id key in sortedKeys)
+            {
+                object = [dict objectForKey:key];
+                if(nil != object)
+                {
+                    [sortedValues addObject:object];
+                }
+                else
+                {
+                    //load from constants
+                }
+            }
+        }
+    }
+    return [sortedValues objectAtIndex:index];
+}
 
 @end
