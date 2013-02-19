@@ -311,51 +311,8 @@
         
         bgView = nil;
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0,81 , SCREENWIDTH, 60)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        searchBarView = nil;
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal-72.png"], [UIImage imageNamed:@"specialoffers_btn_normal-72.png"], [UIImage imageNamed:@"mycart_btn_highlighted-72.png"],
-                                       nil];
-        
-        int x  = 8;
-        
-        int y = 83;
-        
-        int width = 250;
-        
-        int height = 55;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 252;
-            
-            if(i==0)
-            {
-                [button addTarget:self action:@selector(browseButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            if(i==1)
-            {
-                [button addTarget:self action:@selector(specialOfferButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            button = nil;
-            
-        }
-        
-        UILabel *myCartView = [[UILabel alloc] initWithFrame:CGRectMake(300, 150 , 180, 40)];
+              
+       UILabel *myCartView = [[UILabel alloc] initWithFrame:CGRectMake(300, 100 , 180, 40)];
         
         [myCartView setFont:[UIFont fontWithName:@"Helvetica" size:24]];
         myCartView.backgroundColor = [UIColor clearColor];
@@ -400,51 +357,7 @@
         
         bgView =nil;
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , SCREENWIDTH, 40)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        searchBarView = nil;
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_highlighted.png"],
-                                       nil];
-        
-        int x  = 5;
-        
-        int y = 42;
-        
-        int width = 100;
-        
-        int height = 35;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 102;
-            
-            if(i==0)
-            {
-                [button addTarget:self action:@selector(browseButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            if(i==1)
-            {
-                [button addTarget:self action:@selector(specialOfferButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            button = nil;
-            
-        }
-        
-        UILabel *myCartView = [[UILabel alloc] initWithFrame:CGRectMake(120, 80 , 80, 20)];
+        UILabel *myCartView = [[UILabel alloc] initWithFrame:CGRectMake(120, 55 , 80, 20)];
         
         [myCartView setFont:[UIFont fontWithName:@"Helvetica" size:12]];
         myCartView.backgroundColor = [UIColor clearColor];
@@ -454,8 +367,6 @@
         [self.view addSubview:myCartView];
         
         myCartView = nil;
-        
-        
         
         UIButton *reviewCart = [[UIButton alloc] initWithFrame:CGRectMake(70, 365 , 108, 31)];
         
@@ -484,10 +395,10 @@
 {
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
-        addToBagTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 215, 768, 550) style:UITableViewStylePlain];
+        addToBagTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 180, 768, 550) style:UITableViewStylePlain];
     }
     else {
-        addToBagTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 105, 320, 250) style:UITableViewStylePlain];
+        addToBagTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 80, 320, 250) style:UITableViewStylePlain];
     }
     
 	addToBagTable.dataSource = self;
@@ -522,13 +433,6 @@
 -(void)cancelAction:(id)sender
 {
     
-    //     if ((![txtFirst.text length]) || (![txtAdd1.text length]) || (![txtAdd2.text length]) || (![txtCity.text length]) || (![txtState.text length]) || (![txtCountry.text length]) || (![txtPost.text length]) || (![txtOrder.text length])){
-    //
-    //         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"" message:@"Enter all Required Values" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    //         [alert show];
-    //         [alert release];
-    //     }
-    //     else {
     CheckoutOverAllViewController  *checkOutController = [[CheckoutOverAllViewController alloc] initWithNibName:@"CheckoutOverAllViewController" bundle:nil];
     checkOutController.strFirst = txtFirst.text;
     checkOutController.strLast = txtLast.text;
@@ -547,7 +451,7 @@
     
     [self.view addSubview:overallViewController.view];
     checkOutController = nil;
-    // }
+   
 }
 
 -(void) editButtonClicked:(id)sender
@@ -645,65 +549,6 @@
 }
 
 
-#pragma mark Button Actions
-
-- (void) browseButtonSelected:(id)sender
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    assetsData.productArray = [[NSMutableArray alloc]init];
-    assetsData.productDetailArray = [[NSMutableArray alloc]init];
-    assetsData.catalogArray = [[NSMutableArray alloc]init];
-    ServiceHandler *serviceHandler = [[ServiceHandler alloc] init];
-    
-    [serviceHandler catalogService:self :@selector(finishedCatalogService:)];
-    
-    serviceHandler = nil;
-    
-    
-}
-
--(void) finishedCatalogService:(id) data
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    
-    [assetsData updateCatalogModel:data];
-    
-    BrowseViewController	*tempBrowseViewController = [[BrowseViewController alloc] initWithNibName:@"BrowseViewController" bundle:nil];
-    
-    self.browseViewController = tempBrowseViewController;
-    
-    [self.view addSubview:browseViewController.view];
-    
-    tempBrowseViewController = nil;
-}
-
-- (void) specialOfferButtonSelected:(id)sender
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    assetsData.specialProductsArray = [[NSMutableArray alloc]init];
-    assetsData.productDetailArray = [[NSMutableArray alloc]init];
-    
-    ServiceHandler *serviceHandler = [[ServiceHandler alloc] init];
-    
-    [serviceHandler specialProductsService:self :@selector(finishedSpecialProductsService:)];
-    
-    serviceHandler = nil;
-    
-    
-}
--(void) finishedSpecialProductsService:(id) data
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    
-    [assetsData updateSpecialproductsModel:data];
-    
-    SpecialOffersViewController *tempSpecialOffersViewController = [[SpecialOffersViewController alloc] initWithNibName:@"SpecialOffersViewController" bundle:nil];
-    
-    self.specialOffersViewController = tempSpecialOffersViewController;
-    
-    [self.view addSubview:specialOffersViewController.view];
-    
-}
 
 #pragma mark Text Field Delegate Methods
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

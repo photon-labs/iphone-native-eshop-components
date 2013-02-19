@@ -146,42 +146,7 @@
         
         searchBarView = nil;
         
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_highlighted-72.png"], [UIImage imageNamed:@"specialoffers_btn_normal-72.png"],
-                                       [UIImage imageNamed:@"mycart_btn_normal-72.png"],
-                                       nil];
-        
-        int x = 8;
-        
-        int y = 83;
-        
-        int width = 250;
-        
-        int height = 55;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 252;
-            if(i==1)
-            {
-                [button addTarget:self action:@selector(specialOfferButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            if(i==2)
-            {
-                [button addTarget:self action:@selector(myCartButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            button = nil;
-            
-        }
-    }
+         }
     else {
         
         UIImageView *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40,SCREENWIDTH, 375)];
@@ -200,43 +165,7 @@
         
         searchBarView = nil;
         
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_highlighted.png"], [UIImage imageNamed:@"offers_btn_normal.png"],
-                                       [UIImage imageNamed:@"mycart_btn_normal.png"],
-                                       nil];
-        
-        int x = 5;
-        
-        int y = 42;
-        
-        int width = 100;
-        
-        int height = 35;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 102;
-            if(i==1)
-            {
-                [button addTarget:self action:@selector(specialOfferButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            if(i==2)
-            {
-                [button addTarget:self action:@selector(myCartButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            button = nil;
-            
         }
-    }
-    
     
 }
 
@@ -522,68 +451,11 @@
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    
-    // NSString *strType = [NSString stringWithFormat:@"%@",[[assestsData.reviewDictionary objectAtIndex:indexPath.row]userComments]];
-    // NSLog(@"userComments :%@", strType);
-    //
-    // NSString* averageValue = [NSString stringWithFormat:@" Average customer review (%@)",[[assestsData.productReviewArray objectAtIndex:indexPath.row] averageCustomerReview]];
-    //
-    
-    
-    //[[cell commentsLabel] setText:[[assestsData.reviewDictionary objectAtIndex:indexPath.row]userComments]];
-    
-    //[[cell commentsLabel] setText: strType];
-    
-    [[cell disImage] setImage:[UIImage imageNamed:@"nav_arrow.png"]];
-    //
+       [[cell disImage] setImage:[UIImage imageNamed:@"nav_arrow.png"]];
     NSString* string = [NSString stringWithFormat:@"%@",[[assestsData.productReviewArray objectAtIndex:indexPath.row] productRatingView]];
-    //
-    // NSString* user = [[[assestsData.productReviewArray objectAtIndex:indexPath.row] userName]description];
-    //
-    // [[cell userNameLabel] setText:user];
-    //
-    // NSString* date = [NSString stringWithFormat:@"%@",[[assestsData.productReviewArray objectAtIndex:indexPath.row] commentedDate]];
-    //
-    // [[cell dateLabel] setText:date];
-    //
-    // NSInteger tagValue = (NSInteger)[[assestsData.productReviewArray objectAtIndex:indexPath.row] productDetailId];
-    // [submitReview setTag:tagValue];
-    
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+       if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
-        // float x = 20;
-        //
-        // float y = 5;
-        //
-        // float width = 25;
-        //
-        // float height = 25;
-        //
-        // NSMutableArray *imageFramesWhiteArray = [[NSMutableArray alloc]init];
-        // for(int i = 0; i<5;i++)
-        // {
-        // UIImageView *ratingsView = [[UIImageView alloc]init];
-        // ratingsView.frame = CGRectMake(x,y,width,height);
-        // [ratingsView setImage:[UIImage imageNamed:@"white_star.png"]];
-        // x = x + 25;
-        // [ratingsView setTag:i];
-        // [cell.contentView addSubview:ratingsView];
-        // [imageFramesWhiteArray addObject:ratingsView];
-        // }
-        //
-        // float xBlue = 20;
-        // NSMutableArray *imageFramesArray = [[NSMutableArray alloc]init];
-        // for(int i = 0; i<[string intValue];i++)
-        // {
-        // UIImageView *ratingsView = [[UIImageView alloc]init];
-        // ratingsView.frame = CGRectMake(xBlue,y,width,height);
-        // [ratingsView setImage:[UIImage imageNamed:@"blue_star.png"]];
-        // xBlue = xBlue + 25;
-        // [ratingsView setTag:i];
-        // [cell.contentView addSubview:ratingsView];
-        // [imageFramesArray addObject:ratingsView];
-        // }
-    }
+           }
     else {
         float x = 10;
         
@@ -681,42 +553,8 @@
         [self.view addSubview:reviewCommentsViewController.view];
         
         tempReviewCommentsViewController.ratingCount =[[NSString alloc] init];
-        
-        // [tempReviewCommentsViewController.dateLabel setText:[[assetsData.productReviewArray objectAtIndex:[indexPath row]]commentedDate]];
-        //
-        // [tempReviewCommentsViewController.commentsLabel setText:[[assetsData.productReviewArray objectAtIndex:[indexPath row]]userComments]];
-        //
-        // NSString* user = [[[assetsData.productReviewArray objectAtIndex:indexPath.row] userName]description];
-        // [tempReviewCommentsViewController.userNameLabel setText:user];
-        //
-        // NSString* string = [NSString stringWithFormat:@"%@",[[assetsData.productReviewArray objectAtIndex:indexPath.row] productRatingView]];
-        //
-        ///Star Rating
-        
-        float xBlue = 10;
-        
-        float y = 100;
-        
-        float width = 15;
-        
-        float height = 15;
-        
-        NSMutableArray *imageFramesArray = [[NSMutableArray alloc]init];
-        
-        // for(int i = 0; i<[string intValue];i++)
-        // {
-        // tempReviewCommentsViewController.ratingImage = [[UIImageView alloc]init];
-        // tempReviewCommentsViewController.ratingImage.frame = CGRectMake(xBlue,y,width,height);
-        // [tempReviewCommentsViewController.ratingImage setImage:[UIImage imageNamed:@"blue_star.png"]];
-        // xBlue = xBlue + 15;
-        // [tempReviewCommentsViewController.ratingImage setTag:i];
-        // [tempReviewCommentsViewController.view addSubview:tempReviewCommentsViewController.ratingImage];
-        // [imageFramesArray addObject:tempReviewCommentsViewController.ratingImage];
-        // }
-        //
-        // tempReviewCommentsViewController = nil;
-        
-    }
+       
+         }
 }
 
 -(void)submitReviewButtonSelected:(id)sender
@@ -802,109 +640,6 @@
         }
         
     }
-    
-}
-
-
--(void)specialOfferButtonPressed:(id)sender
-{
-    NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_highlighted.png"], [UIImage imageNamed:@"mycart_btn_normal.png"],
-                                   nil];
-    
-    
-    int x = 5;
-    
-    int y = 42;
-    
-    int width = 100;
-    
-    int height = 35;
-    
-    for(int i = 0; i<[buttonArray count]; i++)
-    {
-        UIButton *button = [[UIButton alloc] init];
-        
-        [button setFrame:CGRectMake(x, y, width, height)];
-        
-        [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-        
-        [self.view addSubview:button];
-        
-        x = x + 102;
-        
-        button = nil;
-        
-        
-    }
-    
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    assetsData.productReviewArray =[[NSMutableArray alloc] init];
-    
-    ServiceHandler *serviceHandler = [[ServiceHandler alloc] init];
-    
-    [serviceHandler specialProductsService:self :@selector(finishedSpecialProductsService:)];
-    
-    serviceHandler = nil;
-    
-}
-
-
--(void) finishedSpecialProductsService:(id) data
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    
-    [assetsData updateSpecialproductsModel:data];
-    
-    
-    SpecialOffersViewController *tempSpecialOffersViewController = [[SpecialOffersViewController alloc] initWithNibName:@"SpecialOffersViewController" bundle:nil];
-    
-    self.specialOffersViewController = tempSpecialOffersViewController;
-    
-    [self.view addSubview:specialOffersViewController.view];
-    
-    tempSpecialOffersViewController = nil;
-}
-
-- (void) myCartButtonPressed:(id)sender
-{
-    NSMutableArray *buttonArrayForMycart = [[NSMutableArray alloc] initWithObjects:
-                                            [UIImage imageNamed:@"browse_btn_normal.png"],[UIImage imageNamed:@"offers_btn_normal.png"],
-                                            [UIImage imageNamed:@"mycart_btn_highlighted.png"],nil];
-    int x = 5;
-    
-    int y = 42;
-    
-    int width = 100;
-    
-    int height = 35;
-    
-    for(int i = 0; i<[buttonArrayForMycart count]; i++)
-    {
-        UIButton *button = [[UIButton alloc] init];
-        
-        [button setFrame:CGRectMake(x, y, width, height)];
-        
-        [button setBackgroundImage:[buttonArrayForMycart objectAtIndex:i] forState:UIControlStateNormal];
-        
-        [self.view addSubview:button];
-        
-        x = x + 102;
-        
-        button = nil;
-        
-    }
-    
-    
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    assetsData.productReviewArray = [[NSMutableArray alloc] init];
-    
-    AddToBagViewController *tempResultViewController = [[AddToBagViewController alloc] initWithNibName:@"AddToBagViewController" bundle:nil];
-    
-    self.addToBagViewController = tempResultViewController;
-    
-    [self.view addSubview:addToBagViewController.view];
-    
-    tempResultViewController = nil;
     
 }
 

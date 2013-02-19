@@ -144,41 +144,9 @@
         
         bgView =nil;
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 , SCREENWIDTH, 90)];
         
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        searchBarView =nil;
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_highlighted-72.png"], [UIImage imageNamed:@"specialoffers_btn_normal-72.png"], [UIImage imageNamed:@"mycart_btn_normal-72.png"], 
-                                       nil];
-        
-        int x  = 8;
-        
-        int y = 83;
-        
-        int width = 250;
-        
-        int height = 55;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 252;
-            
-            button =nil;
-            
-        }
-    }
+         }
+    
     else {
         
         UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, SCREENWIDTH, 375)];
@@ -187,52 +155,8 @@
         
         [self.view addSubview:bgView];
         
-        bgView =nil;
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , SCREENWIDTH, 40)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        searchBarView =nil;
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_highlighted.png"], [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_normal.png"], 
-                                       nil];
-        
-        int x  = 5;
-        
-        int y = 42;
-        
-        int width = 100;
-        
-        int height = 35;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 102;
-            
-            if(i==1) {
-                [button addTarget:self action:@selector(specialOfferButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            if(i==2)
-            {
-                [button addTarget:self action:@selector(myCartButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            button =nil;
-            
-        }
-    }
-	
-	
+        bgView = nil;
+       }
 }
 
 
@@ -247,17 +171,16 @@
 {
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
-		resultTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 152, 768, 800)];
+		resultTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 80, 768, 855)];
 	}
     else {
         
-        resultTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 81, 320, 330)];
+        resultTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 43, 320, 370)];
     }
 	
 	resultTable.dataSource = self;
 	resultTable.delegate = self;
 	resultTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0]; 
-    //resultTable.separatorColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"split_line.png"]];
     
     AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
     
@@ -298,53 +221,8 @@
     
 }
 
-#pragma mark navigation button Actions
 
 
--(void)specialOfferButtonSelected :(id)sender 
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    assetsData.specialProductsArray = [[NSMutableArray alloc]init];
-    assetsData.productDetailArray = [[NSMutableArray alloc]init];
-    ServiceHandler *serviceHandler = [[ServiceHandler alloc] init];
-    
-    [serviceHandler specialProductsService:self :@selector(finishedSpecialProductsService:)];
-    
-    serviceHandler =nil;
-    
-    
-    
-    
-}
-
-
--(void) finishedSpecialProductsService:(id) data
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    
-    [assetsData updateSpecialproductsModel:data];
-    
-    
-    SpecialOffersViewController *tempSpecialOffersViewController = [[SpecialOffersViewController alloc] initWithNibName:@"SpecialOffersViewController" bundle:nil];
-    
-    self.specialOffersViewController = tempSpecialOffersViewController;
-    
-    [self.view addSubview:specialOffersViewController.view];
-    
-    tempSpecialOffersViewController = nil;
-}
-
-- (void) myCartButtonSelected:(id)sender
-{
-    
-    AddToBagViewController *tempResultViewController = [[AddToBagViewController alloc] initWithNibName:@"AddToBagViewController" bundle:nil];
-	
-	self.addToBagViewController = tempResultViewController;
-    
-	[self.view addSubview:addToBagViewController.view];
-    
-	tempResultViewController = nil;
-}
 
 #pragma mark TableView Delegates
 
@@ -363,6 +241,7 @@
         
         return [assestsDataOne.productArray count];
     }
+
 }
 
 
@@ -387,7 +266,6 @@
     if ((cell == nil) ||(cell != nil)) {
         cell = [[ProductResultViewCell alloc]
                 initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
         cell.textLabel.numberOfLines = 2;
         
         [[cell reviewsButton] addTarget:self
@@ -401,7 +279,6 @@
     
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //cell.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
     
     
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -663,8 +540,6 @@
     
     service.strId = [[assetsData.productArray objectAtIndex:rowOfButton] productDetailId];
     [service productReviewService:self :@selector(finishedProductReviewService:)];
-    
-    //service=nil;
     
 }
 

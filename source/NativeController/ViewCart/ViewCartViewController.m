@@ -111,69 +111,20 @@
         
         [self.view addSubview:bgView];
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0,80 , SCREENWIDTH, 60)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal-72.png"], [UIImage imageNamed:@"specialoffers_btn_normal-72.png"], [UIImage imageNamed:@"mycart_btn_highlighted-72.png"],
-                                       nil];
-        
-        int x  = 8;
-        
-        int y = 82;
-        
-        int width = 250;
-        
-        int height = 55;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 252;
-            
-            if(i==0) {
-                [button addTarget:self action:@selector(browseButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            if(i==1)
-            {
-                [button addTarget:self action:@selector(specialOfferButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            //   [button release];
-            
-        }
-        
-        UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(300,161,250,45)];
-        [titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:28]];
+        UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(300,100,250,45)];
+        [titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:24]];
         titleLabel.backgroundColor = [UIColor clearColor];
         [titleLabel setTextColor:[UIColor whiteColor]];
         [titleLabel setText:@"View My Cart"];
         [self.view addSubview:titleLabel];
         
-        
         int purchase=0;
-        
         AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-        
         for (int i=0; i<[assetsData.arrayAddtoCart count]; i++) {
             
             NSString *cartPrice=[[assetsData.arrayAddtoCart objectAtIndex:i]objectForKey:@"ListPrice"];
             NSString *cartCount=[[assetsData.arrayAddtoCart objectAtIndex:i]objectForKey:@"Count"];
-            
-            
             purchase = purchase + ([cartPrice intValue] * [cartCount intValue]);
-            
             
         }
         
@@ -209,55 +160,14 @@
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg.png"]];
         
         [self.view addSubview:bgView];
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , SCREENWIDTH, 40)];
+               
         
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_highlighted.png"],
-                                       nil];
-        
-        int x  = 5;
-        
-        int y = 42;
-        
-        int width = 100;
-        
-        int height = 35;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 102;
-            
-            if(i==0) {
-                [button addTarget:self action:@selector(browseButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            if(i==1)
-            {
-                [button addTarget:self action:@selector(specialOfferButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            
-        }
-        
-        UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(100,80,320,25)];
-        [titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:14]];
+        UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(100,55,320,25)];
+        [titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:12]];
         titleLabel.backgroundColor = [UIColor clearColor];
         [titleLabel setTextColor:[UIColor whiteColor]];
         [titleLabel setText:@"View My Cart"];
         [self.view addSubview:titleLabel];
-        
         
         int purchase=0;
         
@@ -267,8 +177,6 @@
             
             NSString *cartPrice=[[assetsData.arrayAddtoCart objectAtIndex:i]objectForKey:@"ListPrice"];
             NSString *cartCount=[[assetsData.arrayAddtoCart objectAtIndex:i]objectForKey:@"Count"];
-            
-            
             purchase = purchase + ([cartPrice intValue] * [cartCount intValue]);
             
         }
@@ -299,65 +207,8 @@
         [self.view addSubview:checkout];
         
     }
-	
-    
 }
 
-
-#pragma mark Button Actions
-
-- (void) browseButtonSelected:(id)sender
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    assetsData.productArray = [[NSMutableArray alloc]init];
-    assetsData.productDetailArray = [[NSMutableArray alloc]init];
-    ServiceHandler *serviceHandler = [[ServiceHandler alloc] init];
-    
-    [serviceHandler catalogService:self :@selector(finishedCatalogService:)];
-    
-    
-    
-}
-
--(void) finishedCatalogService:(id) data
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    
-    [assetsData updateCatalogModel:data];
-    
-    BrowseViewController	*tempBrowseViewController = [[BrowseViewController alloc] initWithNibName:@"BrowseViewController" bundle:nil];
-    
-    self.browseViewController = tempBrowseViewController;
-    
-    [self.view addSubview:browseViewController.view];
-    
-}
-
-- (void) specialOfferButtonSelected:(id)sender
-{
-    
-    ServiceHandler *serviceHandler = [[ServiceHandler alloc] init];
-    
-    [serviceHandler specialProductsService:self :@selector(finishedSpecialProductsService:)];
-    
-    
-    
-}
--(void) finishedSpecialProductsService:(id) data
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    
-    [assetsData updateSpecialproductsModel:data];
-    
-    
-    SpecialOffersViewController *tempSpecialOffersViewController = [[SpecialOffersViewController alloc] initWithNibName:@"SpecialOffersViewController" bundle:nil];
-    
-    self.specialOffersViewController = tempSpecialOffersViewController;
-    
-    [self.view addSubview:specialOffersViewController.view];
-    
-    tempSpecialOffersViewController = nil;
-}
 
 
 -(void)viewWillAppear:(BOOL)animated
@@ -372,7 +223,6 @@
         CheckOutViewController  *checkViewCartController = [[CheckOutViewController alloc] initWithNibName:@"CheckOutViewController-iPad" bundle:nil];
         checkViewCartController.checkTotalPrice =[NSString stringWithFormat:@"%@",cartPurchaseTotal];
         self.checkCartController = checkViewCartController;
-        
         [self.view addSubview:checkCartController.view];
         
         checkViewCartController =nil;
@@ -382,7 +232,6 @@
         CheckOutViewController  *checkViewCartController = [[CheckOutViewController alloc] initWithNibName:@"CheckOutViewController" bundle:nil];
         checkViewCartController.checkTotalPrice =[NSString stringWithFormat:@"%@",cartPurchaseTotal];
         self.checkCartController = checkViewCartController;
-        
         [self.view addSubview:checkCartController.view];
         
         checkViewCartController =nil;
@@ -412,7 +261,7 @@
         else {
             iPadHeightTable = 380;
         }
-        viewCartTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 220, 768, iPadHeightTable) style:UITableViewStyleGrouped];
+        viewCartTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 180, 768, iPadHeightTable) style:UITableViewStyleGrouped];
         viewCartTable.dataSource = self;
         viewCartTable.delegate = self;
         viewCartTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0];
@@ -427,7 +276,7 @@
         else {
             heightTable = 190;
         }
-        viewCartTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 105, 320, heightTable) style:UITableViewStyleGrouped];
+        viewCartTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 80, 320, heightTable) style:UITableViewStyleGrouped];
         viewCartTable.dataSource = self;
         viewCartTable.delegate = self;
         viewCartTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0];
@@ -514,13 +363,6 @@
         if(indexPath.row == 2) {
             
             NSString *strPrice=[[assetsData.arrayAddtoCart objectAtIndex:indexPath.section]objectForKey:@"ListPrice"];
-            //            NSString *strCount=[[assetsData.arrayAddtoCart objectAtIndex:indexPath.section]objectForKey:@"Count"];
-            //            int total = [strPrice intValue];
-            //            int sum =  [strCount intValue];
-            //            int subtotal;
-            //
-            //            subtotal = (sum * total);
-            
             Price.text = [NSString stringWithFormat:@" $%@",strPrice];
             [cell.contentView addSubview:Price];
             [cell.contentView addSubview:PriceLabel];
@@ -571,13 +413,6 @@
         if(indexPath.row == 2) {
             
             NSString *strPrice=[[assetsData.arrayAddtoCart objectAtIndex:indexPath.section]objectForKey:@"ListPrice"];
-            //NSString *strCount=[[assetsData.arrayAddtoCart objectAtIndex:indexPath.section]objectForKey:@"Count"];
-            //int total = [strPrice intValue];
-            //int sum =  [strCount intValue];
-            //int subtotal;
-            
-            //subtotal = (sum * total);
-            
             Price.text = [NSString stringWithFormat:@" $%@",strPrice];
             [cell.contentView addSubview:Price];
             [cell.contentView addSubview:PriceLabel];

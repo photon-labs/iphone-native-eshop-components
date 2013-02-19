@@ -197,7 +197,6 @@
         
         [scrollView addSubview:productBgView];
         
-       // [productBgView release];
         
         AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
         
@@ -208,8 +207,6 @@
         productImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
         
         [scrollView addSubview:productImageView];
-        
-     //   [productImageView release];
         
         
         int x = productImageView.frame.origin.x + productImageView.frame.size.width + 125;
@@ -254,10 +251,7 @@
         [scrollView addSubview:reviewButton];
         
         [reviewButton addTarget:self action:@selector(reviewButtonSelected:) forControlEvents:UIControlEventTouchUpInside];;
-        
-      //  [reviewButton release];
-        
-        //add price label and price
+    
         UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(productImageView.frame.origin.x + productImageView.frame.size.width + 125, productImageView.frame.origin.y + 60, 140, 60)];
         
         [priceLabel setText:@"Price:"];
@@ -270,10 +264,7 @@
         
         [scrollView addSubview:priceLabel];
         
-     //   [priceLabel release];
-        
-        //add price to the scroll view
-        
+           
         UILabel *price = [[UILabel alloc] initWithFrame:CGRectMake(priceLabel.frame.origin.x + priceLabel.frame.size.width, priceLabel.frame.origin.y, 
                                                                    180, priceLabel.frame.size.height)];
         price.text = [NSString stringWithFormat:@"$%@",[[assetsData.productDetailArray objectAtIndex:0] productDetailsPrice]];
@@ -285,11 +276,7 @@
         price.backgroundColor = kColorClear;
         
         [scrollView addSubview:price];
-        
-     //   [price release];
-        
-        //add addtocart button to scroll view
-        
+           
         UIButton *addToCart = [[UIButton alloc] initWithFrame:CGRectMake(360, 265, 290, 100)];
         
         [addToCart setImage:[UIImage imageNamed:@"addtocart_btn-72.png"] forState:UIControlStateNormal];
@@ -298,7 +285,7 @@
         
         [self.scrollView addSubview:addToCart];
         
-     //   [addToCart release];
+     
     }
     else {
         
@@ -308,7 +295,6 @@
         
         [scrollView addSubview:productBgView];
         
-      //  [productBgView release];
         
         AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
         
@@ -319,11 +305,6 @@
         productImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
         
         [scrollView addSubview:productImageView];
-        
-      //  [productImageView release];
-        
-        //add ratings to the view
-        //Note: This logic has to be changed when integrating with the services
         
         int x = productImageView.frame.origin.x + productImageView.frame.size.width + 25;
         
@@ -369,9 +350,7 @@
         
         [reviewButton addTarget:self action:@selector(reviewButtonSelected:) forControlEvents:UIControlEventTouchUpInside]; 
         
-      //  [reviewButton release];
-        
-        //add price label and price
+ 
         UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(productImageView.frame.origin.x + productImageView.frame.size.width + 25, productImageView.frame.origin.y + 25, 70, 40)];
         
         [priceLabel setText:@"Price:"];
@@ -384,10 +363,7 @@
         
         [scrollView addSubview:priceLabel];
         
-      //  [priceLabel release];
-        
-        //add price to the scroll view
-        
+            
         UILabel *price = [[UILabel alloc] initWithFrame:CGRectMake(priceLabel.frame.origin.x + priceLabel.frame.size.width, priceLabel.frame.origin.y, 
                                                                    70, priceLabel.frame.size.height)];
         price.text = [NSString stringWithFormat:@"$%@",[[assetsData.productDetailArray objectAtIndex:0] productDetailsPrice]];
@@ -400,9 +376,6 @@
         
         [scrollView addSubview:price];
         
-      //  [price release];
-        
-        //add addtocart button to scroll view
         
         UIButton *addToCart = [[UIButton alloc] initWithFrame:CGRectMake(priceLabel.frame.origin.x, priceLabel.frame.origin.y + priceLabel.frame.size.height,
                                                                          priceLabel.frame.size.width + price.frame.size.width, priceLabel.frame.size.height)];
@@ -415,7 +388,7 @@
         
         [self.scrollView addSubview:addToCart];
         
-       // [addToCart release];
+       
     }
 }
 

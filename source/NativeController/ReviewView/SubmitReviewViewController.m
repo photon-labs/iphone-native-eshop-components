@@ -116,51 +116,6 @@
         [self.view addSubview:bgView];
         
         bgView = nil;
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 , SCREENWIDTH, 60)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        searchBarView = nil;
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_highlighted.png"], [UIImage imageNamed:@"offers_btn_normal.png"],
-                                       [UIImage imageNamed:@"mycart_btn_normal.png"],
-                                       nil];
-        
-        int x  = 8;
-        
-        int y = 83;
-        
-        int width = 250;
-        
-        int height = 55;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 252;
-            
-            if(i==1)
-            {
-                [button addTarget:self action:@selector(specialOfferButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            if(i==2)
-            {
-                [button addTarget:self action:@selector(myCartButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            button = nil;
-            
-        }
-        
         submitButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         submitButton.frame = CGRectMake(300, 800, 160, 50);
         [submitButton setBackgroundImage:[UIImage imageNamed:@"submitreview_btn.png"] forState:UIControlStateNormal];
@@ -175,50 +130,6 @@
         [self.view addSubview:bgView];
         
         bgView = nil;
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , SCREENWIDTH, 40)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        searchBarView = nil;
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_highlighted.png"], [UIImage imageNamed:@"offers_btn_normal.png"],
-                                       [UIImage imageNamed:@"mycart_btn_normal.png"],
-                                       nil];
-        
-        int x  = 5;
-        
-        int y = 42;
-        
-        int width = 100;
-        
-        int height = 35;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 102;
-            
-            if(i==1)
-            {
-                [button addTarget:self action:@selector(specialOfferButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            if(i==2)
-            {
-                [button addTarget:self action:@selector(myCartButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            button = nil;
-            
-        }
         
         submitButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         submitButton.frame = CGRectMake(130, 300, 70, 25);
@@ -485,76 +396,6 @@
     AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
     
     [assetsData updateProductReviewModel:data];
-    
-}
--(void)specialOfferButtonPressed:(id)sender
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    assetsData.specialProductsArray = [[NSMutableArray alloc]init];
-    assetsData.productDetailArray = [[NSMutableArray alloc]init];
-    ServiceHandler *serviceHandler = [[ServiceHandler alloc] init];
-    
-    [serviceHandler specialProductsService:self :@selector(finishedSpecialProductsService:)];
-    
-    serviceHandler = nil;
-    
-}
-
-
--(void) finishedSpecialProductsService:(id) data
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    
-    [assetsData updateSpecialproductsModel:data];
-    
-    
-    SpecialOffersViewController *tempSpecialOffersViewController = [[SpecialOffersViewController alloc] initWithNibName:@"SpecialOffersViewController" bundle:nil];
-    
-    self.specialOffersViewController = tempSpecialOffersViewController;
-    
-    [self.view addSubview:specialOffersViewController.view];
-    
-    tempSpecialOffersViewController = nil;
-}
-
-
-- (void) myCartButtonPressed:(id)sender
-{
-    NSMutableArray *buttonArrayForMycart = [[NSMutableArray alloc] initWithObjects:
-                                            [UIImage imageNamed:@"browse_btn_normal.png"],                                        [UIImage imageNamed:@"offers_btn_normal.png"],
-                                            [UIImage imageNamed:@"mycart_btn_highlighted.png"],nil];
-    int x  = 5;
-	
-	int y = 42;
-	
-	int width = 100;
-	
-	int height = 35;
-	
-	for(int i = 0; i<[buttonArrayForMycart count]; i++)
-	{
-		UIButton *button = [[UIButton alloc] init];
-		
-		[button setFrame:CGRectMake(x, y, width, height)];
-		
-		[button setBackgroundImage:[buttonArrayForMycart objectAtIndex:i] forState:UIControlStateNormal];
-		
-		[self.view addSubview:button];
-		
-		x = x + 102;
-        
-       	//button = nil;
-		
-	}
-    
-    AddToBagViewController *tempResultViewController = [[AddToBagViewController alloc] initWithNibName:@"AddToBagViewController" bundle:nil];
-	
-	self.addToBagViewController = tempResultViewController;
-    
-	[self.view addSubview:addToBagViewController.view];
-    
-	tempResultViewController = nil;
-    
     
 }
 

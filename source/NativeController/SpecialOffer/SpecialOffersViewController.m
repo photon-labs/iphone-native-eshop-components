@@ -147,48 +147,8 @@
         
         bgView = nil;
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 , SCREENWIDTH, 60)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        searchBarView = nil;
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_highlighted.png"], [UIImage imageNamed:@"mycart_btn_normal.png"],
-                                       nil];
-        
-        int x  = 8;
-        
-        int y = 83;
-        
-        int width = 250;
-        
-        int height = 55;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 252;
-            if(i==0) {
-                [button addTarget:self action:@selector(browseButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            if(i==2)
-            {
-                [button addTarget:self action:@selector(myCartButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            button = nil;
-            
-        }
-    }
+               
+           }
     else {
         
         UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, SCREENWIDTH, 375)];
@@ -207,40 +167,7 @@
         
         searchBarView = nil;
         
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_highlighted.png"], [UIImage imageNamed:@"mycart_btn_normal.png"],
-                                       nil];
-        
-        int x  = 5;
-        
-        int y = 42;
-        
-        int width = 100;
-        
-        int height = 35;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 102;
-            if(i==0) {
-                [button addTarget:self action:@selector(browseButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
             }
-            if(i==2)
-            {
-                [button addTarget:self action:@selector(myCartButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            button = nil;
-            
-        }
-    }
 	
 	
 }
@@ -255,11 +182,11 @@
 {
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
-		specialProductTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 151, 768, 785)];
+		specialProductTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 85, 768, 845)];
 	}
     else {
         
-        specialProductTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 81, 320, 330)];
+        specialProductTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, 320, 360)];
     }
 	
 	specialProductTable.dataSource = self;
@@ -574,54 +501,6 @@
     }
     
 }
-
-#pragma mark navigation button Actions
-- (void) browseButtonSelected:(id)sender
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    assetsData.productArray = [[NSMutableArray alloc]init];
-    assetsData.productDetailArray = [[NSMutableArray alloc]init];
-    assetsData.catalogArray = [[NSMutableArray alloc]init];
-    assetsData.productReviewArray = [[NSMutableArray alloc] init];
-    
-    
-    ServiceHandler *serviceHandler = [[ServiceHandler alloc] init];
-    
-    [serviceHandler catalogService:self :@selector(finishedCatalogService:)];
-    
-    serviceHandler = nil;
-    
-}
-
--(void) finishedCatalogService:(id) data
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    
-    [assetsData updateCatalogModel:data];
-    
-    BrowseViewController	*tempBrowseViewController = [[BrowseViewController alloc] initWithNibName:@"BrowseViewController" bundle:nil];
-    
-    self.browseViewController = tempBrowseViewController;
-    
-    [self.view addSubview:browseViewController.view];
-    
-    tempBrowseViewController = nil;
-}
-
-
-- (void) myCartButtonSelected:(id)sender
-{
-    
-    AddToBagViewController *tempResultViewController = [[AddToBagViewController alloc] initWithNibName:@"AddToBagViewController" bundle:nil];
-	
-	self.addToBagViewController = tempResultViewController;
-    
-	[self.view addSubview:addToBagViewController.view];
-    
-	tempResultViewController = nil;
-}
-
-
 
 -(void)viewWillAppear:(BOOL)animated
 {

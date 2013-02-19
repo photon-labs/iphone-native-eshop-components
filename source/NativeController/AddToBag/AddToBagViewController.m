@@ -125,56 +125,13 @@
         
         bgView = nil;
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 , SCREENWIDTH, 60)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        searchBarView = nil;
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal-72.png"], [UIImage imageNamed:@"specialoffers_btn_normal-72.png"], [UIImage imageNamed:@"mycart_btn_highlighted-72.png"],
-                                       nil];
-        
-        int x  = 8;
-        
-        int y = 83;
-        
-        int width = 250;
-        
-        int height = 55;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 252;
-            if(i==0) {
-                [button addTarget:self action:@selector(browseButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            if(i==1)
-            {
-                [button addTarget:self action:@selector(specialOfferButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            button = nil;
-            
-        }
-        
         AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
         
         if ([assetsData.arrayAddtoCart count] == 0) {
         }
         else{
             
-            myCartView = [[UILabel alloc] initWithFrame:CGRectMake(320, 151 , 140, 40)];
+            myCartView = [[UILabel alloc] initWithFrame:CGRectMake(320, 100 , 140, 40)];
             
             [myCartView setFont:[UIFont fontWithName:@"Helvetica" size:24]];
             myCartView.backgroundColor = [UIColor clearColor];
@@ -264,58 +221,14 @@
         
         bgView = nil;
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , SCREENWIDTH, 40)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        searchBarView = nil;
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_highlighted.png"],
-                                       nil];
-        
-        int x  = 5;
-        
-        int y = 42;
-        
-        int width = 100;
-        
-        int height = 35;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 102;
-            if(i==0) {
-                button.accessibilityLabel=@"NavigationBrowse";
-                [button addTarget:self action:@selector(browseButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            if(i==1)
-            {
-                button.accessibilityLabel=@"NavigationOffer";
-                [button addTarget:self action:@selector(specialOfferButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            button = nil;;
-            
-        }
-        
+                    
         AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
         
         if ([assetsData.arrayAddtoCart count] == 0) {
         }
         else{
             
-            myCartView = [[UILabel alloc] initWithFrame:CGRectMake(120, 80 , 80, 20)];
+            myCartView = [[UILabel alloc] initWithFrame:CGRectMake(120, 50 , 80, 20)];
             
             [myCartView setFont:[UIFont fontWithName:@"Helvetica" size:12]];
             myCartView.backgroundColor = [UIColor clearColor];
@@ -352,7 +265,6 @@
         }
         
         
-        
         UIImageView    *subTotalView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 296, 320, 40)];
         
         [subTotalView setImage:[UIImage imageNamed:@"subtotal_bg.png"]];
@@ -361,8 +273,6 @@
         
         subTotalView = nil;
         
-        int price;
-        
         purchase=0;
         
         for (int i=0; i<[assetsData.arrayAddtoCart count]; i++) {
@@ -370,11 +280,7 @@
             NSString *cartPrice=[[assetsData.arrayAddtoCart objectAtIndex:i]objectForKey:@"ListPrice"];
             cartCount=[[assetsData.arrayAddtoCart objectAtIndex:i]objectForKey:@"Count"];
             [inputTexts addObject:cartCount];
-            
-            //price = [cartPrice intValue];
-            
             theInteger = [cartCount intValue];
-            
             purchase = purchase + ([cartPrice intValue] * theInteger);
             
         }
@@ -409,7 +315,6 @@
             lblNoCart.text = @"No items in your cart";
             lblNoCart.backgroundColor = [UIColor clearColor];
             lblNoCart.textColor = [UIColor whiteColor];
-            lblNoCart.textAlignment = UITextAlignmentCenter;
             [self.view addSubview:lblNoCart];
         }
         else {
@@ -417,7 +322,6 @@
             lblNoCart.text = @"No items in your cart";
             lblNoCart.backgroundColor = [UIColor clearColor];
             lblNoCart.textColor = [UIColor whiteColor];
-            lblNoCart.textAlignment = UITextAlignmentCenter;
             [self.view addSubview:lblNoCart];
         }
     }
@@ -447,10 +351,10 @@
         
         if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
         {
-            addToBagTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 205, 768, iPadHeightTable) style:UITableViewStylePlain];
+            addToBagTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 180, 768, iPadHeightTable) style:UITableViewStylePlain];
         }
         else {
-            addToBagTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 105, 320, heightTable) style:UITableViewStylePlain];
+            addToBagTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 80, 320, heightTable) style:UITableViewStylePlain];
         }
         
         addToBagTable.dataSource = self;
@@ -468,7 +372,6 @@
         for(int i = 0;i<[assetsData.productDetailArray count]; i++)
         {
             NSLog(@"productImageArray :%@", productImageArray);
-            //[productImageArray addObject:[[assetsData.productDetailArray objectAtIndex:i] productDetailImageUrl]];
             
         }
     }
@@ -519,57 +422,6 @@
 
 
 #pragma mark Button Actions
-
-- (void) browseButtonSelected:(id)sender
-{
-    
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    [assetsData.productArray removeAllObjects];
-    [assetsData.productDetailArray removeAllObjects];
-    [assetsData.catalogArray removeAllObjects];
-    
-    [serviceHandler catalogService:self :@selector(finishedCatalogService:)];
-}
-
--(void) finishedCatalogService:(id) data
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    
-    [assetsData updateCatalogModel:data];
-    
-    BrowseViewController	*tempBrowseViewController = [[BrowseViewController alloc] initWithNibName:@"BrowseViewController" bundle:nil];
-    
-    self.browseViewController = tempBrowseViewController;
-    
-    [self.view addSubview:browseViewController.view];
-    
-    tempBrowseViewController = nil;
-}
-
-- (void) specialOfferButtonSelected:(id)sender
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    [assetsData.specialProductsArray removeAllObjects];
-    [assetsData.productDetailArray removeAllObjects];
-    [serviceHandler specialProductsService:self :@selector(finishedSpecialProductsService:)];
-    
-}
-
--(void) finishedSpecialProductsService:(id) data
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    
-    [assetsData updateSpecialproductsModel:data];
-    
-    
-    SpecialOffersViewController *tempSpecialOffersViewController = [[SpecialOffersViewController alloc] initWithNibName:@"SpecialOffersViewController" bundle:nil];
-    
-    self.specialOffersViewController = tempSpecialOffersViewController;
-    
-    [self.view addSubview:specialOffersViewController.view];
-    
-    tempSpecialOffersViewController = nil;
-}
 
 -(void)updateAction:(id)sender
 {

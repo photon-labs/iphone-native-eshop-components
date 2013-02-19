@@ -41,6 +41,10 @@
 #define iPadcategoryNameWidth 300
 #define iPadProductNameHeight 100
 #define iPadProductNameWidth 400
+#define iPhoneProductCountWidth 40
+#define iPhoneProductCountHeight 30
+#define iPadProductCountWidth 50
+#define iPadProductCountHeight 40
 
 @interface BrowseViewController ()
 
@@ -69,7 +73,7 @@
 		self = [super initWithNibName:@"BrowseViewController-iPad" bundle:nil];
 		
 	}
-	else 
+	else
     {
         self = [super initWithNibName:@"BrowseViewController" bundle:nil];
         
@@ -121,7 +125,7 @@
     navBar.navigationDelegate = self;
     [navBar loadNavbar:YES:NO];
     [self.view addSubview:navBar];
-
+    
 	[self loadOtherViews];
 	
 	[self addSearchBar];
@@ -139,50 +143,6 @@
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg-72.png"]];
         
         [self.view addSubview:bgView];
-                
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 , SCREENWIDTH, 90)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_highlighted-72.png"], [UIImage imageNamed:@"specialoffers_btn_normal-72.png"], [UIImage imageNamed:@"mycart_btn_normal-72.png"], 
-                                       nil];
-        
-        
-        int x  = 8;
-        
-        int y = 83;
-        
-        int width = 250;
-        
-        int height = 55;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 252;
-            
-            if(i==0) {
-                [button addTarget:self action:@selector(browseButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            if(i==1) {
-                [button addTarget:self action:@selector(specialOfferButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            if(i==2)
-            {
-                [button addTarget:self action:@selector(myCartButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-        }
         
     }
     else {
@@ -193,50 +153,6 @@
         
         [self.view addSubview:bgView];
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , SCREENWIDTH, 40)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_highlighted.png"], [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_normal.png"], 
-                                       nil];
-        
-        
-        int x  = 5;
-        
-        int y = 42;
-        
-        int width = 100;
-        
-        int height = 35;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 102;
-            
-            if(i==0) {
-                [button addTarget:self action:@selector(browseButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            if(i==1) {
-                [button addTarget:self action:@selector(specialOfferButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            if(i==2)
-            {
-                [button addTarget:self action:@selector(myCartButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-        }
     }
 	
 }
@@ -245,89 +161,73 @@
 {
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 140 , SCREENWIDTH, 100)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 , SCREENWIDTH, 100)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
         
         [self.view addSubview:searchBarView];
         
-        UIImageView *searchText = [[UIImageView alloc] initWithFrame:CGRectMake(15, 162 , 680, 60)];
+        UIImageView *searchText = [[UIImageView alloc] initWithFrame:CGRectMake(15, 20 , 680, 60)];
         
         [searchText setImage:[UIImage imageNamed:@"searchbox.png"]];
         
-        [self.view addSubview:searchText];
+        [searchBarView addSubview:searchText];
         
-        txtBar = [[UITextField alloc]initWithFrame:CGRectMake(35, 168, 665, 56)];
+        txtBar = [[UITextField alloc]initWithFrame:CGRectMake(35, 20, 665, 60)];
         txtBar.delegate = self;
         txtBar.backgroundColor = [UIColor clearColor];
         txtBar.textColor = [UIColor blackColor];
-        [self.view addSubview:txtBar];
+        [searchBarView addSubview:txtBar];
         
-        btnSearchIcon = [[UIButton alloc]initWithFrame:CGRectMake(705, 163, 60, 60)];
+        btnSearchIcon = [[UIButton alloc]initWithFrame:CGRectMake(705, 20, 60, 60)];
         [btnSearchIcon setBackgroundImage:[UIImage imageNamed:@"searchbox_icon.png"] forState:UIControlStateNormal];
         [btnSearchIcon addTarget:self action:@selector(searchButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btnSearchIcon];
+        [searchBarView addSubview:btnSearchIcon];
         
-//        [searchBarView release];
-        
-        UIImageView *descriptionBlock = [[UIImageView alloc] initWithFrame:CGRectMake(0, 290, 768, 60)];
-        
+        UIImageView *descriptionBlock = [[UIImageView alloc] initWithFrame:CGRectMake(0, searchBarView.frame.origin.y + searchBarView.frame.size.height + 20, 768, 60)];
         [descriptionBlock setImage:[UIImage imageNamed:@"categorylist_top_row.png"]];
-        
         [self.view addSubview:descriptionBlock];
         
-//        [descriptionBlock release];
         
-        UIImageView	*descriptionHeader = [[UIImageView alloc] initWithFrame:CGRectMake(200, 270, 320, 60)];
-        
+        UIImageView	*descriptionHeader = [[UIImageView alloc] initWithFrame:CGRectMake(200, descriptionBlock.frame.origin.y - 20, 320, 60)];
         [descriptionHeader setImage:[UIImage imageNamed:@"categorylist_header-72.png"]];
-        
         [self.view addSubview:descriptionHeader];
         
-//        [descriptionHeader release];
     }
     else {
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 81 , 320, 40)];
+        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , 320, 40)];
         
         [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
         
         [self.view addSubview:searchBarView];
         
-        UIImageView *searchText = [[UIImageView alloc] initWithFrame:CGRectMake(8, 84 , 275, 30)];
+        UIImageView *searchText = [[UIImageView alloc] initWithFrame:CGRectMake(8, 5 , 275, 30)];
         
         [searchText setImage:[UIImage imageNamed:@"searchbox.png"]];
         
-        [self.view addSubview:searchText];
+        [searchBarView addSubview:searchText];
         
-        txtBar = [[UITextField alloc]initWithFrame:CGRectMake(25, 86, 245, 24)];
+        txtBar = [[UITextField alloc]initWithFrame:CGRectMake(25, 0, 245, 24)];
         txtBar.delegate = self;
         txtBar.backgroundColor = [UIColor clearColor];
         txtBar.textColor = [UIColor blackColor];
-        [self.view addSubview:txtBar];
+        [searchBarView addSubview:txtBar];
         
-        btnSearchIcon = [[UIButton alloc]initWithFrame:CGRectMake(285, 84, 30, 32)];
+        btnSearchIcon = [[UIButton alloc]initWithFrame:CGRectMake(285, 5, 30, 30)];
         [btnSearchIcon setBackgroundImage:[UIImage imageNamed:@"searchbox_icon.png"] forState:UIControlStateNormal];
         [btnSearchIcon addTarget:self action:@selector(searchButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btnSearchIcon];
+        [searchBarView addSubview:btnSearchIcon];
         
-//        [searchBarView release];
         
-        UIImageView *descriptionBlock = [[UIImageView alloc] initWithFrame:CGRectMake(0, 130, 320, 30)];
-        
+        UIImageView *descriptionBlock = [[UIImageView alloc] initWithFrame:CGRectMake(0, 90, 320, 40)];
         [descriptionBlock setImage:[UIImage imageNamed:@"categorylist_top_row.png"]];
-        
         [self.view addSubview:descriptionBlock];
-        
-//        [descriptionBlock release];
-        
-        UIImageView	*descriptionHeader = [[UIImageView alloc] initWithFrame:CGRectMake(90, 120, 150, 30)];
-        
+        UIImageView	*descriptionHeader = [[UIImageView alloc] initWithFrame:CGRectMake(90, 80, 150, 30)];
         [descriptionHeader setImage:[UIImage imageNamed:@"categorylist_header.png"]];
         
         [self.view addSubview:descriptionHeader];
         
-//        [descriptionHeader release];
     }
 	
     
@@ -352,7 +252,7 @@
         [self searchButtonSelected:0];
     }
     else
-    { 
+    {
         [textFieldui resignFirstResponder];
         
     }
@@ -374,17 +274,14 @@
     {
         
         ServiceHandler* service = [[ServiceHandler alloc]init];
-        
         service.productName = txtBar.text;
-        
         [service    searchProductsService:self:@selector(finishedProductDetialsService:)];
         
     }
     else
-    { 
+    {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Search Product" message:@"Enter a product name" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
         [alert show];
-//        [alert release];
         
     }
     
@@ -402,18 +299,18 @@
 {
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
-		productTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 330, 768, 420) style:UITableViewStylePlain];
+		productTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 260, 768, 450) style:UITableViewStylePlain];
         productTable.dataSource = self;
         productTable.delegate = self;
-        productTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0]; 
+        productTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0];
         [self.view addSubview:productTable];
 	}
     else {
         
-        productTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 150, 320, 260) style:UITableViewStylePlain];
+        productTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 130, 320, 280) style:UITableViewStylePlain];
         productTable.dataSource = self;
         productTable.delegate = self;
-        productTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0]; 
+        productTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0];
         
         [self.view addSubview:productTable];
     }
@@ -427,7 +324,7 @@
         productImageArray = [[NSMutableArray alloc] init];
     }
     
-    if(nil == productCountArray) 
+    if(nil == productCountArray)
     {
         
         productCountArray = [[NSMutableArray alloc] init];
@@ -449,7 +346,7 @@
 #pragma mark navigation button Actions
 
 
--(void)specialOfferButtonSelected :(id)sender 
+-(void)specialOfferButtonSelected :(id)sender
 {
     
     AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
@@ -460,7 +357,7 @@
     
     [serviceHandler specialProductsService:self :@selector(finishedSpecialProductsService:)];
     
-//    [serviceHandler release];
+    //    [serviceHandler release];
     
 }
 
@@ -531,10 +428,8 @@
         [[cell productName] setFrame:CGRectMake(imageName.size.width +iPhoneXpos, iPadYpos +iPhoneYpos,iPadcategoryNameWidth, imageName.size.height)];
         
         float nameWidth = iPadXpos + imageName.size.width  + iPadcategoryNameWidth;
-        UIImage* countImageName = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"itemscount_bg-72" ofType:@"png"]];
         
-        [[cell productCountLabel] setFrame:CGRectMake(iPadXpos + nameWidth,self.view.frame.origin.y,countImageName.size.width, countImageName.size.height)];
-        [[cell countImage] setFrame:CGRectMake(iPadXpos + nameWidth, iPadYpos,countImageName.size.width , countImageName.size.height)];
+        [[cell productCountLabel] setFrame:CGRectMake(2*iPadXpos + nameWidth,iPadYpos,iPadProductCountWidth,iPadProductCountHeight)];
         
         float countImageWidth = self.view.frame.size.width - iPadXpos ;
         UIImage* disImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"nav_arrow-72" ofType:@"png"]];
@@ -566,12 +461,9 @@
         UIImage* imageName = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"computer_icon" ofType:@"png"]];
         [[cell productName] setFrame:CGRectMake(imageName.size.width +iPhoneXpos+10, iPhoneYpos + iPhoneYpos,iPhoneCategoryNameWidth, imageName.size.height)];
         
-        UIImage* countImageName = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"itemscount_bg-72" ofType:@"png"]];
         float nameWidth = iPhoneXpos + imageName.size.width  + iPhoneCategoryNameWidth;
         
-        [[cell productCountLabel] setFrame:CGRectMake(nameWidth + 2*iPhoneXpos  ,self.view.frame.origin.y,countImageName.size.width, countImageName.size.height)];
-        [[cell countImage] setFrame:CGRectMake(iPhoneXpos + nameWidth ,iPhoneYpos ,imageName.size.width + iPhoneXpos, imageName.size.height)];
-        
+        [[cell productCountLabel] setFrame:CGRectMake(nameWidth + 2*iPhoneXpos  ,iPhoneYpos,iPhoneProductCountWidth,iPhoneProductCountHeight)];
         UIImage* disImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"nav_arrow" ofType:@"png"]];
         float countImageWidth =  iPhoneXpos + nameWidth + 2*imageName.size.width ;
         [[cell disImage] setFrame:CGRectMake(countImageWidth, 2*iPhoneYpos, disImage.size.width, disImage.size.height)];
@@ -649,7 +541,7 @@
         
         [self.view addSubview:resultViewController.view];
         
-        tempResultViewController = nil;        
+        tempResultViewController = nil;
     }
     else {
         
@@ -666,7 +558,7 @@
             
             [self.view addSubview:resultViewController.view];
             
-            tempResultViewController = nil;    
+            tempResultViewController = nil;
         }
         
         else {

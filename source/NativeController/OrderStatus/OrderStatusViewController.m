@@ -21,6 +21,8 @@
 @end
 
 @implementation OrderStatusViewController
+@synthesize browseViewController;
+@synthesize orderStatusTextView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -106,47 +108,9 @@
         
         bgView = nil;
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 ,SCREENWIDTH, 60)];
+      
         
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        searchBarView = nil;
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_highlighted.png"],nil];
-        
-        int x  = 8;
-        
-        int y = 83;
-        
-        int width = 250;
-        
-        int height = 55;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 252;
-            if(i==0) {
-                [button addTarget:self action:@selector(browseButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            if(i==1)
-            {
-                [button addTarget:self action:@selector(specialOfferButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            button = nil;
-            
-        }
-        
+               
         UIImageView    *titleHeader = [[UIImageView alloc] initWithFrame:CGRectMake(0, 151, 768, 60)];
         
         [titleHeader setImage:[UIImage imageNamed:@"product_header.png"]];
@@ -180,53 +144,13 @@
         
         bgView = nil;
         
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , SCREENWIDTH, 40)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        searchBarView = nil;
-        
-        NSMutableArray *buttonArray = [[NSMutableArray alloc] initWithObjects:[UIImage imageNamed:@"browse_btn_normal.png"], [UIImage imageNamed:@"offers_btn_normal.png"], [UIImage imageNamed:@"mycart_btn_highlighted.png"],nil];
-        
-        int x  = 5;
-        
-        int y = 42;
-        
-        int width = 100;
-        
-        int height = 35;
-        
-        for(int i = 0; i<[buttonArray count]; i++)
-        {
-            UIButton *button = [[UIButton alloc] init];
-            
-            [button setFrame:CGRectMake(x, y, width, height)];
-            
-            [button setBackgroundImage:[buttonArray objectAtIndex:i] forState:UIControlStateNormal];
-            
-            [self.view addSubview:button];
-            
-            x = x + 102;
-            if(i==0) {
-                [button addTarget:self action:@selector(browseButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            
-            if(i==2)
-            {
-                [button addTarget:self action:@selector(specialOfferButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            button = nil;
-            
-        }
-        
+              
+               
         UIImageView    *titleHeader = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80, 320, 30)];
         
         [titleHeader setImage:[UIImage imageNamed:@"product_header.png"]];
         
         [self.view addSubview:titleHeader];
-        
         
         UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(95,80,320,25)];
         [titleLabel setFont:[UIFont fontWithName:@"Times New Roman-Regular" size:14]];
@@ -265,7 +189,6 @@
         [orderStatusTextView.layer setBorderWidth:1.0];
         [orderStatusTextView.layer setCornerRadius:8.0f];
         [orderStatusTextView.layer setMasksToBounds:YES];
-        orderStatusTextView.textAlignment = UITextAlignmentLeft;
         orderStatusTextView.textColor = [UIColor whiteColor];
         orderStatusTextView.text = @"Your order is complete!\nyour order number is 007.\nThanks you for shopping at Phresco.While logged in.\nYou may continue shopping or view your order status and order.";
         [self.view addSubview:orderStatusTextView];
@@ -280,72 +203,12 @@
         [orderStatusTextView.layer setBorderWidth:1.0];
         [orderStatusTextView.layer setCornerRadius:8.0f];
         [orderStatusTextView.layer setMasksToBounds:YES];
-        orderStatusTextView.textAlignment = UITextAlignmentLeft;
         orderStatusTextView.textColor = [UIColor whiteColor];
         orderStatusTextView.text = @"Your order is complete!\nyour order number is 007.\nThanks you for shopping at Phresco.While logged in.\nYou may continue shopping or view your order status and order.";
         [self.view addSubview:orderStatusTextView];
     }
     
 }
-#pragma mark Button Actions
-
-#pragma mark Button Actions
-
-- (void) browseButtonSelected:(id)sender
-{
-    
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    assetsData.productArray = [[NSMutableArray alloc]init];
-    assetsData.productDetailArray = [[NSMutableArray alloc]init];
-    
-    ServiceHandler *serviceHandler = [[ServiceHandler alloc] init];
-    
-    [serviceHandler catalogService:self :@selector(finishedCatalogService:)];
-    
-    serviceHandler = nil;
-    
-}
-
--(void) finishedCatalogService:(id) data
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    
-    [assetsData updateCatalogModel:data];
-    
-    BrowseViewController	*tempBrowseViewController = [[BrowseViewController alloc] initWithNibName:@"BrowseViewController" bundle:nil];
-    
-    self.browseViewController = tempBrowseViewController;
-    
-    [self.view addSubview:browseViewController.view];
-    
-    tempBrowseViewController = nil;
-}
-
-- (void) specialOfferButtonSelected:(id)sender
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    assetsData.specialProductsArray = [[NSMutableArray alloc]init];
-    assetsData.productDetailArray = [[NSMutableArray alloc]init];
-    ServiceHandler *serviceHandler = [[ServiceHandler alloc] init];
-    
-    [serviceHandler specialProductsService:self :@selector(finishedSpecialProductsService:)];
-    
-    serviceHandler = nil;
-    
-}
--(void) finishedSpecialProductsService:(id) data
-{
-    AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
-    
-    [assetsData updateSpecialproductsModel:data];
-    
-    
-    SpecialOffersViewController *tempSpecialOffersViewController = [[SpecialOffersViewController alloc] initWithNibName:@"SpecialOffersViewController" bundle:nil];
-    
-    [self.view addSubview:tempSpecialOffersViewController.view];
-    
-}
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];
