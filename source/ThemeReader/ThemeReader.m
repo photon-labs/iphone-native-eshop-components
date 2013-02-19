@@ -24,7 +24,7 @@
 -(NSMutableDictionary*)loadDataFromComponentPlist:(NSString*)key INCOMPONENT:(NSString*)component {
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"feature-manifest" ofType:@"plist" inDirectory:[NSString stringWithFormat:@"%@Resource", component]];
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"info" ofType:@"plist" inDirectory:[NSString stringWithFormat:@"%@Resource", component]];
     if ([fileManager fileExistsAtPath: filePath])
     {
         if(nil == dataDictionary)
@@ -44,7 +44,7 @@
 -(NSMutableDictionary*)loadDataFromManifestPlist:(NSString*)key {
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"Manifest" ofType:@"plist"];
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"environment" ofType:@"plist"];
     if ([fileManager fileExistsAtPath: filePath])
     {
         if(nil == dataDictionary)
