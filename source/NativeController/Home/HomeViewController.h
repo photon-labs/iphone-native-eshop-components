@@ -17,14 +17,11 @@
 @class Tabbar;
 @class SubmitReviewViewController;
 
-@interface HomeViewController : UIViewController <dashBoardDelegate>
+@interface HomeViewController : UIViewController <UITextFieldDelegate,dashBoardDelegate>
 {
-     Tabbar *tabbar;
+    Tabbar *tabbar;
     
     UIActivityIndicatorView* activityIndicator;
-    
-    UITextField	*searchTextField;
-    
     UIButton *btnSearchIcon;
     
     NSMutableArray* array;
@@ -34,7 +31,7 @@
     SubmitReviewViewController* SubmitReviewViewController;
     
     LoginViewController *loginViewController;
-   
+    
     RegistrationViewController  *registrationViewController;
     
     SpecialOffersViewController *specialOffersViewController;
@@ -42,11 +39,10 @@
     ResultViewController        *resultViewController;
     
     DashBoardView* dashBoard;
-
+    
     float navBarHieght;
-     float searchBarHieght;
+    float searchBarHieght;
 }
-@property (nonatomic, strong) UITextField	*searchTextField;
 
 @property (nonatomic, strong) UIActivityIndicatorView* activityIndicator;
 
@@ -77,7 +73,7 @@
 
 -(void) callViewController:(id) sender;
 
-- (void)searchButtonSelected;
+- (void)searchButtonSelected:(NSString*)searchTextEdit;
 
 -(void) finishedCatalogService:(id) data;
 @end
