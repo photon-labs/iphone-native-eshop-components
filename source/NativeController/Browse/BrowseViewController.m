@@ -23,6 +23,7 @@
 #import "Constants.h"
 #import "NavigationView.h"
 #import "ProductResultViewCell.h"
+#import "SearchBarView.h"
 
 
 #define iPhoneCategoriesCellHeight 50
@@ -52,7 +53,7 @@
 
 @implementation BrowseViewController
 
-@synthesize searchBar;
+
 @synthesize productTable;
 @synthesize productImageArray;
 @synthesize productNameArray;
@@ -127,9 +128,20 @@
     [self.view addSubview:navBar];
     
 	[self loadOtherViews];
-	
-	[self addSearchBar];
-	
+    
+    
+    SearchBarView *searchBar = nil;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        searchBar =[[SearchBarView alloc]initWithFrame:CGRectMake(0,40,SCREENWIDTH,100)];
+    }
+    else{
+        searchBar =[[SearchBarView alloc]initWithFrame:CGRectMake(0,20,SCREENWIDTH,40)];
+    }
+    searchBar.searchBarDelegate=self;
+    [searchBar loadSearchBar];
+    [self.view addSubview:searchBar];
+    
 	[self initializeTableView];
 }
 
@@ -137,130 +149,36 @@
 {
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
-        
         UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80, SCREENWIDTH, 860)];
-        
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg-72.png"]];
-        
         [self.view addSubview:bgView];
         
+        UIImageView *descriptionBlock = [[UIImageView alloc] initWithFrame:CGRectMake(0, 220, 768, 60)];
+        [descriptionBlock setImage:[UIImage imageNamed:@"categorylist_top_row.png"]];
+        [self.view addSubview:descriptionBlock];
+        
+        UIImageView	*descriptionHeader = [[UIImageView alloc] initWithFrame:CGRectMake(240, 200, 320, 60)];
+        [descriptionHeader setImage:[UIImage imageNamed:@"categorylist_header-72.png"]];
+        [self.view addSubview:descriptionHeader];
     }
     else {
         
         UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, SCREENWIDTH, 375)];
-        
         [bgView setImage:[UIImage imageNamed:@"home_screen_bg.png"]];
-        
         [self.view addSubview:bgView];
-        
-    }
-	
-}
-
--(void) addSearchBar
-{
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80 , SCREENWIDTH, 100)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        UIImageView *searchText = [[UIImageView alloc] initWithFrame:CGRectMake(15, 20 , 680, 60)];
-        
-        [searchText setImage:[UIImage imageNamed:@"searchbox.png"]];
-        
-        [searchBarView addSubview:searchText];
-        
-        txtBar = [[UITextField alloc]initWithFrame:CGRectMake(35, 20, 665, 60)];
-        txtBar.delegate = self;
-        txtBar.backgroundColor = [UIColor clearColor];
-        txtBar.textColor = [UIColor blackColor];
-        [searchBarView addSubview:txtBar];
-        
-        btnSearchIcon = [[UIButton alloc]initWithFrame:CGRectMake(705, 20, 60, 60)];
-        [btnSearchIcon setBackgroundImage:[UIImage imageNamed:@"searchbox_icon.png"] forState:UIControlStateNormal];
-        [btnSearchIcon addTarget:self action:@selector(searchButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-        [searchBarView addSubview:btnSearchIcon];
-        
-        UIImageView *descriptionBlock = [[UIImageView alloc] initWithFrame:CGRectMake(0, searchBarView.frame.origin.y + searchBarView.frame.size.height + 20, 768, 60)];
-        [descriptionBlock setImage:[UIImage imageNamed:@"categorylist_top_row.png"]];
-        [self.view addSubview:descriptionBlock];
-        
-        
-        UIImageView	*descriptionHeader = [[UIImageView alloc] initWithFrame:CGRectMake(200, descriptionBlock.frame.origin.y - 20, 320, 60)];
-        [descriptionHeader setImage:[UIImage imageNamed:@"categorylist_header-72.png"]];
-        [self.view addSubview:descriptionHeader];
-        
-    }
-    else {
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , 320, 40)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        UIImageView *searchText = [[UIImageView alloc] initWithFrame:CGRectMake(8, 5 , 275, 30)];
-        
-        [searchText setImage:[UIImage imageNamed:@"searchbox.png"]];
-        
-        [searchBarView addSubview:searchText];
-        
-        txtBar = [[UITextField alloc]initWithFrame:CGRectMake(25, 0, 245, 24)];
-        txtBar.delegate = self;
-        txtBar.backgroundColor = [UIColor clearColor];
-        txtBar.textColor = [UIColor blackColor];
-        [searchBarView addSubview:txtBar];
-        
-        btnSearchIcon = [[UIButton alloc]initWithFrame:CGRectMake(285, 5, 30, 30)];
-        [btnSearchIcon setBackgroundImage:[UIImage imageNamed:@"searchbox_icon.png"] forState:UIControlStateNormal];
-        [btnSearchIcon addTarget:self action:@selector(searchButtonSelected:) forControlEvents:UIControlEventTouchUpInside];
-        [searchBarView addSubview:btnSearchIcon];
-        
         
         UIImageView *descriptionBlock = [[UIImageView alloc] initWithFrame:CGRectMake(0, 90, 320, 40)];
         [descriptionBlock setImage:[UIImage imageNamed:@"categorylist_top_row.png"]];
         [self.view addSubview:descriptionBlock];
         UIImageView	*descriptionHeader = [[UIImageView alloc] initWithFrame:CGRectMake(90, 80, 150, 30)];
         [descriptionHeader setImage:[UIImage imageNamed:@"categorylist_header.png"]];
-        
         [self.view addSubview:descriptionHeader];
-        
     }
-	
-    
 }
 
-#pragma mark Text Field Delegate Methods
-- (void)textFieldDidBeginEditing:(UITextField *)textFieldui {
-	[txtBar becomeFirstResponder];
-    
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textFieldui {
-	
-    
-}
-
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textFieldui {
-    [txtBar resignFirstResponder];
-    [textFieldui resignFirstResponder];
-    if([textFieldui.text length] > 0 ){
-        [self searchButtonSelected:0];
-    }
-    else
-    {
-        [textFieldui resignFirstResponder];
-        
-    }
-    return YES;
-}
 
 #pragma mark searchButtonSelected
-- (void)searchButtonSelected:(id)sender
+- (void)searchButtonSelected:(NSString*)searchTextEdit
 {
     [txtBar resignFirstResponder];
     
@@ -270,11 +188,11 @@
     [self.view addSubview:activityIndicator];
     [activityIndicator startAnimating];
     
-    if([txtBar.text length] > 0)
+    if([searchTextEdit length] > 0)
     {
         
         ServiceHandler* service = [[ServiceHandler alloc]init];
-        service.productName = txtBar.text;
+        service.productName = searchTextEdit;
         [service    searchProductsService:self:@selector(finishedProductDetialsService:)];
         
     }
@@ -299,7 +217,7 @@
 {
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
-		productTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 260, 768, 450) style:UITableViewStylePlain];
+		productTable = [[UITableView alloc] initWithFrame:CGRectMake(0,260, 768,550) style:UITableViewStylePlain];
         productTable.dataSource = self;
         productTable.delegate = self;
         productTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0];
@@ -307,7 +225,7 @@
 	}
     else {
         
-        productTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 130, 320, 280) style:UITableViewStylePlain];
+        productTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 110, 320, 280) style:UITableViewStylePlain];
         productTable.dataSource = self;
         productTable.delegate = self;
         productTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0];
