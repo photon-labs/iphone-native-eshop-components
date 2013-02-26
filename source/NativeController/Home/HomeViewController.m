@@ -20,10 +20,10 @@
 #import "NavigationView.h"
 #import "Constants.h"
 #import "DashBoardView.h"
+#import "SearchBarView.h"
 
 @implementation HomeViewController
 
-@synthesize searchTextField;
 @synthesize activityIndicator;
 @synthesize array_;
 @synthesize browseViewController;
@@ -98,11 +98,21 @@
     [navBar loadNavbar:NO:NO];
     [self.view addSubview:navBar];
 	[self loadOtherViews];
-	
-	[self addSearchBar];
     
+    SearchBarView *searchBar = nil;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        searchBar =[[SearchBarView alloc]initWithFrame:CGRectMake(0,40,SCREENWIDTH,100)];
+        searchBarHieght =  searchBar.frame.size.height;
+    }
+    else{
+        searchBar =[[SearchBarView alloc]initWithFrame:CGRectMake(0,20,SCREENWIDTH,40)];
+        searchBarHieght =  searchBar.frame.size.height;
+    }
+    searchBar.searchBarDelegate=self;
+    [searchBar loadSearchBar];
+    [self.view addSubview:searchBar];
     [self addHomePageIcons];
-	
 }
 
 -(void) loadOtherViews
@@ -128,74 +138,6 @@
 	
 }
 
--(void) addSearchBar
-{
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 81 , 768, 145)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg-72.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        UIImageView *searchText = [[UIImageView alloc] initWithFrame:CGRectMake(12, 116 , 670, 65)];
-        
-        [searchText setImage:[UIImage imageNamed:@"searchbox.png"]];
-        
-        [self.view addSubview:searchText];
-        
-        
-        searchTextField = [[UITextField alloc]initWithFrame:CGRectMake(40, 130, 620, 50)];
-        searchTextField.delegate = self;
-        searchTextField.backgroundColor = [UIColor clearColor];
-        searchTextField.font = [UIFont systemFontOfSize:17.0];
-        searchTextField.textColor = [UIColor blackColor];
-        [self.view addSubview:searchTextField];
-        
-        searchBarHieght =  searchBarView.frame.size.height;
-        
-        
-        btnSearchIcon = [[UIButton alloc]initWithFrame:CGRectMake(695, 115, 60, 60)];
-        [btnSearchIcon setBackgroundImage:[UIImage imageNamed:@"searchbox_icon.png"] forState:UIControlStateNormal];
-        [btnSearchIcon addTarget:self action:@selector(searchButtonSelected) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btnSearchIcon];
-        btnSearchIcon.accessibilityLabel = @"Searchbutton";
-        
-    }
-    else {
-        
-        UIImageView *searchBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40 , 320, 40)];
-        
-        [searchBarView setImage:[UIImage imageNamed:@"searchblock_bg.png"]];
-        
-        [self.view addSubview:searchBarView];
-        
-        UIImageView *searchText = [[UIImageView alloc] initWithFrame:CGRectMake(8, 44 , 275, 30)];
-        
-        [searchText setImage:[UIImage imageNamed:@"searchbox.png"]];
-        
-        [self.view addSubview:searchText];
-        
-        
-        searchTextField = [[UITextField alloc]initWithFrame:CGRectMake(25, 48, 245, 24)];
-        searchTextField.delegate = self;
-        searchTextField.backgroundColor = [UIColor clearColor];
-        searchTextField.textColor = [UIColor blackColor];
-        [self.view addSubview:searchTextField];
-        
-        searchBarHieght =  searchBarView.frame.size.height;
-        
-        btnSearchIcon = [[UIButton alloc]initWithFrame:CGRectMake(285, 43, 30, 32)];
-        [btnSearchIcon setBackgroundImage:[UIImage imageNamed:@"searchbox_icon.png"] forState:UIControlStateNormal];
-        [btnSearchIcon addTarget:self action:@selector(searchButtonSelected) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btnSearchIcon];
-        btnSearchIcon.accessibilityLabel = @"Searchbutton";
-        
-        
-    }
-	
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     [textField resignFirstResponder];
@@ -205,7 +147,7 @@
     if([str length] > 0 ){
         
         
-        [self searchButtonSelected];
+        // [self searchButtonSelected];
     }
     else
     {
@@ -217,9 +159,8 @@
 }
 
 #pragma mark searchButtonSelected
-- (void)searchButtonSelected
+- (void)searchButtonSelected:(NSString*)searchTextEdit
 {
-    [searchTextField resignFirstResponder];
     
     activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     activityIndicator.frame = CGRectMake(130, 150, 50, 40);
@@ -227,12 +168,12 @@
     [self.view addSubview:activityIndicator];
     [activityIndicator startAnimating];
     
-    if([searchTextField.text length] > 0)
+    if([searchTextEdit length] > 0)
     {
         
         ServiceHandler* service = [[ServiceHandler alloc]init];
         
-        service.productName = searchTextField.text;
+        service.productName = searchTextEdit;
         
         [service   searchProductsService:self:@selector(finishedProductDetialsService:)];
         
