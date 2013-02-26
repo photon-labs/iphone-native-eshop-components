@@ -14,9 +14,9 @@
 @class SpecialOffersViewController;
 @class LoginViewController;
 @interface BrowseViewController : UIViewController
-                    <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate> {
+<UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate> {
     
-	IBOutlet UISearchBar *searchBar;
+	
 	
 	IBOutlet UITableView	*productTable;
 	
@@ -24,7 +24,7 @@
 	
 	IBOutlet NSMutableArray	*productNameArray;
     
-    IBOutlet NSMutableArray  *productCountArray; 
+    IBOutlet NSMutableArray  *productCountArray;
 	
     IBOutlet UITextField	*txtBar;
     
@@ -41,17 +41,17 @@
     LoginViewController* loginViewController;
     
     ResultViewController *resultViewController;
-
-   AddToBagViewController* addToBagViewController;
-   
-   ProductDetailsViewController* product;
-   
-   SpecialOffersViewController *specialOffersViewController;
+    
+    AddToBagViewController* addToBagViewController;
+    
+    ProductDetailsViewController* product;
+    
+    SpecialOffersViewController *specialOffersViewController;
     
     
 }
 
-@property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
+
 
 @property (nonatomic, strong) IBOutlet UITableView	*productTable;
 
@@ -82,7 +82,7 @@
 
 -(void) initializeTableView;
 
-- (void)searchButtonSelected:(id)sender;
+- (void)searchButtonSelected:(NSString*)searchTextEdit;
 
 
 @end
