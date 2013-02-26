@@ -2,6 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>SearchBar</key>
+	<dict>
+		<key>backgroundimage_ipad</key>
+		<string>searchbox_bg2-72.png</string>
+		<key>backgroundimage_iphone</key>
+		<string>categorylist_top_row.png</string>
+		<key>searchicon-ipad</key>
+		<string>searchbox_icon.png</string>
+		<key>searchicon-iphone</key>
+		<string>searchbox_icon.png</string>
+	</dict>
 	<key>Tabbar</key>
 	<dict>
 		<key>Home</key>
