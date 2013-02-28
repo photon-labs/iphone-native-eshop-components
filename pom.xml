@@ -13,7 +13,7 @@
             <plugin>
                 <groupId>com.photon.phresco.plugins.xcode</groupId>
                 <artifactId>xcode-maven-plugin</artifactId>
-                <version>2.0.0.35000</version>
+                <version>2.1.0.1004-SNAPSHOT</version>
                 <extensions>true</extensions>
                 <configuration>
                     <xcodeProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">./source/Phresco.xcodeproj</xcodeProject>
