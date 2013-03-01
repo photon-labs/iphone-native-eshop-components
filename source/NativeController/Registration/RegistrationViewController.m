@@ -87,7 +87,7 @@
     navBar.navigationDelegate = self;
     [navBar loadNavbar:NO:NO];
     [self.view addSubview:navBar];
-
+    
     [self loadOtherViews];
     
     [self createRegistrationScreen];
@@ -96,7 +96,7 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-   
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -126,7 +126,7 @@
         
         bgView = nil;
         
-        }
+    }
 	
 }
 
@@ -138,17 +138,31 @@
 
 -(void) createRegistrationScreen
 {
+    UIView *bgView=nil;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        bgView =[[UIView alloc] initWithFrame:CGRectMake(0,120, 768, 660)];
+        bgView.layer.cornerRadius=30;
+    }
+    else{
+        bgView =[[UIView alloc] initWithFrame:CGRectMake(0,60, 320, 300)];
+        bgView.layer.cornerRadius=20;
+    }
+    bgView.layer.masksToBounds = YES;
+    bgView.backgroundColor = [UIColor clearColor];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = bgView.bounds;
+    gradient.colors = [NSArray arrayWithObjects:
+                       (id)[[UIColor colorWithRed:16.0f/255.0f green:82.0f/255.0f blue:129.0f/255.0f alpha:1.0f] CGColor],
+                       (id)[[UIColor colorWithRed:25.0f/255.0f green:58.0f/255.0f blue:90.0f/255.0f alpha:1.0f] CGColor], nil];
+    [bgView.layer insertSublayer:gradient atIndex:0];
+    [self.view addSubview:bgView];
+    
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 	{
-        backGroundView = [[UIView alloc] init];
-        backGroundView.frame = CGRectMake(0,140, 768, 660);
-        backGroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"register_bg.png"]];
-        [self.view addSubview:backGroundView];
-        
-        
         regScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 768, 660)];
         regScrollView.contentSize = CGSizeMake(760, 680);
-        [backGroundView addSubview:regScrollView];
+        [bgView addSubview:regScrollView];
         
         
         UIImageView	*registerHeader = [[UIImageView alloc] initWithFrame:CGRectMake(230, -15, 300, 60)];
@@ -281,23 +295,17 @@
 	}
     else {
         
-        backGroundView = [[UIView alloc] init];
-        backGroundView.frame = CGRectMake(0,80, 320, 280);
-        backGroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"register_bg.png"]];
-        [self.view addSubview:backGroundView];
-        
-        
         regScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 280)];
         regScrollView.contentSize = CGSizeMake(320, 350);
         regScrollView.delegate =  self;
-        [backGroundView addSubview:regScrollView];
+        [bgView addSubview:regScrollView];
         
         
         UIImageView	*registerHeader = [[UIImageView alloc] initWithFrame:CGRectMake(90, -8, 150, 30)];
         
         [registerHeader setImage:[UIImage imageNamed:@"register_header.png"]];
         
-        [backGroundView addSubview:registerHeader];
+        [bgView addSubview:registerHeader];
         
         registerHeader = nil;
         
@@ -533,8 +541,8 @@
                 NSString *topLevelDomain = [str3 substringFromIndex:indexOfDot];
                 topLevelDomain = [topLevelDomain lowercaseString];
                 NSLog(@"topleveldomains:%@",topLevelDomain);
-//                NSSet *TLD;
-//                TLD = [NSSet setWithObjects:@".phresco",@".aero", @".asia", @".biz", @".cat", @".com", @".coop", @".edu", @".gov", @".info", @".int", @".jobs", @".mil", @".mobi", @".museum", @".name", @".net", @".org", @".pro", @".tel", @".travel", @".ac", @".ad", @".ae", @".af", @".ag", @".ai", @".al", @".am", @".an", @".ao", @".aq", @".ar", @".as", @".at", @".au", @".aw", @".ax", @".az", @".ba", @".bb", @".bd", @".be", @".bf", @".bg", @".bh", @".bi", @".bj", @".bm", @".bn", @".bo", @".br", @".bs", @".bt", @".bv", @".bw", @".by", @".bz", @".ca", @".cc", @".cd", @".cf", @".cg", @".ch", @".ci", @".ck", @".cl", @".cm", @".cn", @".co", @".cr", @".cu", @".cv", @".cx", @".cy", @".cz", @".de", @".dj", @".dk", @".dm", @".do", @".dz", @".ec", @".ee", @".eg", @".er", @".es", @".et", @".eu", @".fi", @".fj", @".fk", @".fm", @".fo", @".fr", @".ga", @".gb", @".gd", @".ge", @".gf", @".gg", @".gh", @".gi", @".gl", @".gm", @".gn", @".gp", @".gq", @".gr", @".gs", @".gt", @".gu", @".gw", @".gy", @".hk", @".hm", @".hn", @".hr", @".ht", @".hu", @".id", @".ie", @" No", @".il", @".im", @".in", @".io", @".iq", @".ir", @".is", @".it", @".je", @".jm", @".jo", @".jp", @".ke", @".kg", @".kh", @".ki", @".km", @".kn", @".kp", @".kr", @".kw", @".ky", @".kz", @".la", @".lb", @".lc", @".li", @".lk", @".lr", @".ls", @".lt", @".lu", @".lv", @".ly", @".ma", @".mc", @".md", @".me", @".mg", @".mh", @".mk", @".ml", @".mm", @".mn", @".mo", @".mp", @".mq", @".mr", @".ms", @".mt", @".mu", @".mv", @".mw", @".mx", @".my", @".mz", @".na", @".nc", @".ne", @".nf", @".ng", @".ni", @".nl", @".no", @".np", @".nr", @".nu", @".nz", @".om", @".pa", @".pe", @".pf", @".pg", @".ph", @".pk", @".pl", @".pm", @".pn", @".pr", @".ps", @".pt", @".pw", @".py", @".qa", @".re", @".ro", @".rs", @".ru", @".rw", @".sa", @".sb", @".sc", @".sd", @".se", @".sg", @".sh", @".si", @".sj", @".sk", @".sl", @".sm", @".sn", @".so", @".sr", @".st", @".su", @".sv", @".sy", @".sz", @".tc", @".td", @".tf", @".tg", @".th", @".tj", @".tk", @".tl", @".tm", @".tn", @".to", @".tp", @".tr", @".tt", @".tv", @".tw", @".tz", @".ua", @".ug", @".uk", @".us", @".uy", @".uz", @".va", @".vc", @".ve", @".vg", @".vi", @".vn", @".vu", @".wf", @".ws", @".ye", @".yt", @".za", @".zm", @".zw", nil];
+                //                NSSet *TLD;
+                //                TLD = [NSSet setWithObjects:@".phresco",@".aero", @".asia", @".biz", @".cat", @".com", @".coop", @".edu", @".gov", @".info", @".int", @".jobs", @".mil", @".mobi", @".museum", @".name", @".net", @".org", @".pro", @".tel", @".travel", @".ac", @".ad", @".ae", @".af", @".ag", @".ai", @".al", @".am", @".an", @".ao", @".aq", @".ar", @".as", @".at", @".au", @".aw", @".ax", @".az", @".ba", @".bb", @".bd", @".be", @".bf", @".bg", @".bh", @".bi", @".bj", @".bm", @".bn", @".bo", @".br", @".bs", @".bt", @".bv", @".bw", @".by", @".bz", @".ca", @".cc", @".cd", @".cf", @".cg", @".ch", @".ci", @".ck", @".cl", @".cm", @".cn", @".co", @".cr", @".cu", @".cv", @".cx", @".cy", @".cz", @".de", @".dj", @".dk", @".dm", @".do", @".dz", @".ec", @".ee", @".eg", @".er", @".es", @".et", @".eu", @".fi", @".fj", @".fk", @".fm", @".fo", @".fr", @".ga", @".gb", @".gd", @".ge", @".gf", @".gg", @".gh", @".gi", @".gl", @".gm", @".gn", @".gp", @".gq", @".gr", @".gs", @".gt", @".gu", @".gw", @".gy", @".hk", @".hm", @".hn", @".hr", @".ht", @".hu", @".id", @".ie", @" No", @".il", @".im", @".in", @".io", @".iq", @".ir", @".is", @".it", @".je", @".jm", @".jo", @".jp", @".ke", @".kg", @".kh", @".ki", @".km", @".kn", @".kp", @".kr", @".kw", @".ky", @".kz", @".la", @".lb", @".lc", @".li", @".lk", @".lr", @".ls", @".lt", @".lu", @".lv", @".ly", @".ma", @".mc", @".md", @".me", @".mg", @".mh", @".mk", @".ml", @".mm", @".mn", @".mo", @".mp", @".mq", @".mr", @".ms", @".mt", @".mu", @".mv", @".mw", @".mx", @".my", @".mz", @".na", @".nc", @".ne", @".nf", @".ng", @".ni", @".nl", @".no", @".np", @".nr", @".nu", @".nz", @".om", @".pa", @".pe", @".pf", @".pg", @".ph", @".pk", @".pl", @".pm", @".pn", @".pr", @".ps", @".pt", @".pw", @".py", @".qa", @".re", @".ro", @".rs", @".ru", @".rw", @".sa", @".sb", @".sc", @".sd", @".se", @".sg", @".sh", @".si", @".sj", @".sk", @".sl", @".sm", @".sn", @".so", @".sr", @".st", @".su", @".sv", @".sy", @".sz", @".tc", @".td", @".tf", @".tg", @".th", @".tj", @".tk", @".tl", @".tm", @".tn", @".to", @".tp", @".tr", @".tt", @".tv", @".tw", @".tz", @".ua", @".ug", @".uk", @".us", @".uy", @".uz", @".va", @".vc", @".ve", @".vg", @".vi", @".vn", @".vu", @".wf", @".ws", @".ye", @".yt", @".za", @".zm", @".zw", nil];
                 
             }
             
@@ -543,7 +551,7 @@
                 
                 ConfigurationReader *configReader = [[ConfigurationReader alloc]init];
                 [configReader parseXMLFileAtURL:@"phresco-env-config" environment:@"myWebservice"];
-                            NSString *protocol = [[configReader.stories objectAtIndex: 0] objectForKey:kwebserviceprotocol];
+                NSString *protocol = [[configReader.stories objectAtIndex: 0] objectForKey:kwebserviceprotocol];
                 protocol = [protocol stringByTrimmingCharactersInSet:
                             [NSCharacterSet whitespaceAndNewlineCharacterSet]];
                 
