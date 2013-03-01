@@ -21,6 +21,7 @@
 #import "NavigationView.h"
 #import "ProductResultViewCell.h"
 #import "Constants.h"
+#import "ThemeReader.h"
 
 
 
@@ -70,7 +71,7 @@
 		self = [super initWithNibName:@"ResultsViewController-iPAd" bundle:nil];
 		
 	}
-	else 
+	else
     {
         NSLog(@"iPhone....");
         self = [super initWithNibName:@"ResultViewController" bundle:nil];
@@ -125,7 +126,7 @@
     navBar.navigationDelegate = self;
     [navBar loadNavbar:YES:NO];
     [self.view addSubview:navBar];
-
+    
     
 	[self loadOtherViews];
 	
@@ -145,7 +146,7 @@
         bgView =nil;
         
         
-         }
+    }
     
     else {
         
@@ -156,7 +157,7 @@
         [self.view addSubview:bgView];
         
         bgView = nil;
-       }
+    }
 }
 
 
@@ -169,6 +170,19 @@
 
 -(void) initializeProductResults
 {
+    float redFloatValue=0.0;
+    float greenFloatValue=0.0;
+    float blueFloatValue=0.0;
+    float alphaFloatValue=0.0;
+    NSString * red =[self getBackGroundColor:@"red"];
+    NSString * green =[self getBackGroundColor:@"green"];
+    NSString * blue =[self getBackGroundColor:@"blue"];
+    NSString * alpha =[self getBackGroundColor:@"alpha"];
+    
+    redFloatValue=[red floatValue];
+    greenFloatValue =[green floatValue];
+    blueFloatValue =[blue floatValue];
+    alphaFloatValue = [alpha floatValue];
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
 		resultTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 80, 768, 855)];
@@ -180,7 +194,7 @@
 	
 	resultTable.dataSource = self;
 	resultTable.delegate = self;
-	resultTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0]; 
+	resultTable.backgroundColor = [UIColor colorWithRed:redFloatValue/255.0 green:greenFloatValue/255.0 blue:blueFloatValue/255.0 alpha:alphaFloatValue];
     
     AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
     
@@ -241,7 +255,7 @@
         
         return [assestsDataOne.productArray count];
     }
-
+    
 }
 
 
@@ -543,7 +557,7 @@
     
 }
 
--(void)viewWillAppear:(BOOL)animated 
+-(void)viewWillAppear:(BOOL)animated
 {
     
     [super viewWillAppear:YES];
@@ -561,6 +575,54 @@
 }
 -(void)backButtonAction{
     [self.view removeFromSuperview];
+}
+-(NSString*)getBackGroundColor:(NSString*)navigationKey{
+    if(navigationKey != nil &&[navigationKey length]>0){
+        ThemeReader *themeReader =[[ThemeReader alloc]init];
+        NSMutableDictionary *navigationDict = nil;
+        navigationDict = [themeReader loadDataFromManifestPlist:@"ProductResults"];
+        if(nil != navigationDict && [navigationDict count] >0)  //Get data from manifest plist
+        {
+            NSString* object=[navigationDict objectForKey:navigationKey];
+            if(nil != object && [object length] > 0)
+            {
+                return object;
+            }
+            else
+            {
+                navigationDict = [themeReader loadDataFromComponentPlist:navigationKey INCOMPONENT:@"ProductResults"];
+                if(nil != navigationDict && [navigationDict count] > 0)
+                {
+                    NSString *object = [navigationDict objectForKey:navigationKey];
+                    if(nil != object && [object length] > 0)
+                    {
+                        return object;
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+                
+            }
+        }
+        else
+        {
+            NSMutableDictionary *navigationViewDict=[themeReader loadDataFromComponentPlist:navigationKey INCOMPONENT:@"ProductResults"];
+            if(nil != navigationViewDict && [navigationViewDict count] > 0)
+            {
+                NSString *object = [navigationViewDict objectForKey:navigationKey];
+                if(nil != object && [object length] > 0)
+                {
+                    return object;
+                }
+                else
+                {
+                }
+            }
+        }
+    }
+    return nil;
 }
 
 @end
