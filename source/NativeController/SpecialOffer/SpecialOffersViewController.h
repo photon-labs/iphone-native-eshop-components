@@ -42,7 +42,7 @@
     ProductDetailsViewController *productDetailsViewController;
 }
 
-@property (nonatomic, strong)UITableView* specialProductTable; 
+@property (nonatomic, strong)UITableView* specialProductTable;
 
 @property (nonatomic, strong) NSMutableArray *productImageArray;
 
