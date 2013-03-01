@@ -21,6 +21,7 @@
 #import "Tabbar.h"
 #import "NavigationView.h"
 #import "ProductResultViewCell.h"
+#import "ThemeReader.h"
 
 
 #define iPhoneCategoriesCellHeight 50
@@ -147,8 +148,8 @@
         
         bgView = nil;
         
-               
-           }
+        
+    }
     else {
         
         UIImageView    *bgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, SCREENWIDTH, 375)];
@@ -167,7 +168,7 @@
         
         searchBarView = nil;
         
-            }
+    }
 	
 	
 }
@@ -180,6 +181,21 @@
 
 -(void) initializeProductResults
 {
+    float redFloatValue=0.0;
+    float greenFloatValue=0.0;
+    float blueFloatValue=0.0;
+    float alphaFloatValue=0.0;
+    NSString * red =[self getBackGroundColor:@"red"];
+    NSString * green =[self getBackGroundColor:@"green"];
+    NSString * blue =[self getBackGroundColor:@"blue"];
+    NSString * alpha =[self getBackGroundColor:@"alpha"];
+    
+    redFloatValue=[red floatValue];
+    greenFloatValue =[green floatValue];
+    blueFloatValue =[blue floatValue];
+    alphaFloatValue = [alpha floatValue];
+    
+    
 	if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         
 		specialProductTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 85, 768, 845)];
@@ -191,7 +207,7 @@
 	
 	specialProductTable.dataSource = self;
 	specialProductTable.delegate = self;
-	specialProductTable.backgroundColor = [UIColor colorWithRed:29.0/255.0 green:106.0/255.0 blue:150.0/255.0 alpha:1.0];
+	specialProductTable.backgroundColor = [UIColor colorWithRed:redFloatValue/255.0 green:greenFloatValue/255.0 blue:blueFloatValue/255.0 alpha:alphaFloatValue];
     
     AssetsDataEntity *assetsData = [SharedObjects sharedInstance].assetsDataEntity;
     
@@ -516,7 +532,54 @@
 -(void)backButtonAction{
     [self.view removeFromSuperview];
 }
-
+-(NSString*)getBackGroundColor:(NSString*)navigationKey{
+    if(navigationKey != nil &&[navigationKey length]>0){
+        ThemeReader *themeReader =[[ThemeReader alloc]init];
+        NSMutableDictionary *navigationDict = nil;
+        navigationDict = [themeReader loadDataFromManifestPlist:@"ProductResults"];
+        if(nil != navigationDict && [navigationDict count] >0)  //Get data from manifest plist
+        {
+            NSString* object=[navigationDict objectForKey:navigationKey];
+            if(nil != object && [object length] > 0)
+            {
+                return object;
+            }
+            else
+            {
+                navigationDict = [themeReader loadDataFromComponentPlist:navigationKey INCOMPONENT:@"ProductResults"];
+                if(nil != navigationDict && [navigationDict count] > 0)
+                {
+                    NSString *object = [navigationDict objectForKey:navigationKey];
+                    if(nil != object && [object length] > 0)
+                    {
+                        return object;
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+                
+            }
+        }
+        else
+        {
+            NSMutableDictionary *navigationViewDict=[themeReader loadDataFromComponentPlist:navigationKey INCOMPONENT:@"ProductResults"];
+            if(nil != navigationViewDict && [navigationViewDict count] > 0)
+            {
+                NSString *object = [navigationViewDict objectForKey:navigationKey];
+                if(nil != object && [object length] > 0)
+                {
+                    return object;
+                }
+                else
+                {
+                }
+            }
+        }
+    }
+    return nil;
+}
 
 @end
 
