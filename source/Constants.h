@@ -143,7 +143,7 @@
 #define kproductName            @"productName"
 #define kproductID              @"productID"
 #define kproductRatingView      @"productRating"
-#define kproductResults         @"ProductResults"
+#define kproductResults         @"ProductList"
 #define kfontSize               @"fontSize"
 #define kredColor               @"red"
 #define kgreenColor             @"green"
