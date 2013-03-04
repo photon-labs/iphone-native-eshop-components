@@ -535,7 +535,7 @@
     if(navigationKey != nil &&[navigationKey length]>0){
         ThemeReader *themeReader =[[ThemeReader alloc]init];
         NSMutableDictionary *navigationDict = nil;
-        navigationDict = [themeReader loadDataFromManifestPlist:@"ProductResults"];
+        navigationDict = [themeReader loadDataFromManifestPlist:kproductResults];
         if(nil != navigationDict && [navigationDict count] >0)  //Get data from manifest plist
         {
             NSString* object=[navigationDict objectForKey:navigationKey];
@@ -545,7 +545,7 @@
             }
             else
             {
-                navigationDict = [themeReader loadDataFromComponentPlist:navigationKey INCOMPONENT:@"ProductResults"];
+                navigationDict = [themeReader loadDataFromComponentPlist:navigationKey INCOMPONENT:kproductResults];
                 if(nil != navigationDict && [navigationDict count] > 0)
                 {
                     NSString *object = [navigationDict objectForKey:navigationKey];
@@ -563,7 +563,7 @@
         }
         else
         {
-            NSMutableDictionary *navigationViewDict=[themeReader loadDataFromComponentPlist:navigationKey INCOMPONENT:@"ProductResults"];
+            NSMutableDictionary *navigationViewDict=[themeReader loadDataFromComponentPlist:navigationKey INCOMPONENT:kproductResults];
             if(nil != navigationViewDict && [navigationViewDict count] > 0)
             {
                 NSString *object = [navigationViewDict objectForKey:navigationKey];
