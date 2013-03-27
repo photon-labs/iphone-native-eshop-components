@@ -19,6 +19,7 @@
                     <xcodeProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">./source/Phresco.xcodeproj</xcodeProject>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
     <profiles>
