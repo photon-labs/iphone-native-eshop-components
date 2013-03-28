@@ -53,6 +53,7 @@
 						  </filesets>
                         </configuration>
                     </plugin>
+					
                 </plugins>
             </build>
         </profile>
